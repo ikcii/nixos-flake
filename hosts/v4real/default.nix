@@ -3,6 +3,6 @@
 
 	# users.hostSpecific = [ "host-specific-user-username" ];
 
-	#programs.steam.enable = true;
-	#programs.gamemode.enable = true;
+	programs.steam.enable = true;
+	programs.gamemode.enable = true;
 }
