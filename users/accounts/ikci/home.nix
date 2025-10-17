@@ -14,6 +14,7 @@
 			btop
 			swaylock
 			nerd-fonts.jetbrains-mono
+			noto-fonts-color-emoji
 			tmux
 			tree
 			wl-clipboard
