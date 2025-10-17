@@ -20,6 +20,7 @@
 			vesktop
 			gamemode
 			steam
+			zerotierone
 		];
 
 		stateVersion = "25.05";
