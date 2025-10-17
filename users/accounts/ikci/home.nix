@@ -9,18 +9,19 @@
 		};
 
 		packages = with pkgs; [
-			dejavu_fonts
+			ani-cli
 			brave
 			btop
-			swaylock
+			dejavu_fonts
+			gamemode
 			nerd-fonts.jetbrains-mono
 			noto-fonts-color-emoji
+			steam
+			swaylock
 			tmux
 			tree
-			wl-clipboard
 			vesktop
-			gamemode
-			steam
+			wl-clipboard
 			zerotierone
 		];
 
