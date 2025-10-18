@@ -33,6 +33,9 @@
 			obs-studio
 			xdg-desktop-portal-wlr
 			xdg-desktop-portal-gtk
+			gimp
+			gimpPlugins.gmic
+			prismlauncher
 		];
 
 		stateVersion = "25.05";
