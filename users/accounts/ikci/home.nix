@@ -27,6 +27,7 @@
 			zerotierone
 			zip
 			unzip
+			mangohud
 		];
 
 		stateVersion = "25.05";
