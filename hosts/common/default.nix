@@ -19,6 +19,7 @@
 
   # Polkit
   security.polkit.enable = true;
+  security.pam.services.swaylock = {};
 
   # Audio fix
   hardware.enableAllFirmware = true;
