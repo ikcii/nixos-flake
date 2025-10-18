@@ -22,6 +22,7 @@
 			gamemode
 			nerd-fonts.jetbrains-mono
 			noto-fonts-color-emoji
+			localsend
 			noto-fonts-cjk-sans
 			steam
 			swaylock
