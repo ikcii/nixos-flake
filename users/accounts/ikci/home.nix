@@ -6,6 +6,7 @@
 	home = {
 		sessionVariables = {
 			EDITOR = "nvim";
+			BROWSER = "brave";
 		};
 
 		packages = with pkgs; [
