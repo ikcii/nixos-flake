@@ -57,7 +57,8 @@
   };
 
   # Configure console keymap
-  console.keyMap = "pl2";
+  console.useXkbConfig = true;
+  #console.keyMap = "pl2";
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 

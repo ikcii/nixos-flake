@@ -40,6 +40,11 @@
 		wrapperFeatures.gtk = true;
 
 		config = rec {
+			input = {
+				"*" = {
+					xkb_layout = "pl";
+				};
+			};
 			modifier = "Mod4";
 			terminal = "kitty";
 			defaultWorkspace = "workspace number 1";
