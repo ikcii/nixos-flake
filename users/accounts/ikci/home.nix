@@ -7,6 +7,8 @@
 		sessionVariables = {
 			EDITOR = "nvim";
 			BROWSER = "brave";
+			XDG_SESSION_TYPE = "wayland";
+    			XDG_CURRENT_DESKTOP = "sway";
 		};
 
 		packages = with pkgs; [
@@ -28,6 +30,9 @@
 			zip
 			unzip
 			mangohud
+			obs-studio
+			xdg-desktop-portal-wlr
+			xdg-desktop-portal-gtk
 		];
 
 		stateVersion = "25.05";
@@ -36,6 +41,12 @@
 	programs.bash.enable = true;
 	programs.kitty.enable = true;
 	programs.git.enable = true;
+
+	xdg.portal = {
+		enable = true;
+		config.common.default = "*";
+		extraPortals = [ pkgs.xdg-desktop-portal-wlr ];
+	};
 
 	wayland.windowManager.sway = rec {
 
