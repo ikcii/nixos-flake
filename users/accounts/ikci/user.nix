@@ -1,5 +1,5 @@
 { ... }: {
     isNormalUser = true;
     description = "ikci";
-    extraGroups = [ "networkmanager" "wheel" "video" "audio" ];
+    extraGroups = [ "networkmanager" "wheel" "video" ];
 }
