@@ -20,6 +20,9 @@
   # Polkit
   security.polkit.enable = true;
 
+  # Audio fix
+  hardware.enableAllFirmware = true;
+
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -28,7 +31,7 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
-
+  
   # Set your time zone.
   time.timeZone = "Europe/Warsaw";
 
@@ -71,6 +74,7 @@
   ];
 
   # programs.sway.enable = true;
+  programs.light.enable = true;
 
   users.common = [ "ikci" ];
 

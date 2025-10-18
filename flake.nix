@@ -20,6 +20,11 @@
 				inherit system;
       				specialArgs = { inherit inputs; };
       				modules = [
+					({ config, ... }: 
+					{
+						networking.hostName = hostname;
+						networking.dhcpcd.setHostname = false;
+					})
       					./hosts/common/default.nix
 					./hosts/${hostname}/hardware-configuration.nix
 
