@@ -13,6 +13,7 @@
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.tmp.cleanOnBoot = true;
 
   # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;
@@ -23,6 +24,8 @@
 
   # Audio fix
   hardware.enableAllFirmware = true;
+
+  hardware.graphics.enable = true;
 
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
@@ -56,6 +59,10 @@
     layout = "pl";
     variant = "";
   };
+
+  services.gvfs.enable = true;
+  #services.udisks2.enable = true;
+  #services.devmon.enable = true;
 
   # Configure console keymap
   console.useXkbConfig = true;

@@ -5,12 +5,13 @@
 
 	home = {
 		sessionVariables = {
-			EDITOR = "nvim";
 			BROWSER = "brave";
+			EDITOR = "nvim";
+			GDK_BACKEND = "x11";
+			NIXOS_OZONE_WL = "1";
 			XDG_SESSION_TYPE = "wayland";
     			XDG_CURRENT_DESKTOP = "sway";
-			GDK_BACKEND = "wayland";
-			QT_QPA_PLATFORM = "wayland;xcb";
+			NIXPKGS_ALLOW_UNFREE = "1";
 		};
 
 		packages = with pkgs; [
@@ -32,13 +33,26 @@
 			zip
 			unzip
 			mangohud
+			pcmanfm
 			obs-studio
 			xdg-desktop-portal-wlr
 			xdg-desktop-portal-gtk
 			gimp-with-plugins
 			prismlauncher
 			xwayland
+			lxmenu-data
+			shared-mime-info
 		];
+
+		# pointerCursor = {
+		#     			name = "Adwaita";
+		#     			package = pkgs.adwaita-icon-theme;
+		#     			size = 24;
+		#     			x11 = {
+		#     				enable = true;
+		#     				defaultCursor = "Adwaita";
+		#     			};
+		# };
 
 		stateVersion = "25.05";
 	};
@@ -57,16 +71,18 @@
 
 		enable = true;
 		wrapperFeatures.gtk = true;
+		
+		xwayland = true;
 
 		config = rec {
-			input = {
-				"*" = {
-					xkb_layout = "pl";
-				};
-			};
+
+			input."*".xkb_layout = "pl";
+
 			modifier = "Mod4";
 			terminal = "kitty";
+
 			defaultWorkspace = "workspace number 1";
+
 
 			keybindings = lib.mkOptionDefault {
 				"${modifier}+s" = "scratchpad show";
