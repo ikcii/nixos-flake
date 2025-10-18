@@ -9,6 +9,8 @@
 			BROWSER = "brave";
 			XDG_SESSION_TYPE = "wayland";
     			XDG_CURRENT_DESKTOP = "sway";
+			GDK_BACKEND = "wayland";
+			QT_QPA_PLATFORM = "wayland;xcb";
 		};
 
 		packages = with pkgs; [
@@ -33,9 +35,9 @@
 			obs-studio
 			xdg-desktop-portal-wlr
 			xdg-desktop-portal-gtk
-			gimp
-			gimpPlugins.gmic
+			gimp-with-plugins
 			prismlauncher
+			xwayland
 		];
 
 		stateVersion = "25.05";
