@@ -16,7 +16,7 @@
 			gamemode
 			nerd-fonts.jetbrains-mono
 			noto-fonts-color-emoji
-			noto-fonts-cjk
+			noto-fonts-cjk-sans
 			steam
 			swaylock
 			tmux
