@@ -17,7 +17,6 @@
 
 		packages = with pkgs; [
 			ani-cli
-			brave
 			btop
 			cava
 			cbonsai
@@ -72,10 +71,13 @@
 
 		stateVersion = "25.05";
 	};
-
-	programs.bash.enable = true;
-	programs.kitty.enable = true;
-	programs.git.enable = true;
+	
+	programs = {
+		bash.enable = true;
+		brave.enable = true;
+		git.enable = true;
+		kitty.enable = true;
+	};
 
 	programs.mpv = {
 		enable = true;
