@@ -74,6 +74,7 @@
 	programs = {
 		bash.enable = true;
 		brave.enable = true;
+		feh.enable = true;
 		git.enable = true;
 		kitty.enable = true;
 		tmux.enable = true;
