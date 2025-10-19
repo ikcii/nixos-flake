@@ -142,5 +142,7 @@
 			terminal = 0.8;
 		};
 		autoEnable = true;
+
+		fonts.monospace.name = "JetBrainsMono Nerd Font";
 	};
 }
