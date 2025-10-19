@@ -27,6 +27,7 @@
 			fortune
 			gamemode
 			gimp-with-plugins
+			libqalculate
 			localsend
 			lxmenu-data
 			mangohud
