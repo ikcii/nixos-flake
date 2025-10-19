@@ -82,6 +82,7 @@
 			config = {
 				hwdec = "nvdec,nvdec-copy,vaapi,vaapi-copy,auto";
 				vo = "gpu";
+			};
 		};
 	};
 
