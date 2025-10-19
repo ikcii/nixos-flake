@@ -18,7 +18,13 @@
 			ani-cli
 			brave
 			btop
+			cava
+			cbonsai
+			cmatrix
+			cowsay
 			dejavu_fonts
+			fastfetch
+			fortune
 			gamemode
 			gimp-with-plugins
 			localsend
@@ -29,6 +35,7 @@
 			noto-fonts-color-emoji
 			obs-studio
 			pcmanfm
+			pipes
 			prismlauncher
 			shared-mime-info
 			steam
@@ -38,6 +45,7 @@
 			unzip
 			vesktop
 			wl-clipboard
+			wtf
 			xdg-desktop-portal-gtk
 			xdg-desktop-portal-wlr
 			xwayland
