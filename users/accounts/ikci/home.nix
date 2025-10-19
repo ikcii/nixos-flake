@@ -42,7 +42,6 @@
 			shared-mime-info
 			steam
 			swaylock
-			tmux
 			tree
 			unzip
 			vesktop
@@ -77,13 +76,12 @@
 		brave.enable = true;
 		git.enable = true;
 		kitty.enable = true;
-	};
-
-	programs.mpv = {
-		enable = true;
-		config = {
-			hwdec = "nvdec,nvdec-copy,vaapi,vaapi-copy,auto";
-			vo = "gpu";
+		tmux.enable = true;
+		mpv = {
+			enable = true;
+			config = {
+				hwdec = "nvdec,nvdec-copy,vaapi,vaapi-copy,auto";
+				vo = "gpu";
 		};
 	};
 
