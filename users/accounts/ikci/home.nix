@@ -20,29 +20,30 @@
 			btop
 			dejavu_fonts
 			gamemode
-			nerd-fonts.jetbrains-mono
-			noto-fonts-color-emoji
+			gimp-with-plugins
 			localsend
+			lxmenu-data
+			mangohud
+			nerd-fonts.jetbrains-mono
 			noto-fonts-cjk-sans
+			noto-fonts-color-emoji
+			obs-studio
+			pcmanfm
+			prismlauncher
+			shared-mime-info
 			steam
 			swaylock
 			tmux
 			tree
+			unzip
 			vesktop
 			wl-clipboard
+			xdg-desktop-portal-gtk
+			xdg-desktop-portal-wlr
+			xwayland
+			yt-dlp
 			zerotierone
 			zip
-			unzip
-			mangohud
-			pcmanfm
-			obs-studio
-			xdg-desktop-portal-wlr
-			xdg-desktop-portal-gtk
-			gimp-with-plugins
-			prismlauncher
-			xwayland
-			lxmenu-data
-			shared-mime-info
 		];
 
 		# pointerCursor = {
