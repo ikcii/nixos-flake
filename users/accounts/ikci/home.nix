@@ -44,6 +44,10 @@
 			yt-dlp
 			zerotierone
 			zip
+    			mpv
+    			neovim
+    			nvimpager
+    			wget
 		];
 
 		# pointerCursor = {
