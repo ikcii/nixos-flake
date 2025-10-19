@@ -117,11 +117,29 @@
 				"XF86AudioLowerVolume" = "exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-";
 				"XF86AudioMute" = "exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
 			};
+
+			window = {
+				border = 0;
+				titlebar = false;
+			};
+
+			gaps = {
+				inner = 1;
+				outer = 1;
+			};
+
 		};
 	};
 
 	stylix = {
 		enable = true;
 		image = ./wallpaper.png;
+		opacity = {
+			applications = 0.8;
+			popups = 0.8;
+			desktop = 0.8;
+			terminal = 0.8;
+		};
+		autoEnable = true;
 	};
 }
