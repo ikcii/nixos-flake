@@ -37,6 +37,7 @@
 			pcmanfm
 			pipes
 			prismlauncher
+			qalculate-qt
 			shared-mime-info
 			steam
 			swaylock
@@ -52,7 +53,6 @@
 			yt-dlp
 			zerotierone
 			zip
-    			mpv
     			neovim
     			nvimpager
     			wget
@@ -74,6 +74,14 @@
 	programs.bash.enable = true;
 	programs.kitty.enable = true;
 	programs.git.enable = true;
+
+	programs.mpv = {
+		enable = true;
+		config = {
+			hwdec = "nvdec,nvdec-copy,vaapi,vaapi-copy,auto";
+			vo = "gpu";
+		};
+	};
 
 	xdg.portal = {
 		enable = true;
