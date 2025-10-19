@@ -1,6 +1,7 @@
 { lib, config, pkgs, ... }: {
 
 	fonts.fontconfig.enable = true;
+
 	nixpkgs.config.allowUnfree = true;
 
 	home = {
@@ -117,5 +118,10 @@
 				"XF86AudioMute" = "exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
 			};
 		};
+	};
+
+	stylix = {
+		enable = true;
+		image = ./wallpaper.png;
 	};
 }

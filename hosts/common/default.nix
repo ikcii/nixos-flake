@@ -64,6 +64,8 @@
   #services.udisks2.enable = true;
   #services.devmon.enable = true;
 
+  services.dconf.enable = true;
+
   # Configure console keymap
   console.useXkbConfig = true;
   #console.keyMap = "pl2";

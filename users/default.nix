@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, inputs, ... }:
 
 let
 
@@ -13,7 +13,12 @@ let
 
 		home-manager.users = lib.listToAttrs (map (username: {
 			name = username;
-			value = import ./accounts/${username}/home.nix;
+			value = {
+				imports = [
+					inputs.stylix.homeModules.stylix
+					./accounts/${username}/home.nix
+				];
+			};
 		}) users);
 	};
 
