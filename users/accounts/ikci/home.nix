@@ -17,18 +17,20 @@
 
 		packages = with pkgs; [
 			ani-cli
-			cava
 			cbonsai
 			cmatrix
 			cowsay
 			dejavu_fonts
 			fastfetch
 			ffmpeg
+			figlet
 			fortune
 			gamemode
 			gimp-with-plugins
+			grim
 			libqalculate
 			localsend
+			lolcat
 			lxmenu-data
 			mangohud
 			nerd-fonts.jetbrains-mono
@@ -40,6 +42,7 @@
 			prismlauncher
 			qalculate-qt
 			shared-mime-info
+			slurp
 			steam
 			tree
 			unzip
@@ -71,6 +74,7 @@
 		bash.enable = true;
 		brave.enable = true;
 		btop.enable = true;
+		cava.enable = true;
 		feh.enable = true;
 		git.enable = true;
 		kitty.enable = true;
@@ -151,5 +155,7 @@
 		};
 
 		fonts.monospace.name = "JetBrainsMono Nerd Font";
+
+		targets.cava.rainbow.enable = true;
 	};
 }
