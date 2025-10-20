@@ -51,6 +51,7 @@
 			wtf
 			xdg-desktop-portal-gtk
 			xdg-desktop-portal-wlr
+			xdg-utils
 			xwayland
 			zerotierone
 			zip
@@ -95,15 +96,8 @@
 
 	xdg.portal = {
 		enable = true;
-		xdgOpenUsePortal = true;
+		config.common.default = "*";
 		extraPortals = [ pkgs.xdg-desktop-portal-wlr ];
-		config = {
-			sway = {
-				default = [ "gtk" ];
-				"org.freedesktop.impl.portal.Screenshot" = [ "wlr" ];
-				"org.freedesktop.impl.portal.ScreenCast" = [ "wlr" ];
-			};
-		};
 	};
 
 	wayland.windowManager.sway = {
@@ -126,6 +120,7 @@
 			keybindings = lib.mkOptionDefault {
 				"${modifier}+s" = "scratchpad show";
 				"${modifier}+Shift+s" = "move scratchpad";
+				"${modifier}+p" = "exec grim -g "$(slurp)" - | wl-copy"
 				"XF86MonBrightnessDown" = "exec light -U 10";
 				"XF86MonBrightnessUp" = "exec light -A 10";
 				"XF86AudioRaiseVolume" = "exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+";
@@ -167,14 +162,14 @@
 		targets.cava.rainbow.enable = true;
 	};
 
-	xdg.mimeApps = {
-		enable = true;
-		defaultApplications = {
-			"text/html" = "brave.desktop";
-			"x-scheme-handler/http" = "brave.desktop";
-			"x-scheme-handler/https" = "brave.desktop";
-	   		"x-scheme-handler/about" = "brave.desktop";
-	   		"x-scheme-handler/unknown" = "brave.desktop";
-		};
-	};
+	# xdg.mimeApps = {
+	# 	enable = true;
+	# 	defaultApplications = {
+	# 		"text/html" = "brave.desktop";
+	# 		"x-scheme-handler/http" = "brave.desktop";
+	# 		"x-scheme-handler/https" = "brave.desktop";
+	#    		"x-scheme-handler/about" = "brave.desktop";
+	#    		"x-scheme-handler/unknown" = "brave.desktop";
+	# 	};
+	# };
 }
