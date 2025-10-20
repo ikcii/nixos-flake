@@ -134,8 +134,7 @@
 			};
 
 			gaps = {
-				inner = 1;
-				outer = 1;
+				inner = 2;
 			};
 
 			bars = [
