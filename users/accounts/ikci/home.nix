@@ -93,7 +93,7 @@
 		extraPortals = [ pkgs.xdg-desktop-portal-wlr ];
 	};
 
-	wayland.windowManager.sway = rec {
+	wayland.windowManager.sway = {
 
 		enable = true;
 		wrapperFeatures.gtk = true;
@@ -129,6 +129,11 @@
 				inner = 1;
 				outer = 1;
 			};
+
+			bars = [
+				(config.stylix.targets.sway.exportedBarConfig // {
+				})
+			];
 
 		};
 	};
