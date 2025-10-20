@@ -34,6 +34,7 @@
 			lxmenu-data
 			mangohud
 			nerd-fonts.jetbrains-mono
+			noto-fonts
 			noto-fonts-cjk-sans
 			noto-fonts-color-emoji
 			obs-studio
@@ -94,8 +95,15 @@
 
 	xdg.portal = {
 		enable = true;
-		config.common.default = "*";
+		xdgOpenUsePortal = true;
 		extraPortals = [ pkgs.xdg-desktop-portal-wlr ];
+		config = {
+			sway = {
+				default = [ "gtk" ];
+				"org.freedesktop.impl.portal.Screenshot" = [ "wlr" ];
+				"org.freedesktop.impl.portal.ScreenCast" = [ "wlr" ];
+			};
+		};
 	};
 
 	wayland.windowManager.sway = {
@@ -103,7 +111,7 @@
 		enable = true;
 		wrapperFeatures.gtk = true;
 		
-		xwayland = true;
+		# xwayland = true;
 
 		config = rec {
 
@@ -157,5 +165,16 @@
 		fonts.monospace.name = "JetBrainsMono Nerd Font";
 
 		targets.cava.rainbow.enable = true;
+	};
+
+	xdg.mimeApps = {
+		enable = true;
+		defaultApplications = {
+			"text/html" = "brave.desktop";
+			"x-scheme-handler/http" = "brave.desktop";
+			"x-scheme-handler/https" = "brave.desktop";
+	   		"x-scheme-handler/about" = "brave.desktop";
+	   		"x-scheme-handler/unknown" = "brave.desktop";
+		};
 	};
 }
