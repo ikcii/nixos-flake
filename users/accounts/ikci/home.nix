@@ -17,7 +17,6 @@
 
 		packages = with pkgs; [
 			ani-cli
-			btop
 			cava
 			cbonsai
 			cmatrix
@@ -41,19 +40,15 @@
 			qalculate-qt
 			shared-mime-info
 			steam
-			swaylock
 			tree
 			unzip
-			vesktop
 			wl-clipboard
 			wtf
 			xdg-desktop-portal-gtk
 			xdg-desktop-portal-wlr
 			xwayland
-			yt-dlp
 			zerotierone
 			zip
-    			neovim
     			nvimpager
     			wget
 		];
@@ -74,10 +69,15 @@
 	programs = {
 		bash.enable = true;
 		brave.enable = true;
+		btop.enable = true;
 		feh.enable = true;
 		git.enable = true;
 		kitty.enable = true;
+		neovim.enable = true;
+		swaylock.enable = true;
 		tmux.enable = true;
+		vesktop.enable = true;
+		yt-dlp.enable = true;
 		mpv = {
 			enable = true;
 			config = {
@@ -146,11 +146,5 @@
 		};
 
 		fonts.monospace.name = "JetBrainsMono Nerd Font";
-
-		targets = {
-			sway.enable = true;
-			swaylock.enable = true;
-			vesktop.enable = true;
-		};
 	};
 }
