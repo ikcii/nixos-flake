@@ -23,6 +23,7 @@
 			cowsay
 			dejavu_fonts
 			fastfetch
+			ffmpeg
 			fortune
 			gamemode
 			gimp-with-plugins
@@ -131,8 +132,7 @@
 			};
 
 			bars = [
-				(config.stylix.targets.sway.exportedBarConfig // {
-				})
+				config.stylix.targets.sway.exportedBarConfig
 			];
 
 		};
