@@ -69,6 +69,12 @@
 		#     			};
 		# };
 
+		file = {
+			"downloads" = {
+				source = config.lib.file.mkOutOfStoreSymlink config.xdg.userDirs.download;
+			};
+		};
+
 		stateVersion = "25.05";
 	};
 	
@@ -94,10 +100,16 @@
 		};
 	};
 
-	xdg.portal = {
-		enable = true;
-		config.common.default = "*";
-		extraPortals = [ pkgs.xdg-desktop-portal-wlr ];
+	xdg = {
+		portal = {
+			enable = true;
+			config.common.default = "*";
+			extraPortals = [ pkgs.xdg-desktop-portal-wlr ];
+		};
+		userDirs = {
+			enable = true;
+			createDirectories = true;
+		};
 	};
 
 	wayland.windowManager.sway = {
