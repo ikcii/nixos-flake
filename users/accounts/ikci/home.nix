@@ -34,7 +34,7 @@
 			# current system daemons utils
 
 			grim
-			lxde.lxmenu-data
+			lxmenu-data
 			shared-mime-info
 			wl-clipboard
 			xdg-desktop-portal-gtk
@@ -46,14 +46,15 @@
 
 			ani-cli
 			cbonsai
-			gamemode
 			cmatrix
 			cowsay
 			fastfetch
 			ffmpeg
 			figlet
 			fortune
+			gamemode
 			gimp-with-plugins
+			git-filter-repo
 			libqalculate
 			localsend
 			lolcat
