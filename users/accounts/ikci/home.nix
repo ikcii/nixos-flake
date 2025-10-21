@@ -6,57 +6,73 @@
 
 	home = {
 		sessionVariables = {
+			
+			# universal
+
 			BROWSER = "brave";
 			EDITOR = "nvim";
+			NIXPKGS_ALLOW_UNFREE = "1";
+
+			# current system
+
 			GDK_BACKEND = "x11";
 			NIXOS_OZONE_WL = "1";
 			XDG_SESSION_TYPE = "wayland";
     			XDG_CURRENT_DESKTOP = "sway";
-			NIXPKGS_ALLOW_UNFREE = "1";
 		};
 
 		packages = with pkgs; [
-			ani-cli
-			cbonsai
-			cmatrix
-			cowsay
+			
+			# fonts
+
 			dejavu_fonts
-			fastfetch
-			ffmpeg
-			figlet
-			fortune
-			gamemode
-			gimp-with-plugins
-			grim
-			libqalculate
-			localsend
-			lolcat
-			lxmenu-data
-			mangohud
 			nerd-fonts.jetbrains-mono
 			noto-fonts
 			noto-fonts-cjk-sans
 			noto-fonts-color-emoji
+
+			# current system daemons utils
+
+			grim
+			lxde.lxmenu-data
+			shared-mime-info
+			wl-clipboard
+			xdg-desktop-portal-gtk
+			xdg-desktop-portal-wlr
+			xdg-utils
+			xwayland
+
+			# other
+
+			ani-cli
+			cbonsai
+			gamemode
+			cmatrix
+			cowsay
+			fastfetch
+			ffmpeg
+			figlet
+			fortune
+			gimp-with-plugins
+			libqalculate
+			localsend
+			lolcat
+			mangohud
 			obs-studio
 			pcmanfm
 			pipes
 			prismlauncher
 			qalculate-qt
-			shared-mime-info
 			slurp
 			steam
 			tree
 			unzip
-			wl-clipboard
 			wtf
-			xdg-desktop-portal-gtk
-			xdg-desktop-portal-wlr
-			xdg-utils
-			xwayland
 			zerotierone
 			zip
     			nvimpager
     			wget
+
 		];
 
 		# pointerCursor = {
