@@ -56,6 +56,7 @@
 			gimp-with-plugins
 			git-filter-repo
 			libqalculate
+			libreoffice-still
 			localsend
 			lolcat
 			mangohud
@@ -111,7 +112,14 @@
 		mpv = {
 			enable = true;
 			config = {
-				hwdec = "nvdec,nvdec-copy,vaapi,vaapi-copy,auto";
+				
+				# system specific
+
+				gpu-context = "wayland";
+
+				# general
+
+				hwdec = "auto-safe";
 				vo = "gpu";
 			};
 		};
@@ -139,6 +147,15 @@
 		config = rec {
 
 			input."*".xkb_layout = "pl";
+
+			output = {
+				"eDP-1"."mode" = "1920x1080@60.052Hz";
+				"eDP-1"."position" = "2560 360";
+				"HDMI-A-2"."mode" = "2560x1440@59.951Hz";
+				"HDMI-A-2"."position" = "0 0";
+			};
+
+			"workspace"."1" = "output HDMI-A-1 DP-1";
 
 			modifier = "Mod4";
 			terminal = "kitty";
