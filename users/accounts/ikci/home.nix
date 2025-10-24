@@ -15,7 +15,7 @@
 
 			# current system
 
-			GDK_BACKEND = "x11";
+			GDK_BACKEND = "wayland,x11";
 			NIXOS_OZONE_WL = "1";
 			XDG_SESSION_TYPE = "wayland";
     			XDG_CURRENT_DESKTOP = "sway";
@@ -155,7 +155,11 @@
 				"HDMI-A-2"."position" = "0 0";
 			};
 
-			"workspace"."1" = "output HDMI-A-1 DP-1";
+			workspaceOutputAssign = [
+			        { workspace = "1"; output = "HDMI-A-2"; }
+			        { workspace = "2"; output = "eDP-1"; }
+			];
+
 
 			modifier = "Mod4";
 			terminal = "kitty";
@@ -186,7 +190,6 @@
 			bars = [
 				config.stylix.targets.sway.exportedBarConfig
 			];
-
 		};
 	};
 
