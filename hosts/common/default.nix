@@ -64,16 +64,16 @@
   #services.udisks2.enable = true;
   #services.devmon.enable = true;
 
-  services.resolved = {
-  	enable = true;
-	dnssec = "true";
-	dnsovertls = "true";
-  };
-
-  networking.nameservers = [
-  	"194.242.2.4"
-	"2a07:e340::4"
-  ];
+	#  services.resolved = {
+	#  	enable = true;
+	# dnssec = "true";
+	# dnsovertls = "true";
+	#  };
+	#
+	#  networking.nameservers = [
+	#  	"194.242.2.4"
+	# "2a07:e340::4"
+	#  ];
 
   # Configure console keymap
   console.useXkbConfig = true;
