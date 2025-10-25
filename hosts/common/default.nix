@@ -94,6 +94,8 @@
   programs.light.enable = true;
   programs.dconf.enable = true;
 
+  users.common = [ "ikci" ];
+
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;

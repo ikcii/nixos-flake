@@ -17,26 +17,13 @@
 
 	outputs = { self, nixpkgs, home-manager, stylix, ... }@inputs: 
 	let
-		commonUsers = [ "ikci" ];
-
-		hostData = {
-			"v4real" = {
-				system = "x86_64-linux";
-				# hostSpecificUsers = [];
-			};
+		myHosts = {
+			"v4real" = { system = "x86_64-linux"; };
 		};
-
-		myHosts = nixpkgs.lib.mapAttrs (hostname: config: 
-			config
-			// {
-				users = commonUsers ++ (config.hostSpecificUsers or []);
-			}
-		) hostData;
-
-		mkSystem = { hostname, system, users, ... }:
+		mkSystem = { hostname, system, ... }:
 			nixpkgs.lib.nixosSystem {
 				inherit system;
-      				specialArgs = { inherit inputs users; };
+      				specialArgs = { inherit inputs; };
       				modules = [
 					({ config, ... }: 
 					{
