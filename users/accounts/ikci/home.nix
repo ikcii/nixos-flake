@@ -171,6 +171,8 @@
 				"${modifier}+s" = "scratchpad show";
 				"${modifier}+Shift+s" = "move scratchpad";
 				"${modifier}+p" = "exec grim -g \"$(slurp)\" - | wl-copy";
+				"${modifier}+o" = "exec swaylock";
+				"${modifier}+Shift+o" = "exec swaylock & systemctl sleep";
 				"XF86MonBrightnessDown" = "exec light -U 10";
 				"XF86MonBrightnessUp" = "exec light -A 10";
 				"XF86AudioRaiseVolume" = "exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+";
