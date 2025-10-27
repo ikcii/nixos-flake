@@ -94,6 +94,7 @@
   # programs.sway.enable = true;
   programs.light.enable = true;
   programs.dconf.enable = true;
+  programs.gamescope.enable = true;
 
   users.common = [ "ikci" ];
 

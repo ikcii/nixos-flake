@@ -77,9 +77,8 @@
 			wtf
 			zerotierone
 			zip
-    			nvimpager
-    			wget
-
+			nvimpager
+			wget
 		];
 
 		# pointerCursor = {
@@ -105,6 +104,7 @@
 		bash.enable = true;
 		brave.enable = true;
 		btop.enable = true;
+		btop.package = pkgs.btop-cuda;
 		cava.enable = true;
 		feh.enable = true;
 		git.enable = true;
