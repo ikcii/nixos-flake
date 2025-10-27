@@ -25,6 +25,7 @@
   # Audio fix
   hardware.enableAllFirmware = true;
 
+  # Graphics drivers just in case
   hardware.graphics.enable = true;
 
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
