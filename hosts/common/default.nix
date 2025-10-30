@@ -5,10 +5,8 @@
 { pkgs, ... }:
 
 {
-  imports =
-    [ 
-    	../../users/modules/common-users.nix
-    ];
+
+  users.list = [ "ikci" ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -95,8 +93,6 @@
   programs.light.enable = true;
   programs.dconf.enable = true;
   programs.gamescope.enable = true;
-
-  users.common = [ "ikci" ];
 
   security.rtkit.enable = true;
   services.pipewire = {

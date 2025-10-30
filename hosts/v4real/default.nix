@@ -1,7 +1,6 @@
 { ... }: {
-	imports = [ ../../users/modules/host-users.nix ];
 
-	# users.hostSpecific = [ "host-specific-user-username" ];
+	# users.list = [ "host-specific-user-username" ];
 
 	services.xserver.videoDrivers = [ "modesetting" "nvidia" ];
 
