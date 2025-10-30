@@ -1,226 +1,228 @@
 { lib, config, pkgs, ... }: {
 
-	fonts.fontconfig.enable = true;
+  fonts.fontconfig.enable = true;
 
-	nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.allowUnfree = true;
 
-	home = {
-		sessionVariables = {
-			
-			# universal
+  home = {
+    sessionVariables = {
+      
+      # universal
 
-			BROWSER = "brave";
-			EDITOR = "nvim";
-			NIXPKGS_ALLOW_UNFREE = "1";
+      BROWSER = "brave";
+      EDITOR = "nvim";
+      NIXPKGS_ALLOW_UNFREE = "1";
 
-			# current system
+      # current system
 
-			GDK_BACKEND = "wayland,x11";
-			NIXOS_OZONE_WL = "1";
-			XDG_SESSION_TYPE = "wayland";
-    			XDG_CURRENT_DESKTOP = "sway";
+      GDK_BACKEND = "wayland,x11";
+      NIXOS_OZONE_WL = "1";
+      XDG_SESSION_TYPE = "wayland";
+          XDG_CURRENT_DESKTOP = "sway";
 
-		};
+    };
 
-		packages = with pkgs; [
-			
-			# fonts
+    packages = with pkgs; [
+      
+      # fonts
 
-			dejavu_fonts
-			nerd-fonts.jetbrains-mono
-			noto-fonts
-			noto-fonts-cjk-sans
-			noto-fonts-color-emoji
+      dejavu_fonts
+      nerd-fonts.jetbrains-mono
+      noto-fonts
+      noto-fonts-cjk-sans
+      noto-fonts-color-emoji
 
-			# current system daemons utils
+      # current system daemons utils
 
-			grim
-			lxmenu-data
-			shared-mime-info
-			wl-clipboard
-			xdg-desktop-portal-gtk
-			xdg-desktop-portal-wlr
-			xdg-utils
-			xwayland
+      grim
+      lxmenu-data
+      shared-mime-info
+      wl-clipboard
+      xdg-desktop-portal-gtk
+      xdg-desktop-portal-wlr
+      xdg-utils
+      xwayland
 
-			# other
+      # other
 
-			ani-cli
-			cbonsai
-			cmatrix
-			cowsay
-			fastfetch
-			ffmpeg
-			figlet
-			fortune
-			gamemode
-			gimp-with-plugins
-			git-filter-repo
-			libqalculate
-			libreoffice-still
-			localsend
-			lolcat
-			mangohud
-			obs-studio
-			pcmanfm
-			pipes
-			prismlauncher
-			qalculate-qt
-			slurp
-			steam
-			tree
-			unzip
-			wtf
-			zerotierone
-			zip
-			nvimpager
-			wget
-		];
+      ani-cli
+      cbonsai
+      cmatrix
+      cowsay
+      fastfetch
+      ffmpeg
+      figlet
+      fortune
+      gamemode
+      gimp-with-plugins
+      git-filter-repo
+      libqalculate
+      libreoffice-still
+      localsend
+      lolcat
+      mangohud
+      obs-studio
+      pcmanfm
+      pipes
+      prismlauncher
+      qalculate-qt
+      slurp
+      steam
+      tree
+      unzip
+      wtf
+      zerotierone
+      zip
+      nvimpager
+      wget
+    ];
 
-		# pointerCursor = {
-		#     			name = "Adwaita";
-		#     			package = pkgs.adwaita-icon-theme;
-		#     			size = 24;
-		#     			x11 = {
-		#     				enable = true;
-		#     				defaultCursor = "Adwaita";
-		#     			};
-		# };
+    # pointerCursor = {
+    #     			name = "Adwaita";
+    #     			package = pkgs.adwaita-icon-theme;
+    #     			size = 24;
+    #     			x11 = {
+    #     				enable = true;
+    #     				defaultCursor = "Adwaita";
+    #     			};
+    # };
 
-		file = {
-			"downloads" = {
-				source = config.lib.file.mkOutOfStoreSymlink config.xdg.userDirs.download;
-			};
-		};
+    file = {
+      "downloads" = {
+        source = config.lib.file.mkOutOfStoreSymlink config.xdg.userDirs.download;
+      };
+    };
 
-		stateVersion = "25.05";
-	};
-	
-	programs = {
-		bash.enable = true;
-		brave.enable = true;
-		btop.enable = true;
-		btop.package = pkgs.btop-cuda;
-		cava.enable = true;
-		feh.enable = true;
-		git.enable = true;
-		kitty.enable = true;
-		neovim.enable = true;
-		swaylock.enable = true;
-		tmux.enable = true;
-		vesktop.enable = true;
-		yt-dlp.enable = true;
-		mpv = {
-			enable = true;
-			config = {
-				
-				# system specific
+    stateVersion = "25.05";
+  };
+  
+  programs = {
+    bash.enable = true;
+    brave.enable = true;
+    btop.enable = true;
+    btop.package = pkgs.btop-cuda;
+    cava.enable = true;
+    feh.enable = true;
+    git.enable = true;
+    kitty.enable = true;
+    neovim.enable = true;
+    swaylock.enable = true;
+    tmux.enable = true;
+    vesktop.enable = true;
+    yt-dlp.enable = true;
+    mpv = {
+      enable = true;
+      config = {
+        
+        # system specific
 
-				gpu-context = "wayland";
+        gpu-context = "wayland";
 
-				# general
+        # general
 
-				hwdec = "auto-safe";
-				vo = "gpu";
-			};
-		};
-	};
+        hwdec = "auto-safe";
+        vo = "gpu";
+      };
+    };
+  };
 
-	xdg = {
-		portal = {
-			enable = true;
-			config.common.default = "*";
-			extraPortals = [ pkgs.xdg-desktop-portal-wlr ];
-		};
-		userDirs = {
-			enable = true;
-			createDirectories = true;
-		};
-	};
+  xdg = {
+    portal = {
+      enable = true;
+      config.common.default = "*";
+      extraPortals = [ pkgs.xdg-desktop-portal-wlr ];
+    };
+    userDirs = {
+      enable = true;
+      createDirectories = true;
+    };
+  };
 
-	wayland.windowManager.sway = {
+  wayland.windowManager.sway = {
 
-		enable = true;
-		wrapperFeatures.gtk = true;
-		
-		# xwayland = true;
+    enable = true;
+    wrapperFeatures.gtk = true;
+    
+    # xwayland = true;
 
-		config = rec {
+    config = rec {
 
-			input."*".xkb_layout = "pl";
+      input."*".xkb_layout = "pl";
 
-			output = {
-				"eDP-1"."mode" = "1920x1080@60.052Hz";
-				"eDP-1"."position" = "2560 360";
-				"HDMI-A-2"."mode" = "2560x1440@59.951Hz";
-				"HDMI-A-2"."position" = "0 0";
-			};
+      output = {
+        "eDP-1"."mode" = "1920x1080@60.052Hz";
+        "eDP-1"."position" = "0 0";
+        #"eDP-1"."position" = "2560 360";
+        #"HDMI-A-2"."mode" = "2560x1440@59.951Hz";
+        #"HDMI-A-2"."position" = "0 0";
+      };
 
-			workspaceOutputAssign = [
-			        { workspace = "1"; output = "HDMI-A-2"; }
-			        { workspace = "2"; output = "eDP-1"; }
-			];
-
-
-			modifier = "Mod4";
-			terminal = "kitty";
-
-			defaultWorkspace = "workspace number 1";
+      workspaceOutputAssign = [
+              #{ workspace = "1"; output = "HDMI-A-2"; }
+              #{ workspace = "2"; output = "eDP-1"; }
+              { workspace = "1"; output = "eDP-1"; }
+      ];
 
 
-			keybindings = lib.mkOptionDefault {
-				"${modifier}+s" = "scratchpad show";
-				"${modifier}+Shift+s" = "move scratchpad";
-				"${modifier}+p" = "exec grim -g \"$(slurp)\" - | wl-copy";
-				"${modifier}+o" = "exec swaylock";
-				"${modifier}+Shift+o" = "exec swaylock & systemctl sleep";
-				"XF86MonBrightnessDown" = "exec light -U 10";
-				"XF86MonBrightnessUp" = "exec light -A 10";
-				"XF86AudioRaiseVolume" = "exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+";
-				"XF86AudioLowerVolume" = "exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-";
-				"XF86AudioMute" = "exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
-			};
+      modifier = "Mod4";
+      terminal = "kitty";
 
-			window = {
-				border = 0;
-				titlebar = false;
-			};
+      defaultWorkspace = "workspace number 1";
 
-			gaps = {
-				inner = 2;
-			};
 
-			bars = [
-				config.stylix.targets.sway.exportedBarConfig
-			];
-		};
-	};
+      keybindings = lib.mkOptionDefault {
+        "${modifier}+s" = "scratchpad show";
+        "${modifier}+Shift+s" = "move scratchpad";
+        "${modifier}+p" = "exec grim -g \"$(slurp)\" - | wl-copy";
+        "${modifier}+o" = "exec swaylock";
+        "${modifier}+Shift+o" = "exec swaylock & systemctl sleep";
+        "XF86MonBrightnessDown" = "exec light -U 10";
+        "XF86MonBrightnessUp" = "exec light -A 10";
+        "XF86AudioRaiseVolume" = "exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+";
+        "XF86AudioLowerVolume" = "exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-";
+        "XF86AudioMute" = "exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
+      };
 
-	stylix = {
-		enable = true;
-		autoEnable = true;
-		image = ./wallpaper.png;
-		polarity = "dark";
-		opacity = {
-			applications = 0.8;
-			popups = 0.8;
-			desktop = 0.8;
-			terminal = 0.8;
-		};
+      window = {
+        border = 0;
+        titlebar = false;
+      };
 
-		fonts.monospace.name = "JetBrainsMono Nerd Font";
+      gaps = {
+        inner = 2;
+      };
 
-		targets.cava.rainbow.enable = true;
-	};
+      bars = [
+        config.stylix.targets.sway.exportedBarConfig
+      ];
+    };
+  };
 
-	# xdg.mimeApps = {
-	# 	enable = true;
-	# 	defaultApplications = {
-	# 		"text/html" = "brave.desktop";
-	# 		"x-scheme-handler/http" = "brave.desktop";
-	# 		"x-scheme-handler/https" = "brave.desktop";
-	#    		"x-scheme-handler/about" = "brave.desktop";
-	#    		"x-scheme-handler/unknown" = "brave.desktop";
-	# 	};
-	# };
+  stylix = {
+    enable = true;
+    autoEnable = true;
+    image = ./wallpaper.png;
+    polarity = "dark";
+    opacity = {
+      applications = 0.8;
+      popups = 0.8;
+      desktop = 0.8;
+      terminal = 0.8;
+    };
+
+    fonts.monospace.name = "JetBrainsMono Nerd Font";
+
+    targets.cava.rainbow.enable = true;
+  };
+
+  # xdg.mimeApps = {
+  # 	enable = true;
+  # 	defaultApplications = {
+  # 		"text/html" = "brave.desktop";
+  # 		"x-scheme-handler/http" = "brave.desktop";
+  # 		"x-scheme-handler/https" = "brave.desktop";
+  #    		"x-scheme-handler/about" = "brave.desktop";
+  #    		"x-scheme-handler/unknown" = "brave.desktop";
+  # 	};
+  # };
 }
