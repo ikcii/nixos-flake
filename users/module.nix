@@ -1,23 +1,28 @@
 { lib, config, inputs, ... }:
 
 {
+  options.users.list = lib.mkOption {
+    type = lib.types.listOf lib.types.str;
+    default = [];
+    description = "A list of all user accounts to be created on this system.";
+  };
+
   config = lib.mkMerge [
-    # Generate the top-level system user accounts from the final list
     {
       users.users = lib.listToAttrs (map (username: {
         name = username;
-        value = import ./accounts/${username}/user.nix;
+        value = import ./${username}/user.nix;
       }) config.users.list);
     }
 
-    # Generate the Home Manager configurations from the final list
     {
       home-manager.users = lib.listToAttrs (map (username: {
         name = username;
         value = {
           imports = [
             inputs.stylix.homeModules.stylix
-            ./accounts/${username}/home.nix
+            # Update the path for home.nix as well
+            ./${username}/home.nix
           ];
         };
       }) config.users.list);
