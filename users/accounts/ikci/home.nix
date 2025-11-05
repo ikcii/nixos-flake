@@ -18,7 +18,7 @@
       GDK_BACKEND = "wayland,x11";
       NIXOS_OZONE_WL = "1";
       XDG_SESSION_TYPE = "wayland";
-          XDG_CURRENT_DESKTOP = "sway";
+      XDG_CURRENT_DESKTOP = "sway";
 
     };
 
@@ -49,6 +49,7 @@
       cbonsai
       cmatrix
       cowsay
+      easyeffects
       fastfetch
       ffmpeg
       figlet
@@ -61,6 +62,9 @@
       localsend
       lolcat
       mangohud
+      nix-index
+      nix-search-cli
+      nvimpager
       obs-studio
       pcmanfm
       pipes
@@ -70,11 +74,20 @@
       steam
       tree
       unzip
+      wget
       wtf
       zerotierone
       zip
-      nvimpager
-      wget
+
+      (import (pkgs.fetchFromGitHub {
+      	owner = "NixOS";
+	repo = "nixpkgs";
+	rev = "0ba4d0e96e2358ea1db4737ff8591cba314a574e";
+	sha256 = "sha256-A9GqrOD7eISfDCjPRiaB5Tb3njV8zPyG5Y1khd5rJQo=";
+      }) {
+      	system = pkgs.system;
+      }).tome4
+
     ];
 
     # pointerCursor = {
@@ -98,9 +111,9 @@
   
   programs = {
     bash.enable = true;
-    brave.enable = true;
     btop.enable = true;
     btop.package = pkgs.btop-cuda;
+    brave.enable = true;
     cava.enable = true;
     feh.enable = true;
     git.enable = true;
@@ -149,25 +162,10 @@
 
       input."*".xkb_layout = "pl";
 
-      output = {
-        "eDP-1"."mode" = "1920x1080@60.052Hz";
-        "eDP-1"."position" = "0 0";
-        #"eDP-1"."position" = "2560 360";
-        #"HDMI-A-2"."mode" = "2560x1440@59.951Hz";
-        #"HDMI-A-2"."position" = "0 0";
-      };
-
-      workspaceOutputAssign = [
-              #{ workspace = "1"; output = "HDMI-A-2"; }
-              #{ workspace = "2"; output = "eDP-1"; }
-              { workspace = "1"; output = "eDP-1"; }
-      ];
-
-
       modifier = "Mod4";
       terminal = "kitty";
 
-      defaultWorkspace = "workspace number 1";
+      defaultWorkspace = "workspace 1";
 
 
       keybindings = lib.mkOptionDefault {
@@ -225,4 +223,61 @@
   #    		"x-scheme-handler/unknown" = "brave.desktop";
   # 	};
   # };
+
+  services.kanshi = 
+  let
+    kanshi-script = pkgs.writeShellScriptBin "arrange-workspaces" ''
+      #!${pkgs.runtimeShell}
+
+        ${pkgs.sway}/bin/swaymsg reload
+
+        sleep 2
+
+        if [[ "$KANSHI_PROFILE" == "docked" ]]; then
+	  ${pkgs.sway}/bin/swaymsg 'workspace number 1, move workspace to output HDMI-A-2'
+          ${pkgs.sway}/bin/swaymsg 'workspace number 2, move workspace to output eDP-1'
+          ${pkgs.sway}/bin/swaymsg 'workspace number 2'
+        fi
+      '';
+  in
+    {
+      enable = true;
+      settings = [
+        {
+          profile = {
+            name = "laptop";
+            outputs = [
+              {
+                criteria = "eDP-1";
+                status = "enable";
+                mode = "1920x1080@60.052Hz";
+		position = "0,0";
+              }
+            ];
+            exec = "${kanshi-script}/bin/arrange-workspaces";
+          };
+        }
+
+        {
+          profile = {
+            name = "docked";
+            outputs = [
+              {
+                criteria = "eDP-1";
+                status = "enable";
+                mode = "1920x1080@60.052Hz";
+                position = "2560,360";
+              }
+              {
+                criteria = "HDMI-A-2";
+                status = "enable";
+                mode = "2560x1440@59.951Hz";
+                position = "0,0";
+              }
+            ];
+            exec = "${kanshi-script}/bin/arrange-workspaces";
+          };
+        }
+      ];
+    };
 }
