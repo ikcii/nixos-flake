@@ -25,26 +25,19 @@
 					inherit system;
       		specialArgs = { inherit inputs; };
       			modules = [
-							# Basic hostname setup
+							# This is here only as a "idk how but it seems to work" fix for one time when randomly my hostname got reset
 							({ ... }: {
 								networking.hostName = hostname;
 								networking.dhcpcd.setHostname = false;
 							})
 
-							# --- REFACTORED MODULE IMPORTS ---
-							# 1. Import the module that defines our custom `users.list` option
 							./users/modules/options.nix
 
-							# 2. Import configurations that populate the `users.list`
-      				./hosts/common/default.nix
+      				                        ./hosts/common/default.nix
 							./hosts/${hostname}/hardware-configuration.nix
-							# The optional import for the host-specific default.nix is at the end
 
-							# 3. Import the central module that consumes the final `users.list`
 							./users/module.nix
-							# ------------------------------------
 
-							# Import Home Manager itself
 							home-manager.nixosModules.home-manager
 
       			] ++ (nixpkgs.lib.optional (builtins.pathExists ./hosts/${hostname}/default.nix) ./hosts/${hostname}/default.nix);
