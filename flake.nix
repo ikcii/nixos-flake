@@ -31,7 +31,7 @@
 								networking.dhcpcd.setHostname = false;
 							})
 
-      				                        ./hosts/common/default.nix
+							./hosts/common/default.nix
 							./hosts/${hostname}/hardware-configuration.nix
 
 							./users/module.nix
