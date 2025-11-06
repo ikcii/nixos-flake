@@ -4,6 +4,8 @@
 
 	services.xserver.videoDrivers = [ "modesetting" "nvidia" ];
 
+	virtualisation.docker.enable = true;
+
 	programs.steam.enable = true;
 	programs.gamemode.enable = true;
 
