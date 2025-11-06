@@ -165,7 +165,7 @@
       modifier = "Mod4";
       terminal = "kitty";
 
-      defaultWorkspace = "workspace 1";
+      defaultWorkspace = "workspace number 1";
 
 
       keybindings = lib.mkOptionDefault {
