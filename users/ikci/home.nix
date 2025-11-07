@@ -41,6 +41,7 @@
       xdg-desktop-portal-gtk
       xdg-desktop-portal-wlr
       xdg-utils
+      xdg-user-dirs
       xwayland
 
       # other
@@ -51,6 +52,7 @@
       cowsay
       easyeffects
       fastfetch
+      faugus-launcher
       ffmpeg
       figlet
       fortune
@@ -196,7 +198,7 @@
   stylix = {
     enable = true;
     autoEnable = true;
-    image = ./wallpaper.png;s
+    image = ./wallpaper.png;
     polarity = "dark";
     opacity = {
       applications = 0.8;
