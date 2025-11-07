@@ -165,9 +165,6 @@
       modifier = "Mod4";
       terminal = "kitty";
 
-      defaultWorkspace = "workspace number 1";
-
-
       keybindings = lib.mkOptionDefault {
         "${modifier}+s" = "scratchpad show";
         "${modifier}+Shift+s" = "move scratchpad";
@@ -199,7 +196,7 @@
   stylix = {
     enable = true;
     autoEnable = true;
-    image = ./wallpaper.png;
+    image = ./wallpaper.png;s
     polarity = "dark";
     opacity = {
       applications = 0.8;
@@ -229,14 +226,14 @@
     kanshi-script = pkgs.writeShellScriptBin "arrange-workspaces" ''
       #!${pkgs.runtimeShell}
 
-        ${pkgs.sway}/bin/swaymsg reload
+        PATH=${lib.makeBinPath [ pkgs.coreutils pkgs.sway ]}
 
         sleep 2
 
         if [[ "$KANSHI_PROFILE" == "docked" ]]; then
 	  ${pkgs.sway}/bin/swaymsg 'workspace number 1, move workspace to output HDMI-A-2'
           ${pkgs.sway}/bin/swaymsg 'workspace number 2, move workspace to output eDP-1'
-          ${pkgs.sway}/bin/swaymsg 'workspace number 2'
+          ${pkgs.sway}/bin/swaymsg 'workspace number 1'
         fi
       '';
   in
