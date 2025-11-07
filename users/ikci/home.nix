@@ -1,4 +1,4 @@
-{ lib, config, pkgs, ... }: {
+{ lib, config, pkgs, options, ... }: {
 
   fonts.fontconfig.enable = true;
 
@@ -63,7 +63,6 @@
       libreoffice-still
       localsend
       lolcat
-      mangohud
       nix-index
       nix-search-cli
       nvimpager
@@ -139,6 +138,14 @@
         vo = "gpu";
       };
     };
+    mangohud = {
+    	enable = true;
+    	settings = lib.mkOptionDefault {
+	  gpu_temp = true;
+	  cpu_temp = true;
+	  throttling_status = true;
+	};
+    };
   };
 
   xdg = {
@@ -156,9 +163,8 @@
   wayland.windowManager.sway = {
 
     enable = true;
+
     wrapperFeatures.gtk = true;
-    
-    # xwayland = true;
 
     config = rec {
 
@@ -188,10 +194,6 @@
       gaps = {
         inner = 2;
       };
-
-      bars = [
-        config.stylix.targets.sway.exportedBarConfig
-      ];
     };
   };
 
