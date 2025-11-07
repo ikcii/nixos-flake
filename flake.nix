@@ -31,10 +31,10 @@
 								networking.dhcpcd.setHostname = false;
 							})
 
-							./hosts/common/default.nix
+							./hosts
 							./hosts/${hostname}/hardware-configuration.nix
 
-							./users/module.nix
+							./users
 
 							home-manager.nixosModules.home-manager
 
