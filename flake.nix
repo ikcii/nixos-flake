@@ -7,41 +7,57 @@
 		home-manager = {
 			url = "github:nix-community/home-manager";
 			inputs.nixpkgs.follows = "nixpkgs";
-    };
+		};
 
 		stylix = {
 			url = "github:danth/stylix";
 			inputs.nixpkgs.follows = "nixpkgs";
 		};
-  };
+	};
 
-	outputs = { self, nixpkgs, home-manager, stylix, ... }@inputs: 
+	outputs = { self, nixpkgs, home-manager, stylix, ... }@inputs:
+    	let
+		lib = nixpkgs.lib;
+
+		listDirs = path:
+			lib.attrNames (lib.filterAttrs (name: type: type == "directory") (builtins.readDir path));
+
+		mkSystem = { hostname, system }:
+			lib.nixosSystem {
+				inherit system;
+				specialArgs = { inherit inputs; };
+				modules = [
+					./hosts
+					./hosts/${system}
+					./hosts/${system}/${hostname}
+					./hosts/${system}/${hostname}/hardware-configuration.nix
+
+					./users
+
+					home-manager.nixosModules.home-manager
+
+					# My hostname got a stroke once so I keep this as a placebo
+					({ ... }: {
+						networking.hostName = hostname;
+                				networking.dhcpcd.setHostname = false;
+              				})
+				];
+			};
+
+	in
+	{
+		nixosConfigurations =
 		let
-			myHosts = {
-				"v4real" = { system = "x86_64-linux"; };
-			};
-			mkSystem = { hostname, system, ... }:
-				nixpkgs.lib.nixosSystem {
-					inherit system;
-      		specialArgs = { inherit inputs; };
-      			modules = [
-							# This is here only as a "idk how but it seems to work" fix for one time when randomly my hostname got reset
-							({ ... }: {
-								networking.hostName = hostname;
-								networking.dhcpcd.setHostname = false;
-							})
+			archs = listDirs ./hosts;
 
-							./hosts
-							./hosts/${hostname}/hardware-configuration.nix
-
-							./users
-
-							home-manager.nixosModules.home-manager
-
-      			] ++ (nixpkgs.lib.optional (builtins.pathExists ./hosts/${hostname}/default.nix) ./hosts/${hostname}/default.nix);
-			};
+			hostNameValuePairs = lib.concatMap (system:
+				let hostnames = listDirs ./hosts/${system};
+				in lib.map (hostname: {
+					name = hostname;
+					value = mkSystem { inherit hostname system; };
+				}) hostnames
+			) archs;
 		in
-		{
-			nixosConfigurations = nixpkgs.lib.mapAttrs (hostname: config: mkSystem (config // { inherit hostname; })) myHosts;
-		};
+		lib.listToAttrs hostNameValuePairs;
+	};
 }

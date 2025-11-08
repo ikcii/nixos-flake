@@ -1,46 +1,10 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ pkgs, ... }:
+# Global settings for ALL systems in this flake
+{ lib, pkgs, ... }:
 
 {
-
-  users.list = [ "ikci" ];
-
-  # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.tmp.cleanOnBoot = true;
-
-  # Use latest kernel.
-  boot.kernelPackages = pkgs.linuxPackages_latest;
-
-  # Polkit
-  security.polkit.enable = true;
-  security.pam.services.swaylock = {};
-
-  # Audio fix
-  hardware.enableAllFirmware = true;
-
-  # Graphics drivers just in case
-  hardware.graphics.enable = true;
-
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  # Enable networking
-  networking.networkmanager.enable = true;
-  
-  # Set your time zone.
+  # --- Time & Localization ---
   time.timeZone = "Europe/Warsaw";
-
-  # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
-
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "pl_PL.UTF-8";
     LC_IDENTIFICATION = "pl_PL.UTF-8";
@@ -53,82 +17,29 @@
     LC_TIME = "pl_PL.UTF-8";
   };
 
-  # Configure keymap in X11
-  services.xserver.xkb = {
+  # --- System-Wide Default Keyboard Layout ---
+  # A low-priority default for any machine that enables an X server.
+  services.xserver.xkb = lib.mkDefault {
     layout = "pl";
     variant = "";
   };
 
-  services.gvfs.enable = true;
-  #services.udisks2.enable = true;
-  #services.devmon.enable = true;
+  # --- Global Users ---
+  users.list = [ "ikci" ];
 
-	#  services.resolved = {
-	#  	enable = true;
-	# dnssec = "true";
-	# dnsovertls = "true";
-	#  };
-	#
-	#  networking.nameservers = [
-	#  	"194.242.2.4"
-	# "2a07:e340::4"
-	#  ];
-
-  # Configure console keymap
-  console.useXkbConfig = true;
-  #console.keyMap = "pl2";
-
+  # --- Nix Settings ---
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
-  # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
+  # --- Networking ---
+  networking.networkmanager.enable = true;
+
+  # --- Universal System Packages ---
   environment.systemPackages = with pkgs; [
     sl
   ];
 
-  # programs.sway.enable = true;
-  programs.light.enable = true;
-  programs.dconf.enable = true;
-  programs.gamescope.enable = true;
-
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    # jack.enable = true; # Uncomment if you need JACK support
-  };
-
-
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
-
-  # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
-
-  # This value determines the NixOS release from which the default
-  # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
-  # this value at the release version of the first install of this system.
-  # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "25.05"; # Did you read the comment?
-
+  # --- System State ---
+  # Leave unchanged, mandatory setting for NixOS, versioning is controlled by flake
+  system.stateVersion = "25.05";
 }
