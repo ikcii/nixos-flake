@@ -22,10 +22,24 @@
 		listDirs = path:
 			lib.attrNames (lib.filterAttrs (name: type: type == "directory") (builtins.readDir path));
 
+		homeManagerModules =
+		let
+			usernames = listDirs ./users;
+			
+			buildUserModules = username: {
+				value = [
+					inputs.stylix.homeModules.stylix
+					./users/${username}/home.nix
+				];
+				name = username;
+			};
+		in
+		lib.listToAttrs (map  buildUserModules usernames);
+
 		mkSystem = { hostname, system }:
 			lib.nixosSystem {
 				inherit system;
-				specialArgs = { inherit inputs; };
+				specialArgs = { inherit inputs homeManagerModules; };
 				modules = [
 					./hosts
 					./hosts/${system}
@@ -46,13 +60,30 @@
 
 	in
 	{
+		homeManagerConfigurations = lib.mapAttrs (username: modules:
+			home-manager.lib.homeManagerConfiguration {
+				pkgs = nixpkgs.legacyPackages.${builtins.currentSystem};
+				extraSpecialArgs = { inherit inputs; };
+				modules = [
+					({ pkgs, ... }: {
+						home.username = username;
+						home.homeDirectory =
+							if pkgs.stdenv.isDarwin
+							then "/Users/${username}"
+							else "/home/${username}";
+					})
+				] ++ modules;
+			}
+		) homeManagerModules;
+
 		nixosConfigurations =
 		let
 			archs = listDirs ./hosts;
-
 			hostNameValuePairs = lib.concatMap (system:
-				let hostnames = listDirs ./hosts/${system};
-				in lib.map (hostname: {
+				let
+					hostnames = listDirs ./hosts/${system};
+				in
+				lib.map (hostname: {
 					name = hostname;
 					value = mkSystem { inherit hostname system; };
 				}) hostnames
