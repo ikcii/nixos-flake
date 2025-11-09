@@ -11,7 +11,7 @@
     {
       users.users = lib.listToAttrs (map (username: {
         name = username;
-        value = import ./${username}/user.nix;
+        value = import ./${username};
       }) config.users.list);
     }
 
@@ -21,7 +21,6 @@
         value = {
           imports = [
             inputs.stylix.homeModules.stylix
-            # Update the path for home.nix as well
             ./${username}/home.nix
           ];
         };
