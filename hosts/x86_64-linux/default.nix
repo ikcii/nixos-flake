@@ -3,8 +3,17 @@
 
 {
   # --- Bootloader ---
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader = {
+    efi = {
+      canTouchEfiVariables = true;
+      efiSysMountPoint = "/boot";
+    };
+    grub = {
+      enable = true;
+      efiSupport = true;
+      device = "nodev";
+    };
+  }; 
   boot.tmp.cleanOnBoot = true;
   
   # --- Kernel ---

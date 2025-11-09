@@ -1,5 +1,5 @@
 # Host-specific settings for the 'v4real' desktop
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
 {
   

@@ -73,6 +73,7 @@
       qalculate-qt
       slurp
       steam
+      tome4
       tree
       unzip
       wget
@@ -80,14 +81,14 @@
       zerotierone
       zip
 
-      (import (pkgs.fetchFromGitHub {
-      	owner = "NixOS";
-	repo = "nixpkgs";
-	rev = "0ba4d0e96e2358ea1db4737ff8591cba314a574e";
-	sha256 = "sha256-A9GqrOD7eISfDCjPRiaB5Tb3njV8zPyG5Y1khd5rJQo=";
-      }) {
-      	system = pkgs.system;
-      }).tome4
+      # (import (pkgs.fetchFromGitHub {
+      #	  owner = "NixOS";
+      #   repo = "nixpkgs";
+	  rev = "0ba4d0e96e2358ea1db4737ff8591cba314a574e";
+	  sha256 = "sha256-A9GqrOD7eISfDCjPRiaB5Tb3njV8zPyG5Y1khd5rJQo=";
+      # }) {
+      #	  system = pkgs.system;
+      # }).tome4
 
     ];
 
