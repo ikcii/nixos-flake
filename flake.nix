@@ -31,6 +31,7 @@
 			buildUserModules = username: {
 				value = [
 					inputs.stylix.homeModules.stylix
+					inputs.mnw.homeManagerModules.mnw
 					./users/${username}/home.nix
 				];
 				name = username;

@@ -1,7 +1,6 @@
 { lib, config, pkgs, inputs, ... }: {
 
   fonts.fontconfig.enable = true;
-
   nixpkgs.config.allowUnfree = true;
 
   home = {
@@ -149,25 +148,18 @@
 	};
     };
 
-    neovim = {
+    mnw = {
     	enable = true;
-	package = 
-	(inputs.mnw.lib.wrap pkgs {
-		neovim = pkgs.neovim-unwrapped;
+	neovim = pkgs.neovim-unwrapped;
 
-		luaFiles = [ ./nvim/init.lua ];
+	luaFiles = [ ./nvim/init.lua ];
 
-		plugins = {
-			start = with pkgs.vimPlugins; [
-				lazy-nvim
-				plenary-nvim
-			];
-
-			opt = [ ];
-		};
-	}).overrideAttrs (oldAttrs: {
-		meta = pkgs.neovim-unwrapped.meta;
-	});
+	plugins = {
+		start = with pkgs.vimPlugins; [
+			lazy-nvim
+		];
+		opt = [];
+	};
     };
   };
 
