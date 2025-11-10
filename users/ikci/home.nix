@@ -1,4 +1,4 @@
-{ lib, config, pkgs, options, ... }: {
+{ lib, config, pkgs, inputs, ... }: {
 
   fonts.fontconfig.enable = true;
 
@@ -120,11 +120,11 @@
     feh.enable = true;
     git.enable = true;
     kitty.enable = true;
-    neovim.enable = true;
     swaylock.enable = true;
     tmux.enable = true;
     vesktop.enable = true;
     yt-dlp.enable = true;
+
     mpv = {
       enable = true;
       config = {
@@ -139,6 +139,7 @@
         vo = "gpu";
       };
     };
+
     mangohud = {
     	enable = true;
     	settings = lib.mkOptionDefault {
@@ -146,6 +147,27 @@
 	  cpu_temp = true;
 	  throttling_status = true;
 	};
+    };
+
+    neovim = {
+    	enable = true;
+	package = 
+	(inputs.mnw.lib.wrap pkgs {
+		neovim = pkgs.neovim-unwrapped;
+
+		luaFiles = [ ./nvim/init.lua ];
+
+		plugins = {
+			start = with pkgs.vimPlugins; [
+				lazy-nvim
+				plenary-nvim
+			];
+
+			opt = [ ];
+		};
+	}).overrideAttrs (oldAttrs: {
+		meta = pkgs.neovim-unwrapped.meta;
+	});
     };
   };
 

@@ -13,9 +13,11 @@
 			url = "github:danth/stylix";
 			inputs.nixpkgs.follows = "nixpkgs";
 		};
+
+		mnw.url = "github:Gerg-L/mnw";
 	};
 
-	outputs = { self, nixpkgs, home-manager, stylix, ... }@inputs:
+	outputs = { self, nixpkgs, home-manager, stylix, mnw, ... }@inputs:
     	let
 		lib = nixpkgs.lib;
 
@@ -49,6 +51,10 @@
 					./users
 
 					home-manager.nixosModules.home-manager
+
+					({ ... }: {
+						home-manager.extraSpecialArgs = { inherit inputs; };
+					})
 
 					# My hostname got a stroke once so I keep this as a placebo
 					({ ... }: {
