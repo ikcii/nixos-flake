@@ -10,7 +10,7 @@
 		};
 
 		stylix = {
-			url = "github:danth/stylix";
+			url = "github:make-42/stylix/matugen";
 			inputs.nixpkgs.follows = "nixpkgs";
 		};
 

@@ -216,7 +216,7 @@
     enable = true;
     autoEnable = true;
     image = ./wallpaper.png;
-    polarity = "dark";
+    colorGeneration.polarity = "dark";
     opacity = {
       applications = 0.8;
       popups = 0.8;
