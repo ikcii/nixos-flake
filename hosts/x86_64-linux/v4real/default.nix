@@ -32,6 +32,7 @@
     __NV_PRIME_RENDER_OFFLOAD_PROVIDER = "NVIDIA-G0";
     __GLX_VENDOR_LIBRARY_NAME = "nvidia";
     __VK_LAYER_NV_optimus = "NVIDIA_only";
+    GDM_BACKEND = "nvidia-drm";
   };
 
   # --- Virtualization ---

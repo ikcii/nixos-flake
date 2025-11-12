@@ -18,6 +18,10 @@
       NIXOS_OZONE_WL = "1";
       XDG_SESSION_TYPE = "wayland";
       XDG_CURRENT_DESKTOP = "sway";
+      SDL_VIDEODRIVER = "wayland";
+      QT_QPA_PLATFORM = "wayland";
+      QT_WAYLAND_DISABLE_WINDOWDECORATION = 1;
+      _JAVA_AWT_WM_NONREPARENTING = 1;
 
     };
 
@@ -37,8 +41,6 @@
       lxmenu-data
       shared-mime-info
       wl-clipboard
-      xdg-desktop-portal-gtk
-      xdg-desktop-portal-wlr
       xdg-utils
       xdg-user-dirs
       xwayland
@@ -111,10 +113,11 @@
   };
   
   programs = {
+
     bash.enable = true;
+    brave.enable = true;
     btop.enable = true;
     btop.package = pkgs.btop-cuda;
-    brave.enable = true;
     cava.enable = true;
     feh.enable = true;
     git.enable = true;
@@ -166,8 +169,14 @@
   xdg = {
     portal = {
       enable = true;
-      config.common.default = "*";
-      extraPortals = [ pkgs.xdg-desktop-portal-wlr ];
+      xdgOpenUsePortal = true;
+      config.sway = {
+      	default = [ "gtk" ];
+	"org.freedesktop.impl.portal.Screenshot" = "wlr";
+	"org.freedesktop.impl.portal.ScreenCast" = "wlr";
+	"org.freedesktop.impl.portal.Inhibit" = "none";
+      };
+      extraPortals =  with pkgs; [ xdg-desktop-portal-wlr xdg-desktop-portal-gtk ];
     };
     userDirs = {
       enable = true;
