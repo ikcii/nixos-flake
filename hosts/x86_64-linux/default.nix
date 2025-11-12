@@ -1,5 +1,5 @@
 # Settings for all x86_64-linux systems
-{ lib, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   # --- Bootloader ---

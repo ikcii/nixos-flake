@@ -1,5 +1,5 @@
 # Host-specific settings for the 'v4real' desktop
-{ pkgs, lib, ... }:
+{ ... }:
 
 {
   
@@ -37,5 +37,4 @@
 
   # --- Virtualization ---
   virtualisation.docker.enable = true;
-
 }

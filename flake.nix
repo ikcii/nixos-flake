@@ -2,7 +2,7 @@
 	description = "My system flake";
 
 	inputs = {
-		nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+		nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
 		home-manager = {
 			url = "github:nix-community/home-manager";
@@ -15,6 +15,11 @@
 		};
 
 		mnw.url = "github:Gerg-L/mnw";
+
+		niri-flake = {
+			url = "github:sodiboo/niri-flake";
+			inputs.nixpkgs.follows = "nixpkgs";
+		};
 	};
 
 	outputs = { self, nixpkgs, home-manager, stylix, mnw, ... }@inputs:
@@ -32,6 +37,7 @@
 				value = [
 					inputs.stylix.homeModules.stylix
 					inputs.mnw.homeManagerModules.mnw
+					inputs.niri-flake.homeModules.niri
 					./users/${username}/home.nix
 				];
 				name = username;
@@ -67,7 +73,7 @@
 
 	in
 	{
-		homeManagerConfigurations = lib.mapAttrs (username: modules:
+		homeConfigurations = lib.mapAttrs (username: modules:
 			home-manager.lib.homeManagerConfiguration {
 				pkgs = nixpkgs.legacyPackages.${builtins.currentSystem};
 				extraSpecialArgs = { inherit inputs; };

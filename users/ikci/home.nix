@@ -1,4 +1,4 @@
-{ lib, config, pkgs, inputs, ... }: {
+{ lib, config, pkgs, ... }: {
 
   fonts.fontconfig.enable = true;
   nixpkgs.config.allowUnfree = true;
@@ -145,25 +145,27 @@
     mangohud = {
     	enable = true;
     	settings = lib.mkOptionDefault {
-	  gpu_temp = true;
-	  cpu_temp = true;
-	  throttling_status = true;
-	};
+	      gpu_temp = true;
+	      cpu_temp = true;
+	      throttling_status = true;
+	    };
     };
 
     mnw = {
     	enable = true;
-	neovim = pkgs.neovim-unwrapped;
+	    neovim = pkgs.neovim-unwrapped;
 
-	luaFiles = [ ./nvim/init.lua ];
+	    luaFiles = [ ./nvim/init.lua ];
 
-	plugins = {
-		start = with pkgs.vimPlugins; [
-			lazy-nvim
-		];
-		opt = [];
-	};
+	    plugins = {
+		    start = with pkgs.vimPlugins; [
+			    lazy-nvim
+		    ];
+		  opt = [];
+	    };
     };
+
+    niri.enable = true;
   };
 
   xdg = {
@@ -276,7 +278,7 @@
                 criteria = "eDP-1";
                 status = "enable";
                 mode = "1920x1080@60.052Hz";
-		position = "0,0";
+		            position = "0,0";
               }
             ];
             exec = "${kanshi-script}/bin/arrange-workspaces";
