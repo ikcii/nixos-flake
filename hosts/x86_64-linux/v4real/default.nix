@@ -26,6 +26,10 @@
     };
   };
 
+  hardware.bluetooth.enable = true;
+
+  services.blueman.enable = true;
+
   # Environment variables for PRIME render offload
   environment.sessionVariables = {
     __NV_PRIME_RENDER_OFFLOAD = "1";
