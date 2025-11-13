@@ -116,8 +116,6 @@
 
     bash.enable = true;
     brave.enable = true;
-    btop.enable = true;
-    btop.package = pkgs.btop-cuda;
     cava.enable = true;
     feh.enable = true;
     git.enable = true;
@@ -126,6 +124,17 @@
     tmux.enable = true;
     vesktop.enable = true;
     yt-dlp.enable = true;
+
+    btop = {
+    	enable = true;
+    	package = pkgs.btop-cuda;
+	settings = lib.mkOptionDefault {
+	    proc_sorting = "pid";
+	    proc_reversed = true;
+	    proc_tree = true;
+	    shown_boxes = "proc cpu mem net gpu0"
+	};
+    }
 
     mpv = {
       enable = true;
@@ -164,8 +173,6 @@
 		  opt = [];
 	    };
     };
-
-    niri.enable = true;
   };
 
   xdg = {
