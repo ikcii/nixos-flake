@@ -10,4 +10,13 @@ return {
 			desc = "Buffer Local Keymaps (which-key)",
 		},
 	},
+
+	opts = {
+		defaults = {
+			preset = "modern",
+			filter = function(mapping)
+				return true
+			end,
+		},
+	},
 }

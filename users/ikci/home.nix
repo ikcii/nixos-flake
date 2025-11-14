@@ -124,6 +124,7 @@
     tmux.enable = true;
     vesktop.enable = true;
     yt-dlp.enable = true;
+    zoxide.enable = true;
 
     btop = {
     	enable = true;
@@ -167,11 +168,26 @@
 	    luaFiles = [ ./nvim/init.lua ];
 
 	    plugins = {
+
 		    start = with pkgs.vimPlugins; [
 			    lazy-nvim
 		    ];
-		  opt = [];
+
+		    opt = with pkgs.vimPlugins; [
+			    plenary-nvim
+			    telescope-nvim
+			    which-key-nvim
+		    ];
+
+		    dev.config = {
+		    	pure = ./nvim;
+		    };
 	    };
+    };
+
+    niri = {
+    	enable = true;
+	package = pkgs.niri;
     };
   };
 
