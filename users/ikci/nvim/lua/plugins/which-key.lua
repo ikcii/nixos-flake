@@ -19,4 +19,9 @@ return {
 			end,
 		},
 	},
+
+	dependencies = {
+		"nvim-mini/mini.icons",
+		"nvim-tree/nvim-web-devicons",
+	},
 }

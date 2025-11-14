@@ -50,10 +50,12 @@
       ani-cli
       cbonsai
       cmatrix
+      tree-sitter
       cowsay
       easyeffects
       fastfetch
       faugus-launcher
+      fd
       ffmpeg
       figlet
       fortune
@@ -72,6 +74,7 @@
       pipes
       prismlauncher
       qalculate-qt
+      ripgrep
       slurp
       steam
       tome4
@@ -174,10 +177,24 @@
 		    ];
 
 		    opt = with pkgs.vimPlugins; [
+			    nvim-treesitter
 			    plenary-nvim
 			    telescope-nvim
 			    which-key-nvim
-		    ];
+			    mini-icons
+			    nvim-web-devicons
+		    	] ++ (with nvim-treesitter-parsers; [
+			    bash
+			    css
+			    html
+			    java
+			    javadoc
+			    javascript
+			    luadoc
+			    luap
+			    nix
+			    python
+		    ]);
 
 		    dev.config = {
 		    	pure = ./nvim;

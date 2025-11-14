@@ -13,12 +13,19 @@ require("lazy").setup({
 			reset = false,
 		},
 	},
-
 	install = {
 		missing = false,
 	},
 
 	spec = {
 		{ import = "plugins" },
-	}
+	},
+
+	rocks = {
+		enabled = false,
+	},
+
+	checker = {
+		enabled = false,
+	},
 })
