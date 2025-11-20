@@ -5,7 +5,7 @@
 
   home = {
     sessionVariables = {
-      
+
       # universal
 
       BROWSER = "brave";
@@ -26,7 +26,7 @@
     };
 
     packages = with pkgs; [
-      
+
       # fonts
 
       dejavu_fonts
@@ -114,7 +114,7 @@
 
     stateVersion = "25.05";
   };
-  
+
   programs = {
 
     bash.enable = true;
@@ -122,7 +122,6 @@
     cava.enable = true;
     feh.enable = true;
     git.enable = true;
-    kitty.enable = true;
     swaylock.enable = true;
     tmux.enable = true;
     vesktop.enable = true;
@@ -143,7 +142,7 @@
     mpv = {
       enable = true;
       config = {
-        
+
         # system specific
 
         gpu-context = "wayland";
@@ -200,6 +199,12 @@
 		    	pure = ./nvim;
 		    };
 	    };
+    };
+    kitty = {
+      enable = true;
+      settings = {
+        shell = "tmux new -As0";
+      };
     };
 
     niri = {
