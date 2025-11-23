@@ -130,7 +130,7 @@
 
     btop = {
     	enable = true;
-    	package = pkgs.btop-cuda;
+    	package = pkgs.btop-rocm;
 	settings = lib.mkOptionDefault {
 	    proc_sorting = "pid";
 	    proc_reversed = true;
@@ -317,39 +317,39 @@
       settings = [
         {
           profile = {
-            name = "laptop";
+            name = "desktop-default";
             outputs = [
               {
-                criteria = "eDP-1";
+                criteria = "HDMI-A-1";
                 status = "enable";
-                mode = "1920x1080@60.052Hz";
-		            position = "0,0";
-              }
-            ];
-            exec = "${kanshi-script}/bin/arrange-workspaces";
-          };
-        }
-
-        {
-          profile = {
-            name = "docked";
-            outputs = [
-              {
-                criteria = "eDP-1";
-                status = "enable";
-                mode = "1920x1080@60.052Hz";
-                position = "2560,360";
-              }
-              {
-                criteria = "HDMI-A-2";
-                status = "enable";
-                mode = "2560x1440@59.951Hz";
+                mode = "1920x1080@120.040Hz";
+		transform = "90";
                 position = "0,0";
               }
+              {
+                criteria = "DP-1";
+                status = "enable";
+                mode = "2560x1440@179.960Hz";
+                position = "1080,550";
+              }
             ];
             exec = "${kanshi-script}/bin/arrange-workspaces";
           };
         }
+	{
+	  profile = {
+	    name = "laptop-default";
+	    outputs = [
+	      {
+	        criteria = "eDP-1";
+		status = "enable";
+		mode = "1920x1080@60.052Hz";
+		position = "0,0";
+	      }
+	      {}
+	    ];
+	  }
+	}
       ];
     };
 }
