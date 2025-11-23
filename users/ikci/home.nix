@@ -346,9 +346,29 @@
 		mode = "1920x1080@60.052Hz";
 		position = "0,0";
 	      }
-	      {}
 	    ];
-	  }
+            exec = "${kanshi-script}/bin/arrange-workspaces";
+	  };
+	}
+	{
+	  profile = {
+	    name = "laptop-docked";
+	    outputs = [
+	      {
+	        criteria = "eDP-1";
+		status = "enable";
+		mode = "1920x1080@60.052Hz";
+		position = "2560,360";
+	      }
+	      {
+	        criteria = "HDMI-A-2"
+		status = "enable";
+		mode = "2560x1440@59.951Hz";
+		position = "0,0";
+	      }
+	    ];
+            exec = "${kanshi-script}/bin/arrange-workspaces";
+	  };
 	}
       ];
     };
