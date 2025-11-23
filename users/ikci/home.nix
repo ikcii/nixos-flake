@@ -361,7 +361,7 @@
 		position = "2560,360";
 	      }
 	      {
-	        criteria = "HDMI-A-2"
+	        criteria = "HDMI-A-2";
 		status = "enable";
 		mode = "2560x1440@59.951Hz";
 		position = "0,0";
