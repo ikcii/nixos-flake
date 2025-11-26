@@ -50,7 +50,6 @@
       ani-cli
       cbonsai
       cmatrix
-      tree-sitter
       cowsay
       easyeffects
       fastfetch
@@ -77,8 +76,10 @@
       ripgrep
       slurp
       steam
+      tealdeer
       tome4
       tree
+      tree-sitter
       unzip
       wget
       wtf
@@ -123,7 +124,6 @@
     feh.enable = true;
     git.enable = true;
     swaylock.enable = true;
-    tmux.enable = true;
     vesktop.enable = true;
     yt-dlp.enable = true;
     zoxide.enable = true;
@@ -200,6 +200,16 @@
 		    };
 	    };
     };
+
+    tmux = { 
+      enable = true;
+      mouse = true;
+      focusEvents = true;
+      extraConfig = ''
+         set -g update-environment "SSH_ASKPASS SSH_AUTH_SOCK SSH_AGENT_PID SSH_CONNECTION"
+      '';
+    };
+
     kitty = {
       enable = true;
       settings = {
