@@ -213,7 +213,7 @@
     kitty = {
       enable = true;
       settings = {
-        shell = "tmux new -As0";
+        shell = "sh -c \"tmux attach -t 0 2>/dev/null || tmux new -s 0 '${pkgs.openssh}/bin/ssh-agent $SHELL'\"";
       };
     };
 
