@@ -73,6 +73,7 @@
       pipes
       prismlauncher
       qalculate-qt
+      qdirstat
       ripgrep
       slurp
       steam
