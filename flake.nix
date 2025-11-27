@@ -23,7 +23,7 @@
 	};
 
 	outputs = { self, nixpkgs, home-manager, stylix, mnw, ... }@inputs:
-    	let
+	let
 		lib = nixpkgs.lib;
 
 		listDirs = path:
