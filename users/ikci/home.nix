@@ -205,9 +205,8 @@
       enable = true;
       mouse = true;
       focusEvents = true;
-      extraConfig = ''
-         set -g update-environment "SSH_ASKPASS SSH_AUTH_SOCK SSH_AGENT_PID SSH_CONNECTION"
-      '';
+      escapeTime = 100;
+      terminal = "screen-256color";
     };
 
     kitty = {
