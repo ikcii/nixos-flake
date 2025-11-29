@@ -213,7 +213,7 @@
     kitty = {
       enable = true;
       settings = {
-        shell = "sh -c \"tmux new-session -t 0 2>/dev/null || tmux new-session -s 0 '${pkgs.openssh}/bin/ssh-agent $SHELL'\"";
+      	shell = "sh -c \"tmux has-session -t main 2>/dev/null && exec tmux new-session -t main || exec tmux new-session -s main \\\"ssh-agent $SHELL\\\"\"";
       };
     };
 
