@@ -43,6 +43,7 @@
       wl-clipboard
       xdg-utils
       xdg-user-dirs
+      xrandr
       xwayland
 
       # other
@@ -95,6 +96,12 @@
       # }) {
       #	  system = pkgs.system;
       # }).tome4
+
+      (cataclysm-dda-git.overrideAttrs (old: {
+	tag = null;
+	rev = "9afa12b497ca332919c3fdde840df75a15b8da3f";
+	hash = "";
+      }))
 
     ];
 
