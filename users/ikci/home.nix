@@ -58,6 +58,7 @@
       fd
       ffmpeg
       figlet
+      file
       fortune
       gamemode
       gimp-with-plugins
