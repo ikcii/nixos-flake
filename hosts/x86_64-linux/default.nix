@@ -26,4 +26,6 @@
 
   # --- Console & Keymaps ---
   console.useXkbConfig = true;
+
+  services.zerotierone.enable = true;
 }
