@@ -49,6 +49,7 @@
       # other
 
       ani-cli
+      bat
       cbonsai
       cmatrix
       cowsay
@@ -60,6 +61,8 @@
       figlet
       file
       fortune
+      fuse-overlayfs
+      fzf
       gamemode
       gimp-with-plugins
       git-filter-repo
@@ -71,6 +74,7 @@
       nix-search-cli
       nvimpager
       obs-studio
+      p7zip-rar
       pcmanfm
       pipes
       prismlauncher
@@ -268,6 +272,7 @@
         "${modifier}+p" = "exec grim -g \"$(slurp)\" - | wl-copy";
         "${modifier}+o" = "exec swaylock";
         "${modifier}+Shift+o" = "exec swaylock & systemctl sleep";
+	"${modifier}+Shift+c" = "exec swaymsg reload && kanshictl reload";
         "XF86MonBrightnessDown" = "exec light -U 10";
         "XF86MonBrightnessUp" = "exec light -A 10";
         "XF86AudioRaiseVolume" = "exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+";
