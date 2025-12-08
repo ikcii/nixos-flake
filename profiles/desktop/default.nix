@@ -19,5 +19,5 @@
   };
 
   # --- GUI Program Defaults ---
-  programs.light.enable = true; # For screen brightness control, unlikely it'll hurt any desktop
+  programs.light.enable = true;
 }
