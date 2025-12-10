@@ -328,7 +328,7 @@
 
         sleep 2
 
-        if [[ "$KANSHI_PROFILE" == "docked" ]]; then
+        if [[ "$KANSHI_PROFILE" == "laptop-docked" ]]; then
 	  ${pkgs.sway}/bin/swaymsg 'workspace number 1, move workspace to output HDMI-A-2'
           ${pkgs.sway}/bin/swaymsg 'workspace number 2, move workspace to output eDP-1'
           ${pkgs.sway}/bin/swaymsg 'workspace number 1'
