@@ -8,18 +8,14 @@
   };
 
   config = {
-  	users.users = lib.listToAttrs (
-		map (username: {
-			name = username;
-			value = import ./${username};
-		}) config.users.list
-	);
+    users.users = lib.listToAttrs (map (username: {
+      name = username;
+      value = import ./${username};
+    }) config.users.list);
 
-	home-manager.users = lib.listToAttrs (
-		map (username: {
-			name = username;
-			value = { imports = homeManagerModules.${username}; };
-		}) config.users.list
-	);
+    home-manager.users = lib.listToAttrs (map (username: {
+      name = username;
+      value = { imports = homeManagerModules.${username}; };
+    }) config.users.list);
   };
 }
