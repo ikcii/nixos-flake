@@ -137,9 +137,26 @@
     feh.enable = true;
     git.enable = true;
     swaylock.enable = true;
-    vesktop.enable = true;
     yt-dlp.enable = true;
     zoxide.enable = true;
+
+    vesktop = {
+      enable = true;
+      vencord.settings = {
+        autoUpdateNotification = true;
+	notifyAboutUpdates = true;
+	useQuickCss = false;
+	disableMinSize = true;
+	plugins = {
+	  VolumeBooster.enabled = true;
+	  FakeNitro.enabled = true;
+	  MessageLogger = {
+	    enabled = true;
+	    ignoreSelf = true;
+	  };
+        };
+      };
+    };
 
     btop = {
     	enable = true;
