@@ -1,107 +1,107 @@
 {
-	description = "My system flake";
+  description = "My system flake";
 
-	inputs = {
-		nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+  inputs = {
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
-		home-manager = {
-			url = "github:nix-community/home-manager";
-			inputs.nixpkgs.follows = "nixpkgs";
-		};
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
-		stylix = {
-			url = "github:make-42/stylix/matugen";
-			inputs.nixpkgs.follows = "nixpkgs";
-		};
+    stylix = {
+      url = "github:make-42/stylix/matugen";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
-		mnw.url = "github:Gerg-L/mnw";
+    mnw.url = "github:Gerg-L/mnw";
 
-		niri-flake = {
-			url = "github:sodiboo/niri-flake";
-			inputs.nixpkgs.follows = "nixpkgs";
-		};
-	};
+    niri-flake = {
+      url = "github:sodiboo/niri-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+  };
 
-	outputs = { self, nixpkgs, home-manager, stylix, mnw, ... }@inputs:
-	let
-		lib = nixpkgs.lib;
+  outputs = { self, nixpkgs, home-manager, stylix, mnw, ... }@inputs:
+  let
+    lib = nixpkgs.lib;
 
-		listDirs = path:
-			lib.attrNames (lib.filterAttrs (name: type: type == "directory") (builtins.readDir path));
+    listDirs = path:
+      lib.attrNames (lib.filterAttrs (name: type: type == "directory") (builtins.readDir path));
 
-		homeManagerModules =
-		let
-			usernames = listDirs ./users;
-			
-			buildUserModules = username: {
-				value = [
-					inputs.stylix.homeModules.stylix
-					inputs.mnw.homeManagerModules.mnw
-					inputs.niri-flake.homeModules.niri
-					./users/${username}/home.nix
-				];
-				name = username;
-			};
-		in
-		lib.listToAttrs (map  buildUserModules usernames);
+    homeManagerModules =
+    let
+      usernames = listDirs ./users;
 
-		mkSystem = { hostname, system }:
-			lib.nixosSystem {
-				inherit system;
-				specialArgs = { inherit inputs homeManagerModules; };
-				modules = [
-					./hosts
-					./hosts/${system}
-					./hosts/${system}/${hostname}
-					./hosts/${system}/${hostname}/hardware-configuration.nix
+      buildUserModules = username: {
+        value = [
+          inputs.stylix.homeModules.stylix
+          inputs.mnw.homeManagerModules.mnw
+          inputs.niri-flake.homeModules.niri
+          ./users/${username}/home.nix
+        ];
+        name = username;
+      };
+    in
+    lib.listToAttrs (map  buildUserModules usernames);
 
-					./users
+    mkSystem = { hostname, system }:
+      lib.nixosSystem {
+        inherit system;
+        specialArgs = { inherit inputs homeManagerModules; };
+        modules = [
+          ./hosts
+          ./hosts/${system}
+          ./hosts/${system}/${hostname}
+          ./hosts/${system}/${hostname}/hardware-configuration.nix
 
-					home-manager.nixosModules.home-manager
+          ./users
 
-					({ ... }: {
-						home-manager.extraSpecialArgs = { inherit inputs; };
-					})
+          home-manager.nixosModules.home-manager
 
-					# My hostname got a stroke once so I keep this as a placebo
-					({ ... }: {
-						networking.hostName = hostname;
-                				networking.dhcpcd.setHostname = false;
-              				})
-				];
-			};
+          ({ ... }: {
+            home-manager.extraSpecialArgs = { inherit inputs; };
+          })
 
-	in
-	{
-		homeConfigurations = lib.mapAttrs (username: modules:
-			home-manager.lib.homeManagerConfiguration {
-				pkgs = nixpkgs.legacyPackages.${builtins.currentSystem};
-				extraSpecialArgs = { inherit inputs; };
-				modules = [
-					({ pkgs, ... }: {
-						home.username = username;
-						home.homeDirectory =
-							if pkgs.stdenv.isDarwin
-							then "/Users/${username}"
-							else "/home/${username}";
-					})
-				] ++ modules;
-			}
-		) homeManagerModules;
+          # My hostname got a stroke once so I keep this as a placebo
+          ({ ... }: {
+            networking.hostName = hostname;
+            networking.dhcpcd.setHostname = false;
+          })
+        ];
+      };
 
-		nixosConfigurations =
-		let
-			archs = listDirs ./hosts;
-			hostNameValuePairs = lib.concatMap (system:
-				let
-					hostnames = listDirs ./hosts/${system};
-				in
-				lib.map (hostname: {
-					name = hostname;
-					value = mkSystem { inherit hostname system; };
-				}) hostnames
-			) archs;
-		in
-		lib.listToAttrs hostNameValuePairs;
-	};
+  in
+  {
+    homeConfigurations = lib.mapAttrs (username: modules:
+      home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.${builtins.currentSystem};
+        extraSpecialArgs = { inherit inputs; };
+        modules = [
+          ({ pkgs, ... }: {
+            home.username = username;
+            home.homeDirectory =
+              if pkgs.stdenv.isDarwin
+              then "/Users/${username}"
+              else "/home/${username}";
+          })
+        ] ++ modules;
+      }
+    ) homeManagerModules;
+
+    nixosConfigurations =
+    let
+      archs = listDirs ./hosts;
+      hostNameValuePairs = lib.concatMap (system:
+        let
+          hostnames = listDirs ./hosts/${system};
+        in
+        lib.map (hostname: {
+          name = hostname;
+          value = mkSystem { inherit hostname system; };
+        }) hostnames
+      ) archs;
+    in
+    lib.listToAttrs hostNameValuePairs;
+  };
 }
