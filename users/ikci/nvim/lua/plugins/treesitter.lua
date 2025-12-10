@@ -4,12 +4,10 @@ return {
 
 	lazy = false,
 
+	-- TODO: Potentially add logic for standalone mode
+
 	opts = {
 		auto_install = false,
 	},
 
-	-- TODO: Potentially add logic for standalone mode
-	init = function()
-    		require("nvim-treesitter.install").compilers = { "nvim" }
-  	end,
 }
