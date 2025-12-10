@@ -94,30 +94,30 @@
       zip
 
       # (import (pkgs.fetchFromGitHub {
-      #	  owner = "NixOS";
+      #   owner = "NixOS";
       #   repo = "nixpkgs";
       #   rev = "0ba4d0e96e2358ea1db4737ff8591cba314a574e";
       #   sha256 = "sha256-A9GqrOD7eISfDCjPRiaB5Tb3njV8zPyG5Y1khd5rJQo=";
       # }) {
-      #	  system = pkgs.system;
+      #   system = pkgs.system;
       # }).tome4
 
       (cataclysm-dda-git.overrideAttrs (old: {
-	tag = null;
-	rev = "9afa12b497ca332919c3fdde840df75a15b8da3f";
-	hash = "";
+        tag = null;
+        rev = "9afa12b497ca332919c3fdde840df75a15b8da3f";
+        hash = "";
       }))
 
     ];
 
     # pointerCursor = {
-    #     			name = "Adwaita";
-    #     			package = pkgs.adwaita-icon-theme;
-    #     			size = 24;
-    #     			x11 = {
-    #     				enable = true;
-    #     				defaultCursor = "Adwaita";
-    #     			};
+    #           name = "Adwaita";
+    #           package = pkgs.adwaita-icon-theme;
+    #           size = 24;
+    #           x11 = {
+    #             enable = true;
+    #             defaultCursor = "Adwaita";
+    #           };
     # };
 
     file = {
@@ -144,29 +144,29 @@
       enable = true;
       vencord.settings = {
         autoUpdateNotification = true;
-	notifyAboutUpdates = true;
-	useQuickCss = false;
-	disableMinSize = true;
-	plugins = {
-	  VolumeBooster.enabled = true;
-	  FakeNitro.enabled = true;
-	  MessageLogger = {
-	    enabled = true;
-	    ignoreSelf = true;
-	  };
+        notifyAboutUpdates = true;
+        useQuickCss = false;
+        disableMinSize = true;
+        plugins = {
+          VolumeBooster.enabled = true;
+          FakeNitro.enabled = true;
+          MessageLogger = {
+            enabled = true;
+            ignoreSelf = true;
+          };
         };
       };
     };
 
     btop = {
-    	enable = true;
-    	package = pkgs.btop-rocm;
-	settings = lib.mkOptionDefault {
-	    proc_sorting = "pid";
-	    proc_reversed = true;
-	    proc_tree = true;
-	    shown_boxes = "proc cpu mem net gpu0";
-	};
+      enable = true;
+      package = pkgs.btop-rocm;
+      settings = lib.mkOptionDefault {
+        proc_sorting = "pid";
+        proc_reversed = true;
+        proc_tree = true;
+        shown_boxes = "proc cpu mem net gpu0";
+      };
     };
 
     mpv = {
@@ -185,50 +185,50 @@
     };
 
     mangohud = {
-    	enable = true;
-    	settings = lib.mkOptionDefault {
-	      gpu_temp = true;
-	      cpu_temp = true;
-	      throttling_status = true;
-	    };
+      enable = true;
+      settings = lib.mkOptionDefault {
+        gpu_temp = true;
+        cpu_temp = true;
+        throttling_status = true;
+      };
     };
 
     mnw = {
-    	enable = true;
-	    neovim = pkgs.neovim-unwrapped;
+      enable = true;
+      neovim = pkgs.neovim-unwrapped;
 
-	    luaFiles = [ ./nvim/init.lua ];
+      luaFiles = [ ./nvim/init.lua ];
 
-	    plugins = {
+      plugins = {
 
-		    start = with pkgs.vimPlugins; [
-			    lazy-nvim
-		    ];
+        start = with pkgs.vimPlugins; [
+          lazy-nvim
+        ];
 
-		    opt = with pkgs.vimPlugins; [
-			    nvim-treesitter
-			    plenary-nvim
-			    telescope-nvim
-			    which-key-nvim
-			    mini-icons
-			    nvim-web-devicons
-		    	] ++ (with nvim-treesitter-parsers; [
-			    bash
-			    css
-			    html
-			    java
-			    javadoc
-			    javascript
-			    luadoc
-			    luap
-			    nix
-			    python
-		    ]);
+        opt = with pkgs.vimPlugins; [
+          nvim-treesitter
+          plenary-nvim
+          telescope-nvim
+          which-key-nvim
+          mini-icons
+          nvim-web-devicons
+        ] ++ (with nvim-treesitter-parsers; [
+          bash
+          css
+          html
+          java
+          javadoc
+          javascript
+          luadoc
+          luap
+          nix
+          python
+        ]);
 
-		    dev.config = {
-		    	pure = ./nvim;
-		    };
-	    };
+        dev.config = {
+          pure = ./nvim;
+        };
+      };
     };
 
     tmux = { 
@@ -242,13 +242,13 @@
     kitty = {
       enable = true;
       settings = {
-      	shell = "sh -c \"tmux has-session -t main 2>/dev/null && exec tmux new-session -t main || exec tmux new-session -s main \\\"ssh-agent $SHELL\\\"\"";
+        shell = "sh -c \"tmux has-session -t main 2>/dev/null && exec tmux new-session -t main || exec tmux new-session -s main \\\"ssh-agent $SHELL\\\"\"";
       };
     };
 
     niri = {
-    	enable = true;
-	package = pkgs.niri;
+      enable = true;
+      package = pkgs.niri;
     };
   };
 
@@ -257,10 +257,10 @@
       enable = true;
       xdgOpenUsePortal = true;
       config.sway = {
-      	default = [ "gtk" ];
-	"org.freedesktop.impl.portal.Screenshot" = "wlr";
-	"org.freedesktop.impl.portal.ScreenCast" = "wlr";
-	"org.freedesktop.impl.portal.Inhibit" = "none";
+        default = [ "gtk" ];
+        "org.freedesktop.impl.portal.Screenshot" = "wlr";
+        "org.freedesktop.impl.portal.ScreenCast" = "wlr";
+        "org.freedesktop.impl.portal.Inhibit" = "none";
       };
       extraPortals =  with pkgs; [ xdg-desktop-portal-wlr xdg-desktop-portal-gtk ];
     };
@@ -289,7 +289,7 @@
         "${modifier}+p" = "exec grim -g \"$(slurp)\" - | wl-copy";
         "${modifier}+o" = "exec swaylock";
         "${modifier}+Shift+o" = "exec swaylock & systemctl sleep";
-	"${modifier}+Shift+c" = "exec swaymsg reload && kanshictl reload";
+        "${modifier}+Shift+c" = "exec swaymsg reload && kanshictl reload";
         "XF86MonBrightnessDown" = "exec light -U 10";
         "XF86MonBrightnessUp" = "exec light -A 10";
         "XF86AudioRaiseVolume" = "exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+";
@@ -313,6 +313,7 @@
     autoEnable = true;
     image = ./wallpaper.png;
     colorGeneration.polarity = "dark";
+    colorGeneration.scheme = "vibrant";
     opacity = {
       applications = 0.8;
       popups = 0.8;
@@ -326,14 +327,14 @@
   };
 
   # xdg.mimeApps = {
-  # 	enable = true;
-  # 	defaultApplications = {
-  # 		"text/html" = "brave.desktop";
-  # 		"x-scheme-handler/http" = "brave.desktop";
-  # 		"x-scheme-handler/https" = "brave.desktop";
-  #    		"x-scheme-handler/about" = "brave.desktop";
-  #    		"x-scheme-handler/unknown" = "brave.desktop";
-  # 	};
+  #   enable = true;
+  #   defaultApplications = {
+  #     "text/html" = "brave.desktop";
+  #     "x-scheme-handler/http" = "brave.desktop";
+  #     "x-scheme-handler/https" = "brave.desktop";
+  #       "x-scheme-handler/about" = "brave.desktop";
+  #       "x-scheme-handler/unknown" = "brave.desktop";
+  #   };
   # };
 
   services.kanshi = 
@@ -346,70 +347,70 @@
         sleep 2
 
         if [[ "$KANSHI_PROFILE" == "laptop-docked" ]]; then
-	  ${pkgs.sway}/bin/swaymsg 'workspace number 1, move workspace to output HDMI-A-2'
+          ${pkgs.sway}/bin/swaymsg 'workspace number 1, move workspace to output HDMI-A-2'
           ${pkgs.sway}/bin/swaymsg 'workspace number 2, move workspace to output eDP-1'
           ${pkgs.sway}/bin/swaymsg 'workspace number 1'
         fi
-      '';
+    '';
   in
-    {
-      enable = true;
-      settings = [
-        {
-          profile = {
-            name = "desktop-default";
-            outputs = [
-              {
-                criteria = "HDMI-A-1";
-                status = "enable";
-                mode = "1920x1080@120.040Hz";
-		transform = "90";
-                position = "0,0";
-              }
-              {
-                criteria = "DP-1";
-                status = "enable";
-                mode = "2560x1440@179.960Hz";
-                position = "1080,550";
-              }
-            ];
-            exec = "${kanshi-script}/bin/arrange-workspaces";
-          };
-        }
-	{
-	  profile = {
-	    name = "laptop-default";
-	    outputs = [
-	      {
-	        criteria = "eDP-1";
-		status = "enable";
-		mode = "1920x1080@60.052Hz";
-		position = "0,0";
-	      }
-	    ];
-            exec = "${kanshi-script}/bin/arrange-workspaces";
-	  };
-	}
-	{
-	  profile = {
-	    name = "laptop-docked";
-	    outputs = [
-	      {
-	        criteria = "eDP-1";
-		status = "enable";
-		mode = "1920x1080@60.052Hz";
-		position = "2560,360";
-	      }
-	      {
-	        criteria = "HDMI-A-2";
-		status = "enable";
-		mode = "2560x1440@59.951Hz";
-		position = "0,0";
-	      }
-	    ];
-            exec = "${kanshi-script}/bin/arrange-workspaces";
-	  };
-	}
-      ];
-    };
+  {
+    enable = true;
+    settings = [
+      {
+        profile = {
+          name = "desktop-default";
+          outputs = [
+            {
+              criteria = "HDMI-A-1";
+              status = "enable";
+              mode = "1920x1080@120.040Hz";
+              transform = "90";
+              position = "0,0";
+            }
+            {
+              criteria = "DP-1";
+              status = "enable";
+              mode = "2560x1440@179.960Hz";
+              position = "1080,550";
+            }
+          ];
+          exec = "${kanshi-script}/bin/arrange-workspaces";
+        };
+      }
+      {
+        profile = {
+          name = "laptop-default";
+          outputs = [
+            {
+              criteria = "eDP-1";
+              status = "enable";
+              mode = "1920x1080@60.052Hz";
+              position = "0,0";
+            }
+          ];
+          exec = "${kanshi-script}/bin/arrange-workspaces";
+        };
+      }
+      {
+        profile = {
+          name = "laptop-docked";
+          outputs = [
+            {
+              criteria = "eDP-1";
+              status = "enable";
+              mode = "1920x1080@60.052Hz";
+              position = "2560,360";
+            }
+            {
+              criteria = "HDMI-A-2";
+              status = "enable";
+              mode = "2560x1440@59.951Hz";
+              position = "0,0";
+            }
+          ];
+          exec = "${kanshi-script}/bin/arrange-workspaces";
+        };
+      }
+    ];
+  };
 }
