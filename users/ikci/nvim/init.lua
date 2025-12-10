@@ -5,43 +5,43 @@ vim.g.maplocalleader = " "
 
 vim.g.have_nerd_font = true
 
-vim.o.number = true
-vim.o.relativenumber = true
+vim.opt.number = true
+vim.opt.relativenumber = true
 
-vim.o.showmode = false
+vim.opt.showmode = false
 
 vim.schedule(function()
-	vim.o.clipboard = 'unnamedplus'
+	vim.opt.clipboard = 'unnamedplus'
 end)
 
-vim.o.breakindent = true
+vim.opt.breakindent = true
 
-vim.o.expandtab = false
-vim.o.tabstop = 8
-vim.o.shiftwidth = 8
-vim.o.softtabstop = 0
-vim.o.smartindent = true
+vim.opt.expandtab = false
+vim.opt.tabstop = 8
+vim.opt.shiftwidth = 8
+vim.opt.softtabstop = 0
+vim.opt.smartindent = true
 
-vim.o.undofile = true
+vim.opt.undofile = true
 
-vim.o.ignorecase = true
-vim.o.smartcase = true
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
 
-vim.o.updatetime = 250
+vim.opt.updatetime = 250
 
-vim.o.splitright = true
-vim.o.splitbelow = true
+vim.opt.splitright = true
+vim.opt.splitbelow = true
 
-vim.o.list = true
+vim.opt.list = true
 vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 
-vim.o.inccommand = 'split'
+vim.opt.inccommand = 'split'
 
-vim.o.cursorline = true
+vim.opt.cursorline = true
 
-vim.o.scrolloff = 12
+vim.opt.scrolloff = 12
 
-vim.o.confirm = true
+vim.opt.confirm = true
 
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
