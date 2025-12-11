@@ -66,6 +66,7 @@
       gamemode
       gimp-with-plugins
       git-filter-repo
+      htop
       libqalculate
       libreoffice-still
       localsend
