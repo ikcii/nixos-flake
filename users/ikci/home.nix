@@ -85,6 +85,7 @@
       slurp
       steam
       tealdeer
+      tokei
       tome4
       tree
       tree-sitter
