@@ -48,6 +48,7 @@
 
       # other
 
+      android-tools
       ani-cli
       bat
       cbonsai
@@ -79,6 +80,8 @@
       pcmanfm
       pipes
       prismlauncher
+      pulseaudio
+      python3
       qalculate-qt
       qdirstat
       ripgrep
