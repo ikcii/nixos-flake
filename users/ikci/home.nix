@@ -51,6 +51,7 @@
       android-tools
       ani-cli
       bat
+      bottles
       cbonsai
       cmatrix
       cowsay
