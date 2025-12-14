@@ -39,6 +39,9 @@
     sl
   ];
 
+  # --- home-manager XDG compatibility --
+  environment.pathsToLink = [ "/share/applications" "/share/xdg-desktop-portal" ];
+
   # --- System State ---
   # Leave unchanged, mandatory setting for NixOS, versioning is controlled by flake
   system.stateVersion = "25.05";

@@ -1,7 +1,6 @@
 { lib, config, pkgs, ... }: {
 
   fonts.fontconfig.enable = true;
-  nixpkgs.config.allowUnfree = true;
 
   home = {
     sessionVariables = {
