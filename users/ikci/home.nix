@@ -282,11 +282,15 @@
 
     wrapperFeatures.gtk = true;
 
-    config = rec {
+    config = 
+    let
+      modifier = "Mod4";
+    in
+    {
+      inherit modifier;
 
       input."*".xkb_layout = "pl";
 
-      modifier = "Mod4";
       terminal = "kitty";
 
       keybindings = lib.mkOptionDefault {
