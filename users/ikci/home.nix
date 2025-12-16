@@ -72,6 +72,7 @@
       libreoffice-still
       localsend
       lolcat
+      nh
       nix-index
       nix-search-cli
       nvimpager
