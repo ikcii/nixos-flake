@@ -282,15 +282,11 @@
 
     wrapperFeatures.gtk = true;
 
-    config = 
-    let
-      modifier = "Mod4";
-    in
-    {
-      inherit modifier;
+    config = rec {
 
       input."*".xkb_layout = "pl";
 
+      modifier = "Mod4";
       terminal = "kitty";
 
       keybindings = lib.mkOptionDefault {
@@ -346,6 +342,8 @@
   #       "x-scheme-handler/unknown" = "brave.desktop";
   #   };
   # };
+
+  services.easyeffects.enable = true;
 
   services.kanshi = 
   let

@@ -32,7 +32,7 @@
     # ================================================================ #
     # Automatically enables Home Manager for every user in the list.
     home-manager.users = lib.genAttrs config.users.list (username:
-      { ... }: {
+      {
         nixpkgs.config.allowUnfree = true;
 
         imports = [
