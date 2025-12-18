@@ -50,7 +50,7 @@
       android-tools
       ani-cli
       bat
-      bottles
+      (bottles.override { removeWarningPopup = true; })
       cbonsai
       cmatrix
       cowsay
