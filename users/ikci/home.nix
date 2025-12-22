@@ -47,12 +47,13 @@
 
       # other
 
+      (bottles.override { removeWarningPopup = true; })
       android-tools
       ani-cli
       bat
-      (bottles.override { removeWarningPopup = true; })
       cbonsai
       cmatrix
+      compsize
       cowsay
       easyeffects
       fastfetch
