@@ -45,4 +45,11 @@
   # --- System State ---
   # Leave unchanged, mandatory setting for NixOS, versioning is controlled by flake
   system.stateVersion = "25.05";
+
+  # --- Garbage Collecting ---
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 21d";
+  };
 }
