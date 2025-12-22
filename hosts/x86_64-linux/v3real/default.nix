@@ -13,8 +13,24 @@
 
   virtualisation.docker.enable = true;
 
+  zramSwap = {
+    enable = true;
+    memoryPercent = 20;
+  };
+
+  fileSystems."/swap" = {
+    device = "/dev/mapper/rootfs";
+    fsType = "btrfs";
+    options = [ "subvol=@swap" "noatime" "compress=none" ];
+  };
+
+  systemd.tmpfiles.rules = [
+    "d /swap 0700 root root - -"
+    "H /swap +C - - - -"
+  ];
+
   swapDevices = [{
-    device = "/var/lib/swapfile";
+    device = "/swap/swapfile";
     size = 32*1024;
   }];
 
