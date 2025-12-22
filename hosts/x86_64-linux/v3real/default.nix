@@ -21,7 +21,7 @@
   fileSystems."/swap" = {
     device = "/dev/mapper/rootfs";
     fsType = "btrfs";
-    options = [ "subvol=@swap" "noatime" "compress=none" ];
+    options = [ "subvol=@swap" "noatime" "compress=none" "discard=async" ];
   };
 
   systemd.tmpfiles.rules = [
@@ -32,6 +32,7 @@
   swapDevices = [{
     device = "/swap/swapfile";
     size = 32*1024;
+    discardPolicy = "both";
   }];
 
   environment.variables = {
@@ -40,19 +41,19 @@
   };
 
   fileSystems."/" = {
-    options = lib.mkForce [ "subvol=@" "compress=zstd:1" "noatime" ];
+    options = lib.mkForce [ "subvol=@" "compress-force=zstd:1" "noatime" "discard=async" ];
   };
 
   fileSystems."/home" = {
-    options = lib.mkForce [ "subvol=@home" "compress=zstd:1" "noatime" ];
+    options = lib.mkForce [ "subvol=@home" "compress-force=zstd:1" "noatime" "discard=async" ];
   };
 
   fileSystems."/nix" = {
-    options = lib.mkForce [ "subvol=@nix" "compress=zstd:1" "noatime" ];
+    options = lib.mkForce [ "subvol=@nix" "compress-force=zstd:1" "noatime" "discard=async" ];
   };
 
   fileSystems."/var/log" = {
-    options = lib.mkForce [ "subvol=@log" "compress=zstd:1" "noatime" ];
+    options = lib.mkForce [ "subvol=@log" "compress-force=zstd:1" "noatime" "discard=async" ];
   };
 
   boot.initrd.luks.devices."rootfs".allowDiscards = true;

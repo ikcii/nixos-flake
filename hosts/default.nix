@@ -46,7 +46,9 @@
   # Leave unchanged, mandatory setting for NixOS, versioning is controlled by flake
   system.stateVersion = "25.05";
 
-  # --- Garbage Collecting ---
+  # --- Nix Optimization And GC---
+  nix.settings.auto-optimise-store = true;
+
   nix.gc = {
     automatic = true;
     dates = "weekly";
