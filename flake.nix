@@ -97,7 +97,7 @@
               home-manager.extraSpecialArgs = { inherit inputs; };
             }
 
-            # -- Networking --
+            # -- Paranoid Fix For That One Time My Hostname Got Reset And It Broke My System --
             {
               networking.hostName = hostname;
               networking.dhcpcd.setHostname = false;
