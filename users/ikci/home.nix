@@ -55,6 +55,7 @@
       cmatrix
       compsize
       cowsay
+      dust
       easyeffects
       fastfetch
       faugus-launcher
