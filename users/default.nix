@@ -33,7 +33,8 @@
     # Automatically enables Home Manager for every user in the list.
     home-manager.users = lib.genAttrs config.users.list (username:
       {
-        nixpkgs.config.allowUnfree = true;
+        # Bridge nixpkgs config for things such as rocmSupport auto detection in hm
+        nixpkgs.config = config.nixpkgs.config;
 
         imports = [
           # 1. The specific user's home configuration
