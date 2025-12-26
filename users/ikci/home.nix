@@ -163,6 +163,11 @@
             enabled = true;
             ignoreSelf = true;
           };
+          ViewIcons = {
+            enabled = true;
+            format = "png";
+            imgSize = "4096";
+          };
         };
       };
     };
