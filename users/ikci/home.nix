@@ -24,6 +24,7 @@
 
     };
 
+
     packages = with pkgs; [
 
       # fonts
@@ -174,8 +175,7 @@
 
     btop = {
       enable = true;
-      package = pkgs.btop-rocm;
-      settings = lib.mkOptionDefault {
+      settings = {
         proc_sorting = "pid";
         proc_reversed = true;
         proc_tree = true;
@@ -200,7 +200,7 @@
 
     mangohud = {
       enable = true;
-      settings = lib.mkOptionDefault {
+      settings = {
         gpu_temp = true;
         cpu_temp = true;
         throttling_status = true;
