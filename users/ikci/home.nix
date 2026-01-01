@@ -65,6 +65,7 @@
       ffmpeg
       figlet
       file
+      flatpak
       fortune
       fuse-overlayfs
       fzf
