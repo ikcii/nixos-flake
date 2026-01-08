@@ -49,7 +49,7 @@
       # other
 
       (bottles.override { removeWarningPopup = true; })
-      (pkgs.writeShellScriptBin "ct" "for file in \"$@\"; do echo \"$file\"; echo \"´´´\"; cat \"$file\"; echo \"´´´\"; done")
+      (pkgs.writeShellScriptBin "ct" "for file in \"$@\"; do echo \"$file\"; echo '```'; cat \"$file\"; echo; echo '```'; done")
       android-tools
       ani-cli
       bat
