@@ -1,5 +1,5 @@
 # Settings for all x86_64-linux systems
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 
 {
   # --- Bootloader ---
@@ -18,7 +18,7 @@
   
   # --- Kernel ---
   # Default to latest kernel
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = lib.mkOptionDefault pkgs.linuxPackages_latest;
 
   # --- Hardware & Drivers ---
   hardware.enableAllFirmware = true;
