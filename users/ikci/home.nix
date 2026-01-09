@@ -159,6 +159,9 @@
         useQuickCss = false;
         disableMinSize = true;
         plugins = {
+          ImageFilename.enabled = true;
+          petpet.enabled = true;
+          GifPaste.enabled = true;
           VolumeBooster.enabled = true;
           FakeNitro.enabled = true;
           MessageLogger = {
