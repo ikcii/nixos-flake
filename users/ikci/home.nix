@@ -13,13 +13,15 @@
 
       # current system
 
+      ELECTRON_OZONE_PLATFORM_HINT = "wayland";
       GDK_BACKEND = "wayland,x11";
+      LIBVA_DRIVER_NAME = "radeonsi";
       NIXOS_OZONE_WL = "1";
-      XDG_SESSION_TYPE = "wayland";
-      XDG_CURRENT_DESKTOP = "sway";
-      SDL_VIDEODRIVER = "wayland,x11,windows";
       QT_QPA_PLATFORM = "wayland";
       QT_WAYLAND_DISABLE_WINDOWDECORATION = 1;
+      SDL_VIDEODRIVER = "wayland,x11,windows";
+      XDG_CURRENT_DESKTOP = "sway";
+      XDG_SESSION_TYPE = "wayland";
       _JAVA_AWT_WM_NONREPARENTING = 1;
 
     };
@@ -65,6 +67,7 @@
       ffmpeg
       figlet
       file
+      flatpak
       flatpak
       fortune
       fuse-overlayfs
@@ -153,6 +156,7 @@
 
     vesktop = {
       enable = true;
+
       vencord.settings = {
         autoUpdateNotification = true;
         notifyAboutUpdates = true;
@@ -174,6 +178,10 @@
             imgSize = "4096";
           };
         };
+      };
+
+      settings = {
+        hardwareAcceleration = true;
       };
     };
 
