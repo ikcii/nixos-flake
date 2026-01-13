@@ -68,7 +68,6 @@
       figlet
       file
       flatpak
-      flatpak
       fortune
       fuse-overlayfs
       fzf
@@ -102,6 +101,7 @@
       tree
       tree-sitter
       unzip
+      uv
       wget
       wtf
       zerotierone
@@ -182,6 +182,8 @@
 
       settings = {
         hardwareAcceleration = true;
+        minimizeToTray = false;
+        splashTheming = true;
       };
     };
 
@@ -366,7 +368,7 @@
 
   services.easyeffects.enable = true;
 
-  services.kanshi = 
+  services.kanshi =
   let
     kanshi-script = pkgs.writeShellScriptBin "arrange-workspaces" ''
       #!${pkgs.runtimeShell}
