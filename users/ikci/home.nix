@@ -97,7 +97,7 @@
       steam
       tealdeer
       tokei
-      tome4
+      #tome4
       tree
       tree-sitter
       unzip
@@ -107,14 +107,12 @@
       zerotierone
       zip
 
-      # (import (pkgs.fetchFromGitHub {
-      #   owner = "NixOS";
-      #   repo = "nixpkgs";
-      #   rev = "0ba4d0e96e2358ea1db4737ff8591cba314a574e";
-      #   sha256 = "sha256-A9GqrOD7eISfDCjPRiaB5Tb3njV8zPyG5Y1khd5rJQo=";
-      # }) {
-      #   system = pkgs.system;
-      # }).tome4
+      (import (builtins.fetchTarball {
+        url = "https://github.com/NixOS/nixpkgs/archive/0ba4d0e96e2358ea1db4737ff8591cba314a574e.tar.gz";
+        sha256 = "02i5dgg8ar4dwn3grk3w6nggfdp5h4k4dkr81jgq8y7vw2naml83";
+      }) {
+        system = pkgs.system;
+      }).tome4
 
       # (cataclysm-dda-git.overrideAttrs (old: {
       #   tag = null;
