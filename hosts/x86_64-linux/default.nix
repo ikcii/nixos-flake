@@ -28,4 +28,20 @@
   console.useXkbConfig = true;
 
   services.zerotierone.enable = true;
+
+  # --- Encrypted DNS ---
+  networking = {
+    nameservers = [ "127.0.0.1" "::1" ];
+    networkmanager.dns = "systemd-resolved";
+  };
+  services.resolved = {
+    enable = true;
+    dnssec = "true";
+    dnsovertls = "true";
+
+    extraConfig = ''
+      DNS=194.242.2.4#base.dns.mullvad.net 2a07:e340::4#base.dns.mullvad.net
+    '';
+  };
+  services.resolved.domains = [ "~." ];
 }
