@@ -38,10 +38,11 @@
     enable = true;
     dnssec = "true";
     dnsovertls = "true";
+    domains = [ "~." ];
 
-    extraConfig = ''
-      DNS=194.242.2.4#base.dns.mullvad.net 2a07:e340::4#base.dns.mullvad.net
-    '';
+    settings.Resolve.DNS = [
+      "194.242.2.4#base.dns.mullvad.net"
+      "2a07:e340::4#base.dns.mullvad.net"
+    ];
   };
-  services.resolved.domains = [ "~." ];
 }
