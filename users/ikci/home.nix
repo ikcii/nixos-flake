@@ -1,7 +1,5 @@
 { lib, config, pkgs, ... }: {
-
   fonts.fontconfig.enable = true;
-
   home = {
     sessionVariables = {
 
@@ -50,6 +48,7 @@
 
       # other
 
+      #tome4
       (bottles.override { removeWarningPopup = true; })
       (pkgs.writeShellScriptBin "ct" "for file in \"$@\"; do echo \"$file\"; echo '```'; cat \"$file\"; echo; echo '```'; done")
       android-tools
@@ -97,7 +96,6 @@
       steam
       tealdeer
       tokei
-      #tome4
       tree
       tree-sitter
       unzip
@@ -113,6 +111,15 @@
       }) {
         system = pkgs.system;
       }).tome4
+
+      # (import (builtins.fetchTarball {
+      #   url = "https://github.com/NixOS/nixpkgs/archive/52047c30129eb1bd860a5549f2b2b2d61e0dbfbc.tar.gz";
+      #   sha256 = "0hkhwd703z6xcqqxxj9krkn6c0p5lhfi7q471yccv78xkglv0gxy";
+      # }) {
+      #   system = pkgs.system;
+      #   config.rocmSupport = true;
+      # }).vllm
+
 
       # (cataclysm-dda-git.overrideAttrs (old: {
       #   tag = null;
