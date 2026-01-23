@@ -95,6 +95,8 @@
       slurp
       steam
       tealdeer
+      texliveFull
+      texstudio
       tokei
       tree
       tree-sitter
