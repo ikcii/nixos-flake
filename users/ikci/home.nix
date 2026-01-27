@@ -74,6 +74,7 @@
       gimp-with-plugins
       git-filter-repo
       htop
+      killall
       libqalculate
       libreoffice-still
       localsend
