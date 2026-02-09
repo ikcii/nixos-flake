@@ -84,6 +84,7 @@
       libreoffice-still
       localsend
       lolcat
+      luajitPackages.jsregexp
       nh
       nix-index
       nix-search-cli
@@ -113,6 +114,13 @@
       wtf
       zerotierone
       zip
+
+      # LSPs
+
+      nil
+      lua-language-server
+      pyright
+      bash-language-server
 
       (import
         (builtins.fetchTarball {
