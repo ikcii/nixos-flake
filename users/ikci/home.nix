@@ -84,7 +84,6 @@
       libreoffice-still
       localsend
       lolcat
-      luajitPackages.jsregexp
       nh
       nix-index
       nix-search-cli
