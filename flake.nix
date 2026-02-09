@@ -23,6 +23,7 @@
     # color schemes for your entire OS and apps.
     stylix = {
       url = "github:make-42/stylix/matugen";
+      # url = "github:nix-community/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
