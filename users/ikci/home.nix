@@ -246,24 +246,29 @@
           lazy-nvim
         ];
 
-        opt = with pkgs.vimPlugins; [
-          nvim-treesitter
-          plenary-nvim
-          telescope-nvim
-          which-key-nvim
-          mini-icons
-          nvim-web-devicons
-        ] ++ (with nvim-treesitter-parsers; [
-          bash
-          css
-          html
-          java
-          javadoc
-          javascript
-          luadoc
-          luap
-          nix
-          python
+        opt = let
+          pluginDir = ./nvim/lua/plugins;
+
+          pluginFiles = builtins.attrNames (builtins.readDir pluginDir);
+
+          pluginNames = map (lib.removeSuffix ".lua") (lib.filter (x: lib.hasSuffix ".lua" x) pluginFiles);
+
+          autoPlugins = map (name: pkgs.vimPlugins.${name}) pluginNames;
+        in
+          autoPlugins ++ (with pkgs.vimPlugins.nvim-treesitter-parsers; [
+
+            bash
+            css
+            gdscript
+            html
+            java
+            javadoc
+            javascript
+            luadoc
+            luap
+            nix
+            python
+
         ]);
 
         dev.config = {
