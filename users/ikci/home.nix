@@ -48,11 +48,11 @@
 
       # other
 
-      #tome4
       (bottles.override { removeWarningPopup = true; })
       (pkgs.writeShellScriptBin "ct" "for file in \"$@\"; do echo \"$file\"; echo '```'; cat \"$file\"; echo; echo '```'; done")
       android-tools
       ani-cli
+      audiosource
       bat
       cbonsai
       cmatrix
@@ -267,7 +267,7 @@
       };
     };
 
-    tmux = { 
+    tmux = {
       enable = true;
       mouse = true;
       focusEvents = true;
@@ -349,8 +349,9 @@
     enable = true;
     autoEnable = true;
     image = ./wallpaper.png;
-    colorGeneration.polarity = "dark";
     colorGeneration.scheme = "vibrant";
+    colorGeneration.polarity = "dark";
+    #polarity = "dark";
     opacity = {
       applications = 0.8;
       popups = 0.8;
