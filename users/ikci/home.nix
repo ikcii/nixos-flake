@@ -162,6 +162,11 @@
     yt-dlp.enable = true;
     zoxide.enable = true;
 
+    direnv = {
+      enable = true;
+      enableBashIntegration = true;
+    };
+
     vesktop = {
       enable = true;
 
