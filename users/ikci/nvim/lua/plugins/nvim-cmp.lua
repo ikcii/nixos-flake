@@ -1,9 +1,45 @@
 return {
 	"hrsh7th/nvim-cmp",
-	dependencies = { "hrsh7th/cmp-nvim-lsp" },
+	dependencies = {
+		"hrsh7th/cmp-nvim-lsp",
+		"saadparwaiz1/cmp_luasnip",
+		"hrsh7th/cmp-buffer",
+		"hrsh7th/cmp-path",
+	},
 
 	config = function()
-		-- 1. Helper function to start a server
+		local cmp = require("cmp")
+		local luasnip = require("luasnip")
+
+		-- Setup nvim-cmp
+		cmp.setup({
+			snippet = {
+				expand = function(args)
+					luasnip.lsp_expand(args.body)
+				end,
+			},
+			window = {
+				completion = cmp.config.window.bordered(),
+				documentation = cmp.config.window.bordered(),
+			},
+			mapping = cmp.mapping.preset.insert({
+				["<C-n>"] = cmp.mapping.select_next_item(),
+				["<C-p>"] = cmp.mapping.select_prev_item(),
+				["<C-b>"] = cmp.mapping.scroll_docs(-4),
+				["<C-f>"] = cmp.mapping.scroll_docs(4),
+				["<C-Space>"] = cmp.mapping.complete(),
+				["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item
+			}),
+			sources = cmp.config.sources({
+				{ name = "nvim_lsp" },
+				{ name = "luasnip" },
+			}, {
+				{ name = "buffer" },
+				{ name = "path" },
+			}),
+		})
+
+		-- Helper function to start a server
 		local function start_lsp(config)
 			-- Merge default capabilities (for cmp autocomplete support)
 			local defaults = {
@@ -20,7 +56,7 @@ return {
 			vim.lsp.start(final_config)
 		end
 
-		-- 2. Define Autocommands to launch servers per filetype
+		-- Define Autocommands to launch servers per filetype
 		local lsp_group = vim.api.nvim_create_augroup("mnw-lsp-start", { clear = true })
 
 		-- Helper to make the autocommands cleaner
