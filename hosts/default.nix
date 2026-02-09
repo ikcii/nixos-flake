@@ -28,7 +28,10 @@
   users.list = [ "ikci" ];
 
   # --- Nix Settings ---
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
   nixpkgs.config.allowUnfree = true;
 
   # --- Networking ---
@@ -40,7 +43,10 @@
   ];
 
   # --- home-manager XDG compatibility --
-  environment.pathsToLink = [ "/share/applications" "/share/xdg-desktop-portal" ];
+  environment.pathsToLink = [
+    "/share/applications"
+    "/share/xdg-desktop-portal"
+  ];
 
   # --- System State ---
   # Leave unchanged, mandatory setting for NixOS, versioning is controlled by flake

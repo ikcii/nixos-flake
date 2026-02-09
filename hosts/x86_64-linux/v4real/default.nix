@@ -2,14 +2,17 @@
 { ... }:
 
 {
-  
+
   imports = [
     ../../../profiles/desktop
     ../../../profiles/desktop/gaming
   ];
 
   # --- Graphics & NVIDIA PRIME Offload ---
-  services.xserver.videoDrivers = [ "modesetting" "nvidia" ];
+  services.xserver.videoDrivers = [
+    "modesetting"
+    "nvidia"
+  ];
 
   hardware.nvidia = {
     open = false;

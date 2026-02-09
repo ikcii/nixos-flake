@@ -1,4 +1,10 @@
-{ lib, config, pkgs, ... }: {
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
+{
   fonts.fontconfig.enable = true;
   home = {
     sessionVariables = {
@@ -23,7 +29,6 @@
       _JAVA_AWT_WM_NONREPARENTING = 1;
 
     };
-
 
     packages = with pkgs; [
 
@@ -82,6 +87,7 @@
       nh
       nix-index
       nix-search-cli
+      nixfmt
       nvimpager
       obs-studio
       p7zip-rar
@@ -108,12 +114,15 @@
       zerotierone
       zip
 
-      (import (builtins.fetchTarball {
-        url = "https://github.com/NixOS/nixpkgs/archive/0ba4d0e96e2358ea1db4737ff8591cba314a574e.tar.gz";
-        sha256 = "02i5dgg8ar4dwn3grk3w6nggfdp5h4k4dkr81jgq8y7vw2naml83";
-      }) {
-        system = pkgs.system;
-      }).tome4
+      (import
+        (builtins.fetchTarball {
+          url = "https://github.com/NixOS/nixpkgs/archive/0ba4d0e96e2358ea1db4737ff8591cba314a574e.tar.gz";
+          sha256 = "02i5dgg8ar4dwn3grk3w6nggfdp5h4k4dkr81jgq8y7vw2naml83";
+        })
+        {
+          system = pkgs.system;
+        }
+      ).tome4
 
       # (import (builtins.fetchTarball {
       #   url = "https://github.com/NixOS/nixpkgs/archive/52047c30129eb1bd860a5549f2b2b2d61e0dbfbc.tar.gz";
@@ -122,7 +131,6 @@
       #   system = pkgs.system;
       #   config.rocmSupport = true;
       # }).vllm
-
 
       # (cataclysm-dda-git.overrideAttrs (old: {
       #   tag = null;
@@ -246,16 +254,18 @@
           lazy-nvim
         ];
 
-        opt = let
-          pluginDir = ./nvim/lua/plugins;
+        opt =
+          let
+            pluginDir = ./nvim/lua/plugins;
 
-          pluginFiles = builtins.attrNames (builtins.readDir pluginDir);
+            pluginFiles = builtins.attrNames (builtins.readDir pluginDir);
 
-          pluginNames = map (lib.removeSuffix ".lua") (lib.filter (x: lib.hasSuffix ".lua" x) pluginFiles);
+            pluginNames = map (lib.removeSuffix ".lua") (lib.filter (x: lib.hasSuffix ".lua" x) pluginFiles);
 
-          autoPlugins = map (name: pkgs.vimPlugins.${name}) pluginNames;
-        in
-          autoPlugins ++ (with pkgs.vimPlugins.nvim-treesitter-parsers; [
+            autoPlugins = map (name: pkgs.vimPlugins.${name}) pluginNames;
+          in
+          autoPlugins
+          ++ (with pkgs.vimPlugins.nvim-treesitter-parsers; [
 
             bash
             css
@@ -269,7 +279,7 @@
             nix
             python
 
-        ]);
+          ]);
 
         dev.config = {
           pure = ./nvim;
@@ -309,7 +319,10 @@
         "org.freedesktop.impl.portal.ScreenCast" = "wlr";
         "org.freedesktop.impl.portal.Inhibit" = "none";
       };
-      extraPortals =  with pkgs; [ xdg-desktop-portal-wlr xdg-desktop-portal-gtk ];
+      extraPortals = with pkgs; [
+        xdg-desktop-portal-wlr
+        xdg-desktop-portal-gtk
+      ];
     };
     userDirs = {
       enable = true;
@@ -388,79 +401,84 @@
   services.easyeffects.enable = true;
 
   services.kanshi =
-  let
-    kanshi-script = pkgs.writeShellScriptBin "arrange-workspaces" ''
-      #!${pkgs.runtimeShell}
+    let
+      kanshi-script = pkgs.writeShellScriptBin "arrange-workspaces" ''
+        #!${pkgs.runtimeShell}
 
-        PATH=${lib.makeBinPath [ pkgs.coreutils pkgs.sway ]}
+          PATH=${
+            lib.makeBinPath [
+              pkgs.coreutils
+              pkgs.sway
+            ]
+          }
 
-        sleep 2
+          sleep 2
 
-        if [[ "$KANSHI_PROFILE" == "laptop-docked" ]]; then
-          ${pkgs.sway}/bin/swaymsg 'workspace number 1, move workspace to output HDMI-A-2'
-          ${pkgs.sway}/bin/swaymsg 'workspace number 2, move workspace to output eDP-1'
-          ${pkgs.sway}/bin/swaymsg 'workspace number 1'
-        fi
-    '';
-  in
-  {
-    enable = true;
-    settings = [
-      {
-        profile = {
-          name = "desktop-default";
-          outputs = [
-            {
-              criteria = "HDMI-A-1";
-              status = "enable";
-              mode = "1920x1080@120.040Hz";
-              transform = "90";
-              position = "0,0";
-            }
-            {
-              criteria = "DP-1";
-              status = "enable";
-              mode = "2560x1440@179.960Hz";
-              position = "1080,550";
-            }
-          ];
-          exec = "${kanshi-script}/bin/arrange-workspaces";
-        };
-      }
-      {
-        profile = {
-          name = "laptop-default";
-          outputs = [
-            {
-              criteria = "eDP-1";
-              status = "enable";
-              mode = "1920x1080@60.052Hz";
-              position = "0,0";
-            }
-          ];
-          exec = "${kanshi-script}/bin/arrange-workspaces";
-        };
-      }
-      {
-        profile = {
-          name = "laptop-docked";
-          outputs = [
-            {
-              criteria = "eDP-1";
-              status = "enable";
-              mode = "1920x1080@60.052Hz";
-              position = "2560,360";
-            }
-            {
-              criteria = "HDMI-A-2";
-              status = "enable";
-              mode = "2560x1440@59.951Hz";
-              position = "0,0";
-            }
-          ];
-          exec = "${kanshi-script}/bin/arrange-workspaces";
-        };
-      }
-    ];
-  };
+          if [[ "$KANSHI_PROFILE" == "laptop-docked" ]]; then
+            ${pkgs.sway}/bin/swaymsg 'workspace number 1, move workspace to output HDMI-A-2'
+            ${pkgs.sway}/bin/swaymsg 'workspace number 2, move workspace to output eDP-1'
+            ${pkgs.sway}/bin/swaymsg 'workspace number 1'
+          fi
+      '';
+    in
+    {
+      enable = true;
+      settings = [
+        {
+          profile = {
+            name = "desktop-default";
+            outputs = [
+              {
+                criteria = "HDMI-A-1";
+                status = "enable";
+                mode = "1920x1080@120.040Hz";
+                transform = "90";
+                position = "0,0";
+              }
+              {
+                criteria = "DP-1";
+                status = "enable";
+                mode = "2560x1440@179.960Hz";
+                position = "1080,550";
+              }
+            ];
+            exec = "${kanshi-script}/bin/arrange-workspaces";
+          };
+        }
+        {
+          profile = {
+            name = "laptop-default";
+            outputs = [
+              {
+                criteria = "eDP-1";
+                status = "enable";
+                mode = "1920x1080@60.052Hz";
+                position = "0,0";
+              }
+            ];
+            exec = "${kanshi-script}/bin/arrange-workspaces";
+          };
+        }
+        {
+          profile = {
+            name = "laptop-docked";
+            outputs = [
+              {
+                criteria = "eDP-1";
+                status = "enable";
+                mode = "1920x1080@60.052Hz";
+                position = "2560,360";
+              }
+              {
+                criteria = "HDMI-A-2";
+                status = "enable";
+                mode = "2560x1440@59.951Hz";
+                position = "0,0";
+              }
+            ];
+            exec = "${kanshi-script}/bin/arrange-workspaces";
+          };
+        }
+      ];
+    };
 }

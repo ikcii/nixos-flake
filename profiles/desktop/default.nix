@@ -6,7 +6,7 @@
   security.polkit.enable = true;
   programs.dconf.enable = true;
   services.gvfs.enable = true;
-  security.pam.services.swaylock = {}; # Because I'm using swaylock on all my desktop machines for now
+  security.pam.services.swaylock = { }; # Because I'm using swaylock on all my desktop machines for now
 
   # --- Audio ---
   # Enable the PipeWire audio server and give it real-time permissions.

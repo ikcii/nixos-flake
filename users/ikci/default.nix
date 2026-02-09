@@ -1,3 +1,8 @@
-{ ... }: {
-  extraGroups = [ "networkmanager" "wheel" "video" ];
+{ ... }:
+{
+  extraGroups = [
+    "networkmanager"
+    "wheel"
+    "video"
+  ];
 }
