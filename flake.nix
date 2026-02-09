@@ -95,7 +95,7 @@
 
             # -- User Logic --
             # Handles creating OS users and hooking up Home Manager
-            ./users/default.nix
+            ./users
 
             # -- Home Manager Setup --
             home-manager.nixosModules.home-manager
