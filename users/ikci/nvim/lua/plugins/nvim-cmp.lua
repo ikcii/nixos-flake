@@ -77,6 +77,15 @@ return {
 			settings = {
 				['nil'] = {
 					formatting = { command = { "nixfmt" } },
+					nix = {
+						binary = "nix",
+						maxMemoryMB = nil,
+					},
+					flake = {
+						autoArchive = true,
+						autoEvalInputs = true,
+						nixpkgsInputName = nixpkgs,
+					},
 				},
 			},
 		})
