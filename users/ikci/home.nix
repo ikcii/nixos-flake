@@ -218,8 +218,6 @@
     btop = {
       enable = true;
       settings = {
-        proc_sorting = "pid";
-        proc_reversed = true;
         proc_tree = true;
         shown_boxes = "proc cpu mem net gpu0";
       };
