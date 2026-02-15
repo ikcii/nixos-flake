@@ -100,7 +100,6 @@
       qdirstat
       ripgrep
       slurp
-      steam
       tealdeer
       texliveFull
       texstudio
