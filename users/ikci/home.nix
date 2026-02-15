@@ -126,7 +126,7 @@
           sha256 = "02i5dgg8ar4dwn3grk3w6nggfdp5h4k4dkr81jgq8y7vw2naml83";
         })
         {
-          system = pkgs.system;
+          system = pkgs.stdenv.hostPlatform.system;
         }
       ).tome4
 
