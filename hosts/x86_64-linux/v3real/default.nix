@@ -15,7 +15,6 @@
 
   zramSwap = {
     enable = true;
-    memoryPercent = 20;
   };
 
   fileSystems."/swap" = {
