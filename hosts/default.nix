@@ -42,10 +42,11 @@
     sl
   ];
 
-  # --- home-manager XDG compatibility --
+  # --- home-manager compatibility --
   environment.pathsToLink = [
     "/share/applications"
     "/share/xdg-desktop-portal"
+    "/share/bash-completion"
   ];
 
   # --- System State ---

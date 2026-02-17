@@ -167,14 +167,20 @@
 
   programs = {
 
-    bash.enable = true;
     brave.enable = true;
     cava.enable = true;
     feh.enable = true;
     git.enable = true;
     swaylock.enable = true;
     yt-dlp.enable = true;
-    zoxide.enable = true;
+
+    zoxide = {
+      enable = true;
+      enableBashIntegration = true;
+      options = [ "--cmd cd" ];
+    };
+
+    bash.enable = true;
 
     direnv = {
       enable = true;

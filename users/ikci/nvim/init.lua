@@ -90,3 +90,33 @@ require("lazy").setup({
 		enabled = false,
 	},
 })
+
+vim.lsp.config('*', {
+	capabilities = require('blink.cmp').get_lsp_capabilities(),
+})
+
+local lsp_configs = vim.api.nvim_get_runtime_file("lsp/*.lua", true)
+
+for _, config_path in ipairs(lsp_configs) do
+	local server_name = vim.fn.fnamemodify(config_path, ":t:r")
+
+	-- Optional: Skip specific files if you ever add utility scripts to that folder
+	if server_name ~= "utils" then
+		vim.lsp.enable(server_name)
+	end
+end
+
+vim.api.nvim_create_autocmd('LspAttach', {
+	callback = function(args)
+		local client = vim.lsp.get_client_by_id(args.data.client_id)
+		-- If the client supports formatting, setup a save hook
+		if client.server_capabilities.documentFormattingProvider then
+			vim.api.nvim_create_autocmd("BufWritePre", {
+				buffer = args.buf,
+				callback = function()
+					vim.lsp.buf.format({ async = false, id = args.data.client_id })
+				end,
+			})
+		end
+	end,
+})
