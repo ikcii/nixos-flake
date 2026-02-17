@@ -35,6 +35,8 @@
       url = "github:sodiboo/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    dw-proton.url = "github:imaviso/dwproton-flake";
   };
 
   # ================================================================ #

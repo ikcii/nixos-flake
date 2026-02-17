@@ -1,12 +1,13 @@
 # Gaming
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 
 {
   boot.kernelPackages = pkgs.linuxPackages_zen;
   programs.steam = {
     enable = true;
-    extraCompatPackages = with pkgs; [
-      proton-ge-bin
+    extraCompatPackages = [
+      pkgs.proton-ge-bin
+      inputs.dw-proton.packages.${pkgs.stdenv.hostPlatform.system}.dw-proton
     ];
   };
   programs.gamemode.enable = true;
