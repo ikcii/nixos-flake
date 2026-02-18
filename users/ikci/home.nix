@@ -252,50 +252,76 @@
       };
     };
 
-    mnw = {
-      enable = true;
-      neovim = pkgs.neovim-unwrapped;
+    mnw =
+      let
+        onlyColorStrings = lib.filterAttrs (
+          name: value: builtins.isString value && lib.hasPrefix "base" name
+        ) config.lib.stylix.colors;
 
-      luaFiles = [ ./nvim/init.lua ];
+        stylixLuaColors = lib.concatStringsSep "\n" (
+          lib.mapAttrsToList (name: value: "  [\"${name}\"] = \"#${value}\",") onlyColorStrings
+        );
 
-      plugins = {
+        stylix-nvim-theme = pkgs.writeText "stylix-theme.lua" ''
+          local colors = {
+            ${stylixLuaColors}
+          }
 
-        start = with pkgs.vimPlugins; [
-          lazy-nvim
+          require('base16-colorscheme').setup(colors)
+
+          if ${toString config.stylix.opacity.applications} < 1 then
+            vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+            vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+          end
+        '';
+      in
+      {
+        enable = true;
+        neovim = pkgs.neovim-unwrapped;
+
+        luaFiles = [
+          ./nvim/init.lua
+          stylix-nvim-theme
         ];
 
-        opt =
-          let
-            pluginDir = ./nvim/lua/plugins;
+        plugins = {
 
-            pluginFiles = builtins.attrNames (builtins.readDir pluginDir);
+          start = with pkgs.vimPlugins; [
+            lazy-nvim
+          ];
 
-            pluginNames = map (lib.removeSuffix ".lua") (lib.filter (x: lib.hasSuffix ".lua" x) pluginFiles);
+          opt =
+            let
+              pluginDir = ./nvim/lua/plugins;
 
-            autoPlugins = map (name: pkgs.vimPlugins.${name}) pluginNames;
-          in
-          autoPlugins
-          ++ (with pkgs.vimPlugins.nvim-treesitter-parsers; [
+              pluginFiles = builtins.attrNames (builtins.readDir pluginDir);
 
-            bash
-            css
-            gdscript
-            html
-            java
-            javadoc
-            javascript
-            luadoc
-            luap
-            nix
-            python
+              pluginNames = map (lib.removeSuffix ".lua") (lib.filter (x: lib.hasSuffix ".lua" x) pluginFiles);
 
-          ]);
+              autoPlugins = map (name: pkgs.vimPlugins.${name}) pluginNames;
+            in
+            autoPlugins
+            ++ (with pkgs.vimPlugins.nvim-treesitter-parsers; [
 
-        dev.config = {
-          pure = ./nvim;
+              bash
+              css
+              gdscript
+              html
+              java
+              javadoc
+              javascript
+              luadoc
+              luap
+              nix
+              python
+
+            ]);
+
+          dev.config = {
+            pure = ./nvim;
+          };
         };
       };
-    };
 
     tmux = {
       enable = true;
