@@ -27,7 +27,13 @@
   # --- Console & Keymaps ---
   console.useXkbConfig = true;
 
+  # --- ZeroTier ---
   services.zerotierone.enable = true;
+
+  # --- x86_64-linux Packages ---
+  environment.systemPackages = with pkgs; [
+    activate-linux
+  ];
 
   # --- Encrypted DNS ---
   networking.networkmanager.dns = "none";
