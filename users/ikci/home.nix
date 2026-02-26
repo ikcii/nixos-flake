@@ -51,10 +51,12 @@
       xrandr
       xwayland
 
-      # other
+      # LLM file context utility
+      (pkgs.writeShellScriptBin "ct" "for file in \"$@\"; do echo \"$file\"; echo '```'; cat \"$file\"; echo; echo '```'; done")
+
+      # general
 
       (bottles.override { removeWarningPopup = true; })
-      (pkgs.writeShellScriptBin "ct" "for file in \"$@\"; do echo \"$file\"; echo '```'; cat \"$file\"; echo; echo '```'; done")
       android-tools
       ani-cli
       audiosource
@@ -120,6 +122,8 @@
       pyright
       bash-language-server
 
+      # overrides, etc
+
       (import
         (builtins.fetchTarball {
           url = "https://github.com/NixOS/nixpkgs/archive/0ba4d0e96e2358ea1db4737ff8591cba314a574e.tar.gz";
@@ -146,6 +150,8 @@
 
     ];
 
+    # cursor theme
+
     # pointerCursor = {
     #           name = "Adwaita";
     #           package = pkgs.adwaita-icon-theme;
@@ -155,6 +161,8 @@
     #             defaultCursor = "Adwaita";
     #           };
     # };
+
+    # we're saving up 0.01ms of having to hold shift while typing downloads once a week
 
     file = {
       "downloads" = {
@@ -387,6 +395,8 @@
         "${modifier}+o" = "exec swaylock";
         "${modifier}+Shift+o" = "exec swaylock & systemctl sleep";
         "${modifier}+Shift+c" = "exec swaymsg reload && kanshictl reload";
+        "${modifier}+Ctrl+o" =
+          "exec pkill -x ${builtins.baseNameOf (lib.getExe pkgs.activate-linux)} || ${lib.getExe pkgs.activate-linux}";
         "XF86MonBrightnessDown" = "exec light -U 10";
         "XF86MonBrightnessUp" = "exec light -A 10";
         "XF86AudioRaiseVolume" = "exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+";
