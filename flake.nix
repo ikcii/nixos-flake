@@ -154,7 +154,7 @@
               home.file.".nix-gpu-hint".text = if gpu != null then gpu else "generic";
             }
             # The user's specific config file
-            (./users/${username}/home.nix)
+            (./users/${username}/home)
           ]
           ++ commonUserModules;
         };

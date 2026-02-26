@@ -29,12 +29,7 @@
       }
       # --- User Overrides ---
       # Check if ./<user>/default.nix exists; if so, import and merge it.
-      // (
-        if builtins.pathExists ./${username}/default.nix then
-          import ./${username}/default.nix { inherit lib config inputs; }
-        else
-          { }
-      )
+      // (import ./${username} { inherit lib config inputs; })
     );
 
     # ================================================================ #
@@ -47,7 +42,7 @@
 
       imports = [
         # 1. The specific user's home configuration
-        (./${username}/home.nix)
+        (./${username}/home)
       ]
       # 2. The shared modules passed down from flake.nix
       ++ commonUserModules;
