@@ -2,7 +2,7 @@
 { lib, pkgs, ... }:
 
 {
-  # --- Bootloader ---
+  # Bootloader
   boot.loader = {
     efi = {
       canTouchEfiVariables = true;
@@ -16,26 +16,29 @@
   };
   boot.tmp.cleanOnBoot = true;
 
-  # --- Kernel ---
+  # Kernel
   # Default to latest kernel
   boot.kernelPackages = lib.mkOptionDefault pkgs.linuxPackages_latest;
 
-  # --- Hardware & Drivers ---
+  # Hardware & Drivers
   hardware.enableAllFirmware = true;
   hardware.graphics.enable = true;
 
-  # --- Console & Keymaps ---
+  # Console & Keymaps
   console.useXkbConfig = true;
 
-  # --- ZeroTier ---
+  # ZeroTier
   services.zerotierone.enable = true;
 
-  # --- x86_64-linux Packages ---
+  # x86_64-linux Packages
   environment.systemPackages = with pkgs; [
     activate-linux
   ];
 
-  # --- Encrypted DNS ---
+  # zram
+  zramSwap.enable = true;
+
+  # Encrypted DNS
   networking.networkmanager.dns = "none";
   networking.nameservers = [
     "127.0.0.1"

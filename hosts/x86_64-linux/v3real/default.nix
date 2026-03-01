@@ -13,8 +13,6 @@
 
   virtualisation.docker.enable = true;
 
-  zramSwap.enable = true;
-
   fileSystems."/swap" = {
     device = "/dev/mapper/rootfs";
     fsType = "btrfs";
