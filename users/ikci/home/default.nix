@@ -110,6 +110,7 @@
       tree-sitter
       unzip
       uv
+      wdisplays
       wget
       wtf
       zerotierone
