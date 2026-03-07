@@ -397,8 +397,8 @@
         "${modifier}+Shift+s" = "move scratchpad";
         "${modifier}+p" = "exec grim -g \"$(slurp)\" - | wl-copy";
         "${modifier}+o" = "exec swaylock";
-        "${modifier}+Shift+o" = "exec swaylock & systemctl sleep";
-        "${modifier}+Shift+c" = "exec swaymsg reload && kanshictl reload";
+        "${modifier}+Shift+o" = "exec systemctl sleep";
+        "${modifier}+Shift+c" = "exec swaymsg reload && ${pkgs.kanshi}/bin/kanshictl reload";
         "${modifier}+Ctrl+o" =
           "exec pkill -x ${builtins.baseNameOf (lib.getExe pkgs.activate-linux)} || ${lib.getExe pkgs.activate-linux}";
         "XF86MonBrightnessDown" = "exec light -U 10";
@@ -416,6 +416,28 @@
       gaps = {
         inner = 2;
       };
+
+      startup = [
+        {
+          command = "${pkgs.kanshi}/bin/kanshictl reload";
+          always = true;
+        }
+      ];
+
+      workspaceOutputAssign = [
+        {
+          workspace = "1";
+          output = "LG Electronics LG ULTRAGEAR 309MAPNFF848";
+        }
+        {
+          workspace = "2";
+          output = "LG Electronics 27GK750F 0x0004F6EE";
+        }
+        {
+          workspace = "1";
+          output = "eDP-1";
+        }
+      ];
     };
   };
 
@@ -451,28 +473,22 @@
 
   services.easyeffects.enable = true;
 
-  services.kanshi =
-    let
-      kanshi-script = pkgs.writeShellScriptBin "arrange-workspaces" ''
-        #!${pkgs.runtimeShell}
+  services = {
+    swayidle = {
+      enable = true;
+      events = [
+        {
+          event = "before-sleep";
+          command = "${pkgs.swaylock}/bin/swaylock -f";
+        }
+        {
+          event = "after-resume";
+          command = "sleep 1; ${pkgs.sway}/bin/swaymsg 'output * power off'; sleep 2; ${pkgs.sway}/bin/swaymsg 'output * power on'; ${pkgs.kanshi}/bin/kanshictl reload";
+        }
+      ];
+    };
 
-          PATH=${
-            lib.makeBinPath [
-              pkgs.coreutils
-              pkgs.sway
-            ]
-          }
-
-          sleep 2
-
-          if [[ "$KANSHI_PROFILE" == "laptop-docked" ]]; then
-            ${pkgs.sway}/bin/swaymsg 'workspace number 1, move workspace to output HDMI-A-2'
-            ${pkgs.sway}/bin/swaymsg 'workspace number 2, move workspace to output eDP-1'
-            ${pkgs.sway}/bin/swaymsg 'workspace number 1'
-          fi
-      '';
-    in
-    {
+    kanshi = {
       enable = true;
       settings = [
         {
@@ -480,20 +496,19 @@
             name = "desktop-default";
             outputs = [
               {
-                criteria = "HDMI-A-1";
+                criteria = "LG Electronics 27GK750F 0x0004F6EE";
                 status = "enable";
                 mode = "1920x1080@120.040Hz";
                 transform = "90";
                 position = "0,0";
               }
               {
-                criteria = "DP-1";
+                criteria = "LG Electronics LG ULTRAGEAR 309MAPNFF848";
                 status = "enable";
                 mode = "2560x1440@179.960Hz";
                 position = "1080,550";
               }
             ];
-            exec = "${kanshi-script}/bin/arrange-workspaces";
           };
         }
         {
@@ -507,29 +522,9 @@
                 position = "0,0";
               }
             ];
-            exec = "${kanshi-script}/bin/arrange-workspaces";
-          };
-        }
-        {
-          profile = {
-            name = "laptop-docked";
-            outputs = [
-              {
-                criteria = "eDP-1";
-                status = "enable";
-                mode = "1920x1080@60.052Hz";
-                position = "2560,360";
-              }
-              {
-                criteria = "HDMI-A-2";
-                status = "enable";
-                mode = "2560x1440@59.951Hz";
-                position = "0,0";
-              }
-            ];
-            exec = "${kanshi-script}/bin/arrange-workspaces";
           };
         }
       ];
     };
+  };
 }
