@@ -53,7 +53,6 @@
       self,
       nixpkgs,
       home-manager,
-      fjordlauncher,
       ...
     }@inputs:
     let

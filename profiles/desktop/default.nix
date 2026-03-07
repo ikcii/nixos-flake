@@ -17,7 +17,4 @@
     alsa.support32Bit = true;
     pulse.enable = true;
   };
-
-  # --- GUI Program Defaults ---
-  programs.light.enable = true;
 }
