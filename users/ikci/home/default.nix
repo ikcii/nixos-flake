@@ -6,6 +6,9 @@
 }:
 {
   fonts.fontconfig.enable = true;
+
+  nixpkgs.overlays = [ inputs.fjordlauncher.overlays.default ];
+
   home = {
     sessionVariables = {
 
@@ -95,7 +98,7 @@
       p7zip-rar
       pcmanfm
       pipes
-      prismlauncher
+      fjordlauncher
       pulseaudio
       python3
       qalculate-qt

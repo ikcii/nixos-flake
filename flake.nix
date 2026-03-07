@@ -37,6 +37,11 @@
     };
 
     dw-proton.url = "github:imaviso/dwproton-flake";
+
+    fjordlauncher = {
+      url = "github:hero-persson/FjordLauncherUnlocked";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   # ================================================================ #
@@ -48,12 +53,13 @@
       self,
       nixpkgs,
       home-manager,
+      fjordlauncher,
       ...
     }@inputs:
     let
       inherit (nixpkgs) lib;
 
-      # --- Helpers & Data Discovery ---
+      # Helpers & Data Discovery
 
       # Helper: Find all subdirectories in a given path.
       listDirs =
@@ -70,7 +76,7 @@
         system: map (hostname: { inherit system hostname; }) (listDirs ./hosts/${system})
       ) supportedSystems;
 
-      # --- Shared Configuration ---
+      # Shared Configuration
 
       # A list of modules that every user gets (mostly from inputs).
       commonUserModules = [
@@ -79,7 +85,7 @@
         inputs.niri-flake.homeModules.niri
       ];
 
-      # --- Builders (The "Recipes") ---
+      # Builders
 
       # 1. System Builder (NixOS)
       mkSystem =
@@ -89,17 +95,17 @@
           # Pass 'inputs' and 'commonUserModules' so they can be used in users/default.nix
           specialArgs = { inherit inputs commonUserModules; };
           modules = [
-            # -- Global & Machine Configs --
+            # Global & Machine Configs
             ./hosts
             ./hosts/${system}
             ./hosts/${system}/${hostname}
             ./hosts/${system}/${hostname}/hardware-configuration.nix
 
-            # -- User Logic --
+            # User Logic
             # Handles creating OS users and hooking up Home Manager
             ./users
 
-            # -- Home Manager Setup --
+            # Home Manager Setup
             home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = false;
@@ -107,7 +113,7 @@
               home-manager.extraSpecialArgs = { inherit inputs; };
             }
 
-            # -- Paranoid Fix For That One Time My Hostname Got Reset And It Broke My System --
+            # Paranoid Fix For That One Time My Hostname Got Reset And It Broke My System
             {
               networking.hostName = hostname;
               networking.dhcpcd.setHostname = false;
@@ -161,7 +167,7 @@
 
     in
     {
-      # --- Final Output Construction ---
+      # Final Output Construction
 
       # 1. NixOS Systems
       # Access via: nixos-rebuild switch --flake .#hostname
