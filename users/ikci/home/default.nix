@@ -101,6 +101,7 @@
       p7zip-rar
       pcmanfm
       pipes
+      protontricks
       pulseaudio
       python3
       qalculate-qt
