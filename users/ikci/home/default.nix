@@ -403,8 +403,8 @@
         "${modifier}+Shift+c" = "exec swaymsg reload && ${pkgs.kanshi}/bin/kanshictl reload";
         "${modifier}+Ctrl+o" =
           "exec pkill -x ${builtins.baseNameOf (lib.getExe pkgs.activate-linux)} || ${lib.getExe pkgs.activate-linux}";
-        "XF86MonBrightnessDown" = "exec brightnessctl set +10%";
-        "XF86MonBrightnessUp" = "exec brightnessctl set -10%";
+        "XF86MonBrightnessDown" = "exec brightnessctl s 10%-";
+        "XF86MonBrightnessUp" = "exec brightnessctl s +10%";
         "XF86AudioRaiseVolume" = "exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+";
         "XF86AudioLowerVolume" = "exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-";
         "XF86AudioMute" = "exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
