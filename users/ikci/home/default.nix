@@ -479,16 +479,10 @@
   services = {
     swayidle = {
       enable = true;
-      events = [
-        {
-          event = "before-sleep";
-          command = "${pkgs.swaylock}/bin/swaylock -f";
-        }
-        {
-          event = "after-resume";
-          command = "sleep 1; ${pkgs.sway}/bin/swaymsg 'output * power off'; sleep 2; ${pkgs.sway}/bin/swaymsg 'output * power on'; ${pkgs.kanshi}/bin/kanshictl reload";
-        }
-      ];
+      events = {
+        before-sleep = "${pkgs.swaylock}/bin/swaylock -f";
+        after-resume = "sleep 1; ${pkgs.sway}/bin/swaymsg 'output * power off'; sleep 2; ${pkgs.sway}/bin/swaymsg 'output * power on'; ${pkgs.kanshi}/bin/kanshictl reload";
+      };
     };
 
     kanshi = {
