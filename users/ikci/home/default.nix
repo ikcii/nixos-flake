@@ -23,7 +23,6 @@
 
       ELECTRON_OZONE_PLATFORM_HINT = "wayland";
       GDK_BACKEND = "wayland,x11";
-      LIBVA_DRIVER_NAME = "radeonsi";
       NIXOS_OZONE_WL = "1";
       QT_QPA_PLATFORM = "wayland";
       QT_WAYLAND_DISABLE_WINDOWDECORATION = 1;

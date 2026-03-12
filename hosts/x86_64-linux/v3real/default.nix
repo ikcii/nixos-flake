@@ -40,6 +40,7 @@
   environment.variables = {
     "HSA_OVERRIDE_GFX_VERSION" = "11.0.0";
     "ROC_ENABLE_PRE_VEGA" = "1";
+    "LIBVA_DRIVER_NAME" = "radeonsi";
   };
 
   fileSystems."/" = {
