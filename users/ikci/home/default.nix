@@ -446,7 +446,7 @@
   stylix = {
     enable = true;
     autoEnable = true;
-    image = ./wallpaper.png;
+    image = ./wallpaper.jpg;
     colorGeneration.scheme = "vibrant";
     colorGeneration.polarity = "dark";
     #polarity = "dark";
