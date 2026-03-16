@@ -148,11 +148,16 @@
       #   config.rocmSupport = true;
       # }).vllm
 
-      # (cataclysm-dda-git.overrideAttrs (old: {
-      #   tag = null;
-      #   rev = "9afa12b497ca332919c3fdde840df75a15b8da3f";
-      #   hash = "";
-      # }))
+      (
+        (cataclysm-dda-git.override {
+          rev = "c62165965c6b74c291c5201cabc3a6e0f385afec";
+          sha256 = "sha256-+scyPpsGpW7eMPxvmgIxCtpp0njqZZn/CrbhyrP7c7s=";
+          version = "2026-03-15";
+        }).overrideAttrs
+        (old: {
+          NIX_CFLAGS_COMPILE = (old.NIX_CFLAGS_COMPILE or "") + " -Wno-error=free-nonheap-object";
+        })
+      )
 
     ];
 
