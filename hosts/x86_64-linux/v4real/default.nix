@@ -6,6 +6,7 @@
   imports = [
     ../../../profiles/desktop
     ../../../profiles/desktop/gaming
+    ./disko.nix
   ];
 
   # --- Graphics & NVIDIA PRIME Offload ---

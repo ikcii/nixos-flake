@@ -36,10 +36,18 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # A fork of proton
     dw-proton.url = "github:imaviso/dwproton-flake";
 
+    # Minecraft launcher
     fjordlauncher = {
       url = "github:hero-persson/FjordLauncherUnlocked";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # Auto partitioning
+    disko = {
+      url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -117,6 +125,8 @@
               networking.hostName = hostname;
               networking.dhcpcd.setHostname = false;
             }
+
+            inputs.disko.nixosModules.disko
           ];
         };
 
