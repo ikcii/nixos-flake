@@ -98,7 +98,6 @@
       mkSystem =
         { hostname, system }:
         lib.nixosSystem {
-          inherit system;
           # Pass 'inputs' and 'commonUserModules' so they can be used in users/default.nix
           specialArgs = { inherit inputs commonUserModules; };
           modules = [
