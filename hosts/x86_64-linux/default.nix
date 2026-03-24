@@ -61,43 +61,33 @@
         hide-version = "yes";
       };
 
-      forward-zone = [
-        # Arma
-        {
-          name = "bohemia.net";
-          forward-addr = [
-            "194.242.2.2@853#dns.mullvad.net"
-            "2a07:e340::2@853#dns.mullvad.net"
-          ];
-          forward-tls-upstream = "yes";
-        }
-        {
-          name = "armaplatform.com";
-          forward-addr = [
-            "194.242.2.2@853#dns.mullvad.net"
-            "2a07:e340::2@853#dns.mullvad.net"
-          ];
-          forward-tls-upstream = "yes";
-        }
-        {
-          name = "bistudio.com";
-          forward-addr = [
-            "194.242.2.2@853#dns.mullvad.net"
-            "2a07:e340::2@853#dns.mullvad.net"
-          ];
-          forward-tls-upstream = "yes";
-        }
+      forward-zone =
+        let
+          mkMullvadRegularEntry = domainName: {
+            name = domainName;
+            forward-addr = [
+              "194.242.2.2@853#dns.mullvad.net"
+              "2a07:e340::2@853#dns.mullvad.net"
+            ];
+            forward-tls-upstream = "yes";
+          };
+        in
+        [
+          # Arma
+          (mkMullvadRegularEntry "bohemia.net")
+          (mkMullvadRegularEntry "armaplatform.com")
+          (mkMullvadRegularEntry "bistudio.com")
 
-        # Global
-        {
-          name = ".";
-          forward-addr = [
-            "194.242.2.4@853#base.dns.mullvad.net"
-            "2a07:e340::4@853#base.dns.mullvad.net"
-          ];
-          forward-tls-upstream = "yes";
-        }
-      ];
+          # Global
+          {
+            name = ".";
+            forward-addr = [
+              "194.242.2.4@853#base.dns.mullvad.net"
+              "2a07:e340::4@853#base.dns.mullvad.net"
+            ];
+            forward-tls-upstream = "yes";
+          }
+        ];
     };
   };
 }
