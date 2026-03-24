@@ -270,6 +270,8 @@
         gpu_temp = true;
         cpu_temp = true;
         throttling_status = true;
+        fps_limit = 180;
+        fps_limit_method = "late";
       };
     };
 
