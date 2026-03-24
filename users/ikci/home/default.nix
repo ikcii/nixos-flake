@@ -82,6 +82,7 @@
       fortune
       fuse-overlayfs
       fzf
+      gale
       gamemode
       gimp-with-plugins
       git-filter-repo
