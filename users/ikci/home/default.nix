@@ -238,6 +238,11 @@
         hardwareAcceleration = true;
         minimizeToTray = false;
         splashTheming = true;
+        spellCheckLanguages = [
+          "en"
+          "en-US"
+          "pl"
+        ];
       };
     };
 
