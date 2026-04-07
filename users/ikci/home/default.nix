@@ -71,6 +71,7 @@
       cowsay
       dust
       easyeffects
+      espeak
       fastfetch
       faugus-launcher
       fd
