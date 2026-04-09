@@ -54,7 +54,11 @@
   system.stateVersion = "25.05";
 
   # --- Nix Optimization And GC---
-  nix.settings.auto-optimise-store = true;
+  nix.settings = {
+    auto-optimise-store = true;
+    keep-outputs = true;
+    keep-derivations = true;
+  };
 
   nix.gc = {
     automatic = true;
