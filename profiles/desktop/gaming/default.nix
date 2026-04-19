@@ -1,8 +1,8 @@
 # Gaming
-{ pkgs, inputs, ... }:
+{ pkgs, ... }:
 
 {
-  boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
+  boot.kernelPackages = with pkgs; linuxPackagesFor linuxPackages_cachyos;
   programs.steam = {
     enable = true;
     extraCompatPackages = [

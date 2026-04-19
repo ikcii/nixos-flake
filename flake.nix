@@ -50,6 +50,10 @@
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nixos-cachyos-kernel = {
+      url = github:xddxdd/nix-cachyos-kernel;
+      inputs.nixpkgs.follows = "nixpkgs";
   };
 
   # ================================================================ #
@@ -126,6 +130,7 @@
             }
 
             inputs.disko.nixosModules.disko
+            nixos-cachyos-kernel.nixosModules.default
           ];
         };
 
