@@ -51,9 +51,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nixos-cachyos-kernel = {
-      url = github:xddxdd/nix-cachyos-kernel;
-      inputs.nixpkgs.follows = "nixpkgs";
+    nix-cachyos-kernel = {
+      url = "github:xddxdd/nix-cachyos-kernel/release";
+    };
   };
 
   # ================================================================ #
@@ -65,6 +65,8 @@
       self,
       nixpkgs,
       home-manager,
+      disko,
+      nix-cachyos-kernel,
       ...
     }@inputs:
     let
@@ -129,8 +131,13 @@
               networking.dhcpcd.setHostname = false;
             }
 
-            inputs.disko.nixosModules.disko
-            nixos-cachyos-kernel.nixosModules.default
+            disko.nixosModules.disko
+            (
+              { pkgs, ... }:
+              {
+                nixpkgs.overlays = [ nix-cachyos-kernel.overlays.pinned ];
+              }
+            )
           ];
         };
 

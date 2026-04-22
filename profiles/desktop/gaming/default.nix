@@ -1,8 +1,8 @@
 # Gaming
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 
 {
-  boot.kernelPackages = with pkgs; linuxPackagesFor linuxPackages_cachyos;
+  boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-latest-lto;
   programs.steam = {
     enable = true;
     extraCompatPackages = [
