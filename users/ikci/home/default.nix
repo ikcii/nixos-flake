@@ -108,6 +108,7 @@
       qalculate-qt
       qdirstat
       ripgrep
+      scrcpy
       slurp
       tealdeer
       texliveFull
