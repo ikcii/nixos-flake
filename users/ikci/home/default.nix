@@ -97,6 +97,7 @@
       nix-index
       nix-search-cli
       nixfmt
+      nodejs
       nvimpager
       obs-studio
       p7zip-rar
