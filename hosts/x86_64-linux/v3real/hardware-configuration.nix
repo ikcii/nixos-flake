@@ -26,43 +26,6 @@
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
-  fileSystems."/" = {
-    device = "/dev/mapper/rootfs";
-    fsType = "btrfs";
-    options = [ "subvol=@" ];
-  };
-
-  boot.initrd.luks.devices."rootfs".device = "/dev/disk/by-uuid/5d4d0789-fdd2-4049-b474-d2b094742617";
-
-  fileSystems."/home" = {
-    device = "/dev/mapper/rootfs";
-    fsType = "btrfs";
-    options = [ "subvol=@home" ];
-  };
-
-  fileSystems."/nix" = {
-    device = "/dev/mapper/rootfs";
-    fsType = "btrfs";
-    options = [ "subvol=@nix" ];
-  };
-
-  fileSystems."/var/log" = {
-    device = "/dev/mapper/rootfs";
-    fsType = "btrfs";
-    options = [ "subvol=@log" ];
-  };
-
-  fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/DFB0-7F59";
-    fsType = "vfat";
-    options = [
-      "fmask=0022"
-      "dmask=0022"
-    ];
-  };
-
-  swapDevices = [ ];
-
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }

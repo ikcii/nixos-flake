@@ -5,6 +5,7 @@
   imports = [
     ../../../profiles/desktop
     ../../../profiles/desktop/gaming
+    ./disko.nix
   ];
 
   services.logrotate.enable = false;
@@ -42,44 +43,6 @@
     "ROC_ENABLE_PRE_VEGA" = "1";
     "LIBVA_DRIVER_NAME" = "radeonsi";
   };
-
-  fileSystems."/" = {
-    options = lib.mkForce [
-      "subvol=@"
-      "compress-force=zstd:1"
-      "noatime"
-      "discard=async"
-    ];
-  };
-
-  fileSystems."/home" = {
-    options = lib.mkForce [
-      "subvol=@home"
-      "compress-force=zstd:1"
-      "noatime"
-      "discard=async"
-    ];
-  };
-
-  fileSystems."/nix" = {
-    options = lib.mkForce [
-      "subvol=@nix"
-      "compress-force=zstd:1"
-      "noatime"
-      "discard=async"
-    ];
-  };
-
-  fileSystems."/var/log" = {
-    options = lib.mkForce [
-      "subvol=@log"
-      "compress-force=zstd:1"
-      "noatime"
-      "discard=async"
-    ];
-  };
-
-  boot.initrd.luks.devices."rootfs".allowDiscards = true;
 
   services.fstrim.enable = true;
   services.btrfs.autoScrub = {
