@@ -167,7 +167,9 @@
           version = "2026-03-15";
         }).overrideAttrs
         (old: {
-          NIX_CFLAGS_COMPILE = (old.NIX_CFLAGS_COMPILE or "") + " -Wno-error=free-nonheap-object";
+          env = (old.env or { }) // {
+            NIX_CFLAGS_COMPILE = (old.env.NIX_CFLAGS_COMPILE or "") + " -Wno-error=free-nonheap-object";
+          };
         })
       )
 
