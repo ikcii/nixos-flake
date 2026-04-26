@@ -510,6 +510,12 @@
   #   };
   # };
 
+  xdg.userDirs.setSessionVariables = false;
+
+  xdg.systemDirs.data = [
+    "${config.home.homeDirectory}/.local/share/flatpak/exports/share"
+  ];
+
   services.easyeffects.enable = true;
 
   services = {
