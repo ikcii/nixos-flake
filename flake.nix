@@ -132,10 +132,19 @@
             }
 
             disko.nixosModules.disko
+
             (
               { pkgs, ... }:
               {
                 nixpkgs.overlays = [ nix-cachyos-kernel.overlays.pinned ];
+              }
+            )
+
+            (
+              { ... }:
+              {
+                nix.settings.extra-substituters = [ "https://attic.xuyh0120.win/lantian" ];
+                nix.settings.extra-trusted-public-keys = [ "lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc=" ];
               }
             )
           ];
