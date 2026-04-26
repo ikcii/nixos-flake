@@ -221,9 +221,16 @@
     vesktop = {
       enable = true;
 
+      package = pkgs.vesktop.override {
+        withSystemVencord = true;
+      };
+
       vencord.settings = {
+
+        autoUpdate = false;
         autoUpdateNotification = true;
         notifyAboutUpdates = true;
+
         useQuickCss = false;
         disableMinSize = true;
         plugins = {
@@ -245,6 +252,9 @@
       };
 
       settings = {
+        checkUpdates = false;
+        discordBranch = "stable";
+
         hardwareAcceleration = true;
         minimizeToTray = false;
         splashTheming = true;
