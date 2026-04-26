@@ -8,7 +8,15 @@
 {
   fonts.fontconfig.enable = true;
 
-  nixpkgs.overlays = [ inputs.fjordlauncher.overlays.default ];
+  nixpkgs.overlays = [
+    inputs.fjordlauncher.overlays.default
+    # Fix openldap test error
+    (final: prev: {
+      openldap = prev.openldap.overrideAttrs (_: {
+        doCheck = false;
+      });
+    })
+  ];
 
   home = {
     sessionVariables = {
