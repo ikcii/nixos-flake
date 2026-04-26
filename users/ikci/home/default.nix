@@ -98,7 +98,7 @@
       htop
       killall
       libqalculate
-      libreoffice-still
+      #libreoffice-still
       localsend
       lolcat
       nh
