@@ -112,7 +112,6 @@
       pcmanfm
       pipes
       protontricks
-      pulseaudio
       python3
       qalculate-qt
       qdirstat
@@ -120,8 +119,6 @@
       scrcpy
       slurp
       tealdeer
-      texliveFull
-      texstudio
       tokei
       tree
       tree-sitter
