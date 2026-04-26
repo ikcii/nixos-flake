@@ -385,6 +385,9 @@
         confirm_os_window_close = 0;
         shell = "sh -c \"tmux has-session -t main 2>/dev/null && exec tmux new-session -t main \\\\; new-window || exec tmux new-session -s main \\\"ssh-agent $SHELL\\\"\"";
       };
+      quickAccessTerminalConfig = {
+        edge = "center-sized";
+      };
     };
 
     niri = {
@@ -426,6 +429,7 @@
 
       modifier = "Mod4";
       terminal = "kitty";
+      menu = "kitten quick-access-terminal ${lib.getExe pkgs.fsel}";
 
       keybindings = lib.mkOptionDefault {
         "${modifier}+s" = "scratchpad show";
