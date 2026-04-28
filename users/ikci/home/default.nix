@@ -440,7 +440,8 @@
           "exec pkill -x ${builtins.baseNameOf (lib.getExe pkgs.activate-linux)} || ${lib.getExe pkgs.activate-linux}";
         "XF86MonBrightnessDown" = "exec brightnessctl s 10%-";
         "XF86MonBrightnessUp" = "exec brightnessctl s +10%";
-        "XF86AudioRaiseVolume" = "exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+";
+        "XF86AudioRaiseVolume" =
+          "exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+ && wpctl set-mute @DEFAULT_AUDIO_SINK@ 0";
         "XF86AudioLowerVolume" = "exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-";
         "XF86AudioMute" = "exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
       };
