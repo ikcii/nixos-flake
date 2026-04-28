@@ -222,10 +222,6 @@
     vesktop = {
       enable = true;
 
-      package = pkgs.vesktop.override {
-        withSystemVencord = true;
-      };
-
       vencord.settings = {
 
         autoUpdate = false;
@@ -257,6 +253,7 @@
         discordBranch = "stable";
 
         hardwareAcceleration = true;
+        videoHardwareAcceleration = true;
         minimizeToTray = false;
         splashTheming = true;
         spellCheckLanguages = [
