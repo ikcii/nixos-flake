@@ -41,136 +41,143 @@
 
     };
 
-    packages = with pkgs; [
+    packages =
+      with pkgs;
+      let
+        specifyNixpkgs =
+          url: sha256:
+          (import
+            (builtins.fetchTarball {
+              inherit url sha256;
+            })
+            {
+              system = pkgs.stdenv.hostPlatform.system;
+            }
+          );
+      in
+      [
 
-      # fonts
+        # fonts
 
-      dejavu_fonts
-      nerd-fonts.jetbrains-mono
-      noto-fonts
-      noto-fonts-cjk-sans
-      noto-fonts-color-emoji
+        dejavu_fonts
+        nerd-fonts.jetbrains-mono
+        noto-fonts
+        noto-fonts-cjk-sans
+        noto-fonts-color-emoji
 
-      # current system daemons utils
+        # current system daemons utils
 
-      grim
-      lxmenu-data
-      shared-mime-info
-      wl-clipboard
-      xdg-utils
-      xdg-user-dirs
-      xrandr
-      xwayland
+        grim
+        lxmenu-data
+        shared-mime-info
+        wl-clipboard
+        xdg-utils
+        xdg-user-dirs
+        xrandr
+        xwayland
 
-      # LLM file context utility
-      (pkgs.writeShellScriptBin "ct" "for file in \"$@\"; do echo \"$file\"; echo '```'; cat \"$file\"; echo; echo '```'; done")
+        # LLM file context utility
+        (pkgs.writeShellScriptBin "ct" "for file in \"$@\"; do echo \"$file\"; echo '```'; cat \"$file\"; echo; echo '```'; done")
 
-      # general
+        # general
 
-      (bottles.override { removeWarningPopup = true; })
-      android-tools
-      ani-cli
-      audiosource
-      bat
-      brightnessctl
-      cbonsai
-      cmatrix
-      compsize
-      cowsay
-      dust
-      easyeffects
-      espeak
-      fastfetch
-      faugus-launcher
-      fd
-      ffmpeg
-      figlet
-      file
-      fjordlauncher
-      flatpak
-      fortune
-      fuse-overlayfs
-      fzf
-      gale
-      gamemode
-      gimp-with-plugins
-      git-filter-repo
-      htop
-      killall
-      libqalculate
-      #libreoffice-still
-      localsend
-      lolcat
-      nh
-      nix-index
-      nix-search-cli
-      nixfmt
-      nodejs
-      nvimpager
-      obs-studio
-      p7zip-rar
-      pcmanfm
-      pipes
-      protontricks
-      python3
-      qalculate-qt
-      qdirstat
-      ripgrep
-      scrcpy
-      slurp
-      tealdeer
-      tokei
-      tree
-      tree-sitter
-      unzip
-      uv
-      wdisplays
-      wget
-      wtf
-      zerotierone
-      zip
+        #libreoffice-still
+        (bottles.override { removeWarningPopup = true; })
+        android-tools
+        ani-cli
+        audiosource
+        bat
+        brightnessctl
+        cbonsai
+        cmatrix
+        compsize
+        cowsay
+        dust
+        easyeffects
+        espeak
+        fastfetch
+        fd
+        ffmpeg
+        figlet
+        faugus-launcher
+        file
+        fjordlauncher
+        flatpak
+        fortune
+        fuse-overlayfs
+        fzf
+        gale
+        gamemode
+        gimp-with-plugins
+        git-filter-repo
+        htop
+        killall
+        libqalculate
+        localsend
+        lolcat
+        nh
+        nix-index
+        nix-search-cli
+        nixfmt
+        nodejs
+        nvimpager
+        obs-studio
+        p7zip-rar
+        pcmanfm
+        pipes
+        protontricks
+        python3
+        qalculate-qt
+        qdirstat
+        ripgrep
+        scrcpy
+        slurp
+        tealdeer
+        tokei
+        tree
+        tree-sitter
+        unzip
+        uv
+        wdisplays
+        wget
+        wtf
+        zerotierone
+        zip
 
-      # LSPs
+        # LSPs
 
-      nil
-      lua-language-server
-      pyright
-      bash-language-server
+        nil
+        lua-language-server
+        pyright
+        bash-language-server
 
-      # overrides, etc
+        # overrides, etc
 
-      (import
-        (builtins.fetchTarball {
-          url = "https://github.com/NixOS/nixpkgs/archive/0ba4d0e96e2358ea1db4737ff8591cba314a574e.tar.gz";
-          sha256 = "02i5dgg8ar4dwn3grk3w6nggfdp5h4k4dkr81jgq8y7vw2naml83";
-        })
-        {
-          system = pkgs.stdenv.hostPlatform.system;
-        }
-      ).tome4
+        (specifyNixpkgs "https://github.com/NixOS/nixpkgs/archive/0ba4d0e96e2358ea1db4737ff8591cba314a574e.tar.gz" "02i5dgg8ar4dwn3grk3w6nggfdp5h4k4dkr81jgq8y7vw2naml83")
+        .tome4
 
-      # (import (builtins.fetchTarball {
-      #   url = "https://github.com/NixOS/nixpkgs/archive/52047c30129eb1bd860a5549f2b2b2d61e0dbfbc.tar.gz";
-      #   sha256 = "0hkhwd703z6xcqqxxj9krkn6c0p5lhfi7q471yccv78xkglv0gxy";
-      # }) {
-      #   system = pkgs.system;
-      #   config.rocmSupport = true;
-      # }).vllm
+        # (import (builtins.fetchTarball {
+        #   url = "https://github.com/NixOS/nixpkgs/archive/52047c30129eb1bd860a5549f2b2b2d61e0dbfbc.tar.gz";
+        #   sha256 = "0hkhwd703z6xcqqxxj9krkn6c0p5lhfi7q471yccv78xkglv0gxy";
+        # }) {
+        #   system = pkgs.system;
+        #   config.rocmSupport = true;
+        # }).vllm
 
-      (
-        (cataclysm-dda-git.override {
-          rev = "c62165965c6b74c291c5201cabc3a6e0f385afec";
-          sha256 = "sha256-+scyPpsGpW7eMPxvmgIxCtpp0njqZZn/CrbhyrP7c7s=";
-          version = "2026-03-15";
-        }).overrideAttrs
-        (old: {
-          env = (old.env or { }) // {
-            NIX_CFLAGS_COMPILE = (old.env.NIX_CFLAGS_COMPILE or "") + " -Wno-error=free-nonheap-object";
-          };
-        })
-      )
+        (
+          (cataclysm-dda-git.override {
+            rev = "c62165965c6b74c291c5201cabc3a6e0f385afec";
+            sha256 = "sha256-+scyPpsGpW7eMPxvmgIxCtpp0njqZZn/CrbhyrP7c7s=";
+            version = "2026-03-15";
+          }).overrideAttrs
+          (old: {
+            env = (old.env or { }) // {
+              NIX_CFLAGS_COMPILE = (old.env.NIX_CFLAGS_COMPILE or "") + " -Wno-error=free-nonheap-object";
+            };
+          })
+        )
 
-    ];
+      ];
 
     # cursor theme
 
