@@ -96,10 +96,10 @@
         easyeffects
         espeak
         fastfetch
+        faugus-launcher
         fd
         ffmpeg
         figlet
-        faugus-launcher
         file
         fjordlauncher
         flatpak
