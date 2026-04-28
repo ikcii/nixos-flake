@@ -203,6 +203,7 @@
     git.enable = true;
     swaylock.enable = true;
     yt-dlp.enable = true;
+    rofi.enable = true;
 
     zoxide = {
       enable = true;
@@ -429,7 +430,7 @@
 
       modifier = "Mod4";
       terminal = "kitty";
-      menu = "kitten quick-access-terminal ${lib.getExe pkgs.fsel}";
+      menu = "rofi -show combi -combi-modes 'drun,run' -modes 'combi'";
 
       keybindings = lib.mkOptionDefault {
         "${modifier}+s" = "scratchpad show";
