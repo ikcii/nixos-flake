@@ -37,7 +37,6 @@
       SDL_VIDEODRIVER = "wayland,x11,windows";
       XDG_CURRENT_DESKTOP = "sway";
       XDG_SESSION_TYPE = "wayland";
-      XDG_DATA_DIRS = "${config.home.homeDirectory}/.local/share/flatpak/exports/share:$XDG_DATA_DIRS";
       _JAVA_AWT_WM_NONREPARENTING = 1;
 
     };
@@ -80,6 +79,11 @@
         # LLM file context utility
         (pkgs.writeShellScriptBin "ct" "for file in \"$@\"; do echo \"$file\"; echo '```'; cat \"$file\"; echo; echo '```'; done")
 
+        # --user only flatpak
+        (pkgs.writeShellScriptBin "flatpak" ''
+          exec ${lib.getExe pkgs.flatpak} --user "$@"
+        '')
+
         # general
 
         #libreoffice-still
@@ -103,7 +107,6 @@
         figlet
         file
         fjordlauncher
-        flatpak
         fortune
         fuse-overlayfs
         fzf
