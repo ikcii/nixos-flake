@@ -37,6 +37,7 @@
       SDL_VIDEODRIVER = "wayland,x11,windows";
       XDG_CURRENT_DESKTOP = "sway";
       XDG_SESSION_TYPE = "wayland";
+      XDG_DATA_DIRS = "${config.home.homeDirectory}/.local/share/flatpak/exports/share:$XDG_DATA_DIRS";
       _JAVA_AWT_WM_NONREPARENTING = 1;
 
     };
@@ -121,7 +122,6 @@
         nixfmt
         nodejs
         nvimpager
-        obs-studio
         p7zip-rar
         pcmanfm
         pipes
@@ -210,7 +210,24 @@
     git.enable = true;
     swaylock.enable = true;
     yt-dlp.enable = true;
-    rofi.enable = true;
+
+    rofi = {
+      enable = true;
+      extraConfig = {
+        drun-match-fields = "name";
+      };
+    };
+
+    obs-studio = {
+      enable = true;
+
+      plugins = with pkgs.obs-studio-plugins; [
+        obs-vaapi
+        obs-vkcapture
+        obs-gstreamer
+        obs-pipewire-audio-capture
+      ];
+    };
 
     zoxide = {
       enable = true;
@@ -434,7 +451,7 @@
 
       modifier = "Mod4";
       terminal = "kitty";
-      menu = "rofi -show combi -combi-modes 'drun,run' -modes 'combi'";
+      menu = "rofi -show combi -combi-modes 'drun,run' -modes 'combi' -show-icons";
 
       keybindings = lib.mkOptionDefault {
         "${modifier}+s" = "scratchpad show";
