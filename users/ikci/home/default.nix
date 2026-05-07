@@ -485,6 +485,10 @@
 
       startup = [
         {
+          command = "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_DATA_DIRS PATH";
+          always = false;
+        }
+        {
           command = "${pkgs.kanshi}/bin/kanshictl reload";
           always = true;
         }
@@ -526,9 +530,17 @@
     targets.cava.rainbow.enable = true;
   };
 
+  # xdg.desktopEntries.kitty-open-dir = {
+  #   name = "Open Directory in Kitty";
+  #   exec = "kitty -d %F";
+  #   terminal = false;
+  #   mimeType = [ "inode/directory" ];
+  # };
+
   # xdg.mimeApps = {
   #   enable = true;
   #   defaultApplications = {
+  #     "inode/directory" = "kitty-open-dir.desktop";
   #     "text/html" = "brave.desktop";
   #     "x-scheme-handler/http" = "brave.desktop";
   #     "x-scheme-handler/https" = "brave.desktop";
