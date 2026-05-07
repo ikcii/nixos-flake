@@ -252,8 +252,8 @@
       vencord.settings = {
 
         autoUpdate = false;
-        autoUpdateNotification = true;
-        notifyAboutUpdates = true;
+        autoUpdateNotification = false;
+        notifyAboutUpdates = false;
 
         useQuickCss = false;
         disableMinSize = true;
@@ -263,6 +263,7 @@
           GifPaste.enabled = true;
           VolumeBooster.enabled = true;
           FakeNitro.enabled = true;
+          ViewRaw.enabled = true;
           MessageLogger = {
             enabled = true;
             ignoreSelf = true;
