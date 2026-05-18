@@ -97,6 +97,7 @@
         cmatrix
         compsize
         cowsay
+        dotnetCorePackages.sdk_10_0
         dust
         easyeffects
         espeak
@@ -118,6 +119,7 @@
         killall
         libqalculate
         localsend
+        logseq
         lolcat
         nh
         nix-index
@@ -149,10 +151,11 @@
 
         # LSPs
 
-        nil
-        lua-language-server
-        pyright
         bash-language-server
+        csharp-ls
+        lua-language-server
+        nil
+        pyright
 
         # overrides, etc
 
@@ -374,22 +377,7 @@
 
               autoPlugins = map (name: pkgs.vimPlugins.${name}) pluginNames;
             in
-            autoPlugins
-            ++ (with pkgs.vimPlugins.nvim-treesitter-parsers; [
-
-              bash
-              css
-              gdscript
-              html
-              java
-              javadoc
-              javascript
-              luadoc
-              luap
-              nix
-              python
-
-            ]);
+            autoPlugins ++ [ pkgs.vimPlugins.nvim-treesitter.withAllGrammars ];
 
           dev.config = {
             pure = ./nvim;
@@ -414,11 +402,6 @@
       quickAccessTerminalConfig = {
         edge = "center-sized";
       };
-    };
-
-    niri = {
-      enable = true;
-      package = pkgs.niri;
     };
   };
 

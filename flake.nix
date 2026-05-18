@@ -30,12 +30,6 @@
     # MNW: A wrapper that helps manage Neovim configurations within Nix.
     mnw.url = "github:Gerg-L/mnw";
 
-    # Niri: A specific Wayland window manager (compositor).
-    niri-flake = {
-      url = "github:sodiboo/niri-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     # A fork of proton
     dw-proton.url = "github:imaviso/dwproton-flake";
 
@@ -95,7 +89,6 @@
       commonUserModules = [
         inputs.stylix.homeModules.stylix
         inputs.mnw.homeManagerModules.mnw
-        inputs.niri-flake.homeModules.niri
       ];
 
       # Builders
