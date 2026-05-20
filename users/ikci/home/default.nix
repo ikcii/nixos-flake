@@ -134,6 +134,7 @@
         python3
         qalculate-qt
         qdirstat
+        recoll
         ripgrep
         scrcpy
         slurp
@@ -586,6 +587,9 @@
           };
         }
       ];
+    };
+    recoll = {
+      enable = true;
     };
   };
   gtk.gtk4.theme = config.gtk.theme;
