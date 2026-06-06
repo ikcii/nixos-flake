@@ -118,6 +118,7 @@
         htop
         killall
         libqalculate
+        llama-cpp-rocm
         localsend
         logseq
         lolcat
@@ -186,7 +187,7 @@
 
       ];
 
-    # cursor theme
+    # cursor theming
 
     # pointerCursor = {
     #           name = "Adwaita";
@@ -243,11 +244,19 @@
     };
 
     bash.enable = true;
+    bash.enableViMode = true;
 
     direnv = {
       enable = true;
       enableBashIntegration = true;
       nix-direnv.enable = true;
+    };
+
+    sioyek = {
+      enable = true;
+      config = {
+        "startup_view_mode" = "dark_mode";
+      };
     };
 
     vesktop = {
@@ -539,9 +548,10 @@
     "${config.home.homeDirectory}/.local/share/flatpak/exports/share"
   ];
 
-  services.easyeffects.enable = true;
-
   services = {
+
+    easyeffects.enable = true;
+
     swayidle = {
       enable = true;
       events = {
@@ -592,5 +602,6 @@
       enable = true;
     };
   };
+
   gtk.gtk4.theme = config.gtk.theme;
 }
