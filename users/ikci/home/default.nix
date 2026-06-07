@@ -11,11 +11,11 @@
   nixpkgs.overlays = [
     inputs.fjordlauncher.overlays.default
     # Fix openldap test error
-    (final: prev: {
-      openldap = prev.openldap.overrideAttrs (_: {
-        doCheck = false;
-      });
-    })
+    # (final: prev: {
+    #   openldap = prev.openldap.overrideAttrs (_: {
+    #     doCheck = false;
+    #   });
+    # })
   ];
 
   home = {
@@ -118,7 +118,6 @@
         htop
         killall
         libqalculate
-        llama-cpp-rocm
         localsend
         logseq
         lolcat
@@ -172,18 +171,28 @@
         #   config.rocmSupport = true;
         # }).vllm
 
-        (
-          (cataclysm-dda-git.override {
-            rev = "c62165965c6b74c291c5201cabc3a6e0f385afec";
-            sha256 = "sha256-+scyPpsGpW7eMPxvmgIxCtpp0njqZZn/CrbhyrP7c7s=";
-            version = "2026-03-15";
-          }).overrideAttrs
-          (old: {
-            env = (old.env or { }) // {
-              NIX_CFLAGS_COMPILE = (old.env.NIX_CFLAGS_COMPILE or "") + " -Wno-error=free-nonheap-object";
-            };
-          })
-        )
+        # (
+        #   (cataclysm-dda-git.override {
+        #     rev = "c62165965c6b74c291c5201cabc3a6e0f385afec";
+        #     sha256 = "sha256-+scyPpsGpW7eMPxvmgIxCtpp0njqZZn/CrbhyrP7c7s=";
+        #     version = "2026-03-15";
+        #   }).overrideAttrs
+        #   (old: {
+        #     env = (old.env or { }) // {
+        #       NIX_CFLAGS_COMPILE = (old.env.NIX_CFLAGS_COMPILE or "") + " -Wno-error=free-nonheap-object";
+        #     };
+        #   })
+        # )
+        #
+        (llama-cpp-rocm.overrideAttrs (old: rec {
+          version = "9548";
+          src = old.src.override {
+            tag = "b${version}";
+            hash = "sha256-LWsuRsblX3J/f+Yuj6Cov/leAX8AFTSFf67zjGo1HA4=";
+          };
+          npmDepsHash = "sha256-pjdbI6NcZRlJVd62xhgbLhWrwFYwgsIwjORqvo1+VD8=";
+          npmRoot = "tools/ui";
+        }))
 
       ];
 
@@ -244,7 +253,12 @@
     };
 
     bash.enable = true;
-    bash.enableViMode = true;
+    readline = {
+      enable = true;
+      variables = {
+        "editing-mode" = "vi";
+      };
+    };
 
     direnv = {
       enable = true;
