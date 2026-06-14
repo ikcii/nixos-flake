@@ -11,11 +11,11 @@
   nixpkgs.overlays = [
     inputs.fjordlauncher.overlays.default
     # Fix openldap test error
-    # (final: prev: {
-    #   openldap = prev.openldap.overrideAttrs (_: {
-    #     doCheck = false;
-    #   });
-    # })
+    (final: prev: {
+      openldap = prev.openldap.overrideAttrs (_: {
+        doCheck = false;
+      });
+    })
   ];
 
   home = {
@@ -119,7 +119,7 @@
         killall
         libqalculate
         localsend
-        logseq
+        # logseq
         lolcat
         nh
         nix-index

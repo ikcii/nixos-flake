@@ -35,7 +35,8 @@
 
     # Minecraft launcher
     fjordlauncher = {
-      url = "github:hero-persson/FjordLauncherUnlocked";
+      #url = "github:hero-persson/FjordLauncherUnlocked";
+      url = "github:unmojang/FjordLauncher";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
