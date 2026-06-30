@@ -95,4 +95,6 @@
     enable = true;
     binfmt = true;
   };
+
+  hardware.keyboard.qmk.enable = true;
 }
