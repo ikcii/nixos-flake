@@ -303,6 +303,8 @@
             format = "png";
             imgSize = "4096";
           };
+          PermissionFreeWill.enabled = true;
+          PermissionsViewer.enabled = true;
         };
       };
 
