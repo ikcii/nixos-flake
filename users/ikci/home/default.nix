@@ -133,6 +133,7 @@
         p7zip-rar
         pcmanfm
         pipes
+        protege-distribution
         protontricks
         python3
         qalculate-qt
