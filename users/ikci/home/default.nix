@@ -120,6 +120,7 @@
         htop
         killall
         libqalculate
+        llama-cpp-rocm
         localsend
         # logseq
         lolcat
@@ -185,16 +186,16 @@
         #     };
         #   })
         # )
-        #
-        (llama-cpp-rocm.overrideAttrs (old: rec {
-          version = "9548";
-          src = old.src.override {
-            tag = "b${version}";
-            hash = "sha256-LWsuRsblX3J/f+Yuj6Cov/leAX8AFTSFf67zjGo1HA4=";
-          };
-          npmDepsHash = "sha256-pjdbI6NcZRlJVd62xhgbLhWrwFYwgsIwjORqvo1+VD8=";
-          npmRoot = "tools/ui";
-        }))
+
+        # (llama-cpp-rocm.overrideAttrs (old: rec {
+        #   version = "9548";
+        #   src = old.src.override {
+        #     tag = "b${version}";
+        #     hash = "sha256-LWsuRsblX3J/f+Yuj6Cov/leAX8AFTSFf67zjGo1HA4=";
+        #   };
+        #   npmDepsHash = "sha256-pjdbI6NcZRlJVd62xhgbLhWrwFYwgsIwjORqvo1+VD8=";
+        #   npmRoot = "tools/ui";
+        # }))
 
       ];
 
