@@ -232,6 +232,15 @@
     swaylock.enable = true;
     yt-dlp.enable = true;
 
+    emacs = {
+      enable = true;
+      extraPackages = epkgs: [
+        epkgs.evil
+        epkgs.corfu
+        epkgs.vertico
+      ];
+    };
+
     rofi = {
       enable = true;
       extraConfig = {
