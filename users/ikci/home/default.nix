@@ -158,6 +158,7 @@
 
         bash-language-server
         csharp-ls
+        haskell-language-server
         lua-language-server
         nil
         pyright
