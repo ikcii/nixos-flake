@@ -18,7 +18,7 @@
 
   # Kernel
   # Default to latest kernel
-  boot.kernelPackages = lib.mkOptionDefault pkgs.linuxPackages_latest;
+  boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
 
   # Hardware & Drivers
   hardware.enableAllFirmware = true;

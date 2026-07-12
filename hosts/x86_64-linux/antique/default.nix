@@ -15,7 +15,7 @@
   boot.loader.efi.canTouchEfiVariables = lib.mkForce false;
   boot.loader.grub = {
     efiSupport = lib.mkForce false;
-    device = lib.mkForce "/dev/sda";
+    devices = lib.mkForce [ "/dev/sda" ];
   };
 
   fileSystems."/swap" = {
