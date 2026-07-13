@@ -2,7 +2,6 @@
 { pkgs, inputs, ... }:
 
 {
-  boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-latest-lto;
   programs.steam = {
     enable = true;
     extraCompatPackages = [

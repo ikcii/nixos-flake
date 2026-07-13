@@ -18,7 +18,7 @@
 
   # Kernel
   # Default to latest kernel
-  boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
+  boot.kernelPackages = lib.mkDefault pkgs.cachyosKernels.linuxPackages-cachyos-latest-lto;
 
   # Hardware & Drivers
   hardware.enableAllFirmware = true;
