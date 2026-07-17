@@ -39,7 +39,7 @@
       XDG_SESSION_TYPE = "wayland";
       _JAVA_AWT_WM_NONREPARENTING = 1;
 
-      WINEDLLOVERRIDES = "winhttp=n,b";
+      WINEDLLOVERRIDES = "winhttp=n,b;version=n,b";
 
     };
 
@@ -88,8 +88,8 @@
 
         # general
 
+        # logseq
         #libreoffice-still
-        (bottles.override { removeWarningPopup = true; })
         android-tools
         ani-cli
         audiosource
@@ -120,9 +120,7 @@
         htop
         killall
         libqalculate
-        llama-cpp-rocm
         localsend
-        # logseq
         lolcat
         nh
         nix-index
@@ -139,6 +137,7 @@
         qalculate-qt
         qdirstat
         recoll
+        unityhub
         ripgrep
         scrcpy
         slurp
@@ -153,6 +152,13 @@
         wtf
         zerotierone
         zip
+
+        (haskellPackages.ghcWithPackages (
+          p: with p; [
+            shh
+            shh-extras
+          ]
+        ))
 
         # LSPs
 
@@ -189,15 +195,18 @@
         #   })
         # )
 
-        # (llama-cpp-rocm.overrideAttrs (old: rec {
-        #   version = "9548";
-        #   src = old.src.override {
-        #     tag = "b${version}";
-        #     hash = "sha256-LWsuRsblX3J/f+Yuj6Cov/leAX8AFTSFf67zjGo1HA4=";
-        #   };
-        #   npmDepsHash = "sha256-pjdbI6NcZRlJVd62xhgbLhWrwFYwgsIwjORqvo1+VD8=";
-        #   npmRoot = "tools/ui";
-        # }))
+        (llama-cpp-rocm.overrideAttrs (old: rec {
+          version = "9591";
+          src = old.src.override {
+            owner = "PrismML-Eng";
+            repo = "llama.cpp";
+            tag = null;
+            rev = "62061f91088281e65071cc38c5f69ee95c39f14e";
+            hash = "sha256-zLxB5UKnCTCw/okB+L8u1VtM1o2yVjVYTlTBgL/BsaM=";
+          };
+          npmDepsHash = "sha256-pjdbI6NcZRlJVd62xhgbLhWrwFYwgsIwjORqvo1+VD8=";
+          npmRoot = "tools/ui";
+        }))
 
       ];
 
@@ -560,17 +569,18 @@
   #   mimeType = [ "inode/directory" ];
   # };
 
-  # xdg.mimeApps = {
-  #   enable = true;
-  #   defaultApplications = {
-  #     "inode/directory" = "kitty-open-dir.desktop";
-  #     "text/html" = "brave.desktop";
-  #     "x-scheme-handler/http" = "brave.desktop";
-  #     "x-scheme-handler/https" = "brave.desktop";
-  #       "x-scheme-handler/about" = "brave.desktop";
-  #       "x-scheme-handler/unknown" = "brave.desktop";
-  #   };
-  # };
+  xdg.mime.enable = true;
+  xdg.mimeApps = {
+    enable = true;
+    # defaultApplications = {
+    #   "inode/directory" = "kitty-open-dir.desktop";
+    #   "text/html" = "brave.desktop";
+    #   "x-scheme-handler/http" = "brave.desktop";
+    #   "x-scheme-handler/https" = "brave.desktop";
+    #     "x-scheme-handler/about" = "brave.desktop";
+    #     "x-scheme-handler/unknown" = "brave.desktop";
+    # };
+  };
 
   xdg.userDirs.setSessionVariables = false;
 
