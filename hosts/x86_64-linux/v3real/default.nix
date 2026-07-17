@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ lib, pkgs, ... }:
 
 {
 
@@ -49,5 +49,39 @@
     enable = true;
     interval = "weekly";
     fileSystems = [ "/" ];
+  };
+
+  environment.systemPackages = with pkgs; [
+    git
+    git-lfs
+  ];
+
+  services.forgejo = {
+    enable = true;
+    lfs.enable = true;
+
+    settings = {
+      server = {
+        DOMAIN = "git.ikci.dev";
+        ROOT_URL = "https://git.ikci.dev";
+        HTTP_PORT = 3000;
+      };
+
+      service = {
+        DISABLE_REGISTRATION = true;
+      };
+    };
+  };
+
+  systemd.services.cloudflared-tunnel = {
+    description = "Cloudflare Tunnel for Git";
+    wantedBy = [ "multi-user.target" ];
+    after = [ "network-online.target" ];
+    serviceConfig = {
+      ExecStart = "${pkgs.cloudflared}/bin/cloudflared tunnel --no-autoupdate run";
+      EnvironmentFile = "/etc/cloudflared.env";
+      Restart = "always";
+      DynamicUser = true;
+    };
   };
 }
