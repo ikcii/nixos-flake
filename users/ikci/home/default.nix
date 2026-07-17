@@ -119,6 +119,7 @@
         git-filter-repo
         htop
         killall
+        lazygit
         libqalculate
         localsend
         lolcat
@@ -137,7 +138,6 @@
         qalculate-qt
         qdirstat
         recoll
-        unityhub
         ripgrep
         scrcpy
         slurp
@@ -145,6 +145,7 @@
         tokei
         tree
         tree-sitter
+        unityhub
         unzip
         uv
         wdisplays
