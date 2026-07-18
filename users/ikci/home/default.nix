@@ -300,34 +300,40 @@
     vesktop = {
       enable = true;
 
-      vencord.settings = {
+      vencord = {
+        settings = {
 
-        autoUpdate = false;
-        autoUpdateNotification = false;
-        notifyAboutUpdates = false;
+          autoUpdate = false;
+          autoUpdateNotification = false;
 
-        useQuickCss = true;
-        transparent = true;
-        disableMinSize = true;
-        plugins = {
-          ImageFilename.enabled = true;
-          petpet.enabled = true;
-          GifPaste.enabled = true;
-          VolumeBooster.enabled = true;
-          FakeNitro.enabled = true;
-          ViewRaw.enabled = true;
-          MessageLogger = {
-            enabled = true;
-            ignoreSelf = true;
+          # This is where I'd put my update-notification-disable-inator... IF I HAD ONE
+
+          # notifyAboutUpdates = false;
+
+          useQuickCss = true;
+          transparent = true;
+          disableMinSize = true;
+          plugins = {
+            ImageFilename.enabled = true;
+            petpet.enabled = true;
+            GifPaste.enabled = true;
+            VolumeBooster.enabled = true;
+            FakeNitro.enabled = true;
+            ViewRaw.enabled = true;
+            MessageLogger = {
+              enabled = true;
+              ignoreSelf = true;
+            };
+            ViewIcons = {
+              enabled = true;
+              format = "png";
+              imgSize = "4096";
+            };
+            PermissionFreeWill.enabled = true;
+            PermissionsViewer.enabled = true;
           };
-          ViewIcons = {
-            enabled = true;
-            format = "png";
-            imgSize = "4096";
-          };
-          PermissionFreeWill.enabled = true;
-          PermissionsViewer.enabled = true;
         };
+        extraQuickCss = builtins.readFile ./quickCss.css;
       };
 
       settings = {

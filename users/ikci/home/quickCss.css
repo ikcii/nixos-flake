@@ -1,0 +1,190 @@
+/*
+ * THE DEFINITIVE STYLIX TRANSPARENCY FIX (FINAL BALANCED)
+ * Note: Keep the Stylix theme ENABLED in Vencord!
+ */
+
+/* ==========================================================================
+   1. COMPREHENSIVE NUKE LIST (PREVENTS OPACITY STACKING)
+   ========================================================================== */
+body, html,
+#app-mount,
+#app-mount .app__160d8,
+#app-mount .bg__960e4,
+#app-mount .appMount__51fd7,
+#app-mount .wrapper_ef3116,
+#app-mount .container__133bf,
+#app-mount .tabBody__133bf,
+#app-mount .chat_f75fb0,
+#app-mount .chatContent_f75fb0,
+#app-mount .privateChannels_e6b769,
+#app-mount .scroller__99e7c,
+#app-mount .container__7d20c,
+#app-mount .nowPlayingColumn__133bf,
+#app-mount .themed__9293f,
+#app-mount .container__2637a,
+#app-mount .sidebar__5e434,
+#app-mount .sidebar__5e434:after,
+#app-mount .visual-refresh .clickable_f37cb1,
+#app-mount .visual-refresh .hasBanner_f37cb1 .header_f37cb1,
+#app-mount :where(.visual-refresh) .themedBackground__74017,
+#app-mount .visual-refresh .container_f369db,
+#app-mount .panels__5e434,
+#app-mount .container__37e49,
+#app-mount .scroller__23746,
+#app-mount .container__551b0,
+#app-mount .theme-light .gradient_e9ef78,
+#app-mount .backdrop__8a7fc,
+#app-mount .visual-refresh .contentRegionScroller__23e6b,
+#app-mount .visual-refresh .sidebarRegionScroller__23e6b,
+#app-mount .visual-refresh .standardSidebarView__23e6b,
+#app-mount .contentRegion__23e6b,
+#app-mount .layer__960e4,
+#app-mount .fieldList_a27e58,
+#app-mount .children__9293f:after,
+#app-mount .wrapper_d852db,
+#app-mount .wrapper_fc8177,
+#app-mount .visual-refresh .content__908e2,
+#app-mount .chatGradient__36d07,
+#app-mount .chatTypingGradientNotAtBottom__36d07,
+#app-mount .chatTypingGradientAtBottom__36d07,
+#app-mount .container__7641b,
+#app-mount .channelChatWrapper_cb9592,
+#app-mount .wrapper_cb9592,
+#app-mount [class*="scrollableContainer_"],
+.visual-refresh #app-mount .bg__960e4,
+.visual-refresh #app-mount .wrapper_ef3116,
+.visual-refresh #app-mount .sidebar_c48ade,
+.visual-refresh #app-mount .chatContent_f75fb0,
+.visual-refresh #app-mount .members_c8ffbb,
+.visual-refresh #app-mount .member_c8ffbb {
+    background: transparent !important;
+    background-color: transparent !important;
+}
+
+/* ==========================================================================
+   2. RE-APPLY TRANSLUCENT STYLIX BACKDROPS (PANEL-BY-PANEL BALANCING)
+   ========================================================================== */
+
+/* The Absolute Bottom Layer of the entire Window */
+body {
+    background-color: color-mix(in srgb, var(--base00, #000000) 50%, transparent) !important;
+}
+
+/* 
+ * Main Chat Background (Middle Panel)
+ */
+.visual-refresh #app-mount .chatContent_f75fb0,
+.visual-refresh #app-mount .chat_f75fb0,
+#app-mount .chatContent_f75fb0,
+#app-mount .chat_f75fb0 {
+    background-color: color-mix(in srgb, var(--base01, #111111) 50%, transparent) !important;
+}
+
+/* Server List Sidebar (Far Left) */
+#app-mount .wrapper_ef3116,
+.visual-refresh #app-mount .wrapper_ef3116 {
+    background-color: color-mix(in srgb, var(--base00, #000000) 50%, transparent) !important;
+}
+
+/* Channel & DM Sidebar (Left Panel) */
+#app-mount .sidebar_c48ade,
+#app-mount .sidebar__5e434,
+#app-mount .privateChannels_e6b769,
+.visual-refresh #app-mount .sidebar_c48ade,
+.visual-refresh #app-mount .sidebar__5e434 {
+    background-color: color-mix(in srgb, var(--base00, #000000) 50%, transparent) !important;
+}
+
+/* Friends Tab & Settings Screen Backgrounds */
+#app-mount .container__133bf,
+#app-mount .tabBody__133bf,
+#app-mount .standardSidebarView__23e6b {
+    background-color: color-mix(in srgb, var(--base00, #000000) 50%, transparent) !important;
+}
+
+/* Chat Input Box (Text Field Container) */
+#app-mount .channelTextArea_f75fb0,
+.visual-refresh #app-mount .channelTextArea_f75fb0 {
+    background-color: color-mix(in srgb, var(--base02, #222222) 50%, transparent) !important;
+}
+
+/* User Profile Panel (Bottom Left User Bar) */
+#app-mount .panels__5e434,
+#app-mount .container__37e49,
+.visual-refresh #app-mount .panels__5e434,
+.visual-refresh #app-mount .container__37e49 {
+    background-color: color-mix(in srgb, var(--base02, #222222) 50%, transparent) !important;
+}
+
+/* Server Member List (Far Right Panel) */
+#app-mount aside[class*="membersWrap_"],
+#app-mount div[class*="container_c8ffbb"],
+#app-mount [class*="members_"],
+.visual-refresh #app-mount aside[class*="membersWrap_"],
+.visual-refresh #app-mount div[class*="container_c8ffbb"],
+.visual-refresh #app-mount [class*="members_"] {
+    background: color-mix(in srgb, var(--base00, #000000) 30%, transparent) !important;
+    background-color: color-mix(in srgb, var(--base00, #000000) 30%, transparent) !important;
+}
+#app-mount [class*="member_"] {
+    background: transparent !important;
+}
+
+/* ==========================================================================
+   3. WINDOW TITLE BAR (TOP HEADER)
+   ========================================================================== */
+#app-mount [class*="titleBar_"],
+#app-mount [class*="typeWindows_"],
+.visual-refresh #app-mount [class*="titleBar_"],
+.visual-refresh #app-mount [class*="typeWindows_"] {
+    background-color: color-mix(in srgb, var(--base00, #000000) 50%, transparent) !important;
+}
+
+/* ==========================================================================
+   4. TAME GLOBAL CSS VARIABLES (FOR POPUPS & CONTEXT MENUS)
+   ========================================================================== */
+:root, .theme-light, .theme-dark, .theme-darker, .theme-midnight, .visual-refresh {
+    --background-primary: color-mix(in srgb, var(--base00, #000000) 50%, transparent) !important;
+    --background-secondary-alt: color-mix(in srgb, var(--base01, #111111) 50%, transparent) !important;
+    --background-secondary: color-mix(in srgb, var(--base01, #111111) 50%, transparent) !important;
+    --background-tertiary: color-mix(in srgb, var(--base00, #000000) 50%, transparent) !important;
+    --home-background: color-mix(in srgb, var(--base00, #000000) 50%, transparent) !important;
+    --background-floating: color-mix(in srgb, var(--base02, #222222) 50%, transparent) !important;
+}
+
+/* ==========================================================================
+   5. SMOOTH SCROLL FADE-OUT (LOW-PROFILE NATIVE FADE)
+   ========================================================================== */
+
+/* Chat Messages Scroller (Fades only the last 20px of the message box itself) */
+#app-mount [class*="chatContent_"] [class*="scroller_"],
+#app-mount .scroller_e2e187,
+.visual-refresh #app-mount [class*="chatContent_"] [class*="scroller_"] {
+    -webkit-mask-image: linear-gradient(
+        to bottom, 
+        black calc(100% - 20px), 
+        transparent 100%
+    ) !important;
+    mask-image: linear-gradient(
+        to bottom, 
+        black calc(100% - 20px), 
+        transparent 100%
+    ) !important;
+}
+
+/* Sidebar Channel & DM Lists (Fades only the last 15px of the sidebar list itself) */
+#app-mount [class*="sidebar_"] [class*="scroller_"],
+#app-mount [class*="privateChannels_"] [class*="scroller_"],
+.visual-refresh #app-mount [class*="sidebar_"] [class*="scroller_"],
+.visual-refresh #app-mount [class*="privateChannels_"] [class*="scroller_"] {
+    -webkit-mask-image: linear-gradient(
+        to bottom, 
+        black calc(100% - 15px), 
+        transparent 100%
+    ) !important;
+    mask-image: linear-gradient(
+        to bottom, 
+        black calc(100% - 15px), 
+        transparent 100%
+    ) !important;
+}
