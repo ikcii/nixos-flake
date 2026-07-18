@@ -62,7 +62,7 @@
         # fonts
 
         dejavu_fonts
-        nerd-fonts.jetbrains-mono
+        nerd-fonts.mononoki
         noto-fonts
         noto-fonts-cjk-sans
         noto-fonts-color-emoji
@@ -306,7 +306,8 @@
         autoUpdateNotification = false;
         notifyAboutUpdates = false;
 
-        useQuickCss = false;
+        useQuickCss = true;
+        transparent = true;
         disableMinSize = true;
         plugins = {
           ImageFilename.enabled = true;
@@ -334,7 +335,7 @@
         discordBranch = "stable";
 
         hardwareAcceleration = true;
-        videoHardwareAcceleration = true;
+        hardwareVideoAcceleration = true;
         minimizeToTray = false;
         splashTheming = true;
         spellCheckLanguages = [
@@ -443,16 +444,23 @@
       terminal = "screen-256color";
     };
 
-    kitty = {
-      enable = true;
-      settings = {
-        confirm_os_window_close = 0;
-        shell = "sh -c \"tmux has-session -t main 2>/dev/null && exec tmux new-session -t main \\\\; new-window || exec tmux new-session -s main \\\"ssh-agent $SHELL\\\"\"";
+    kitty =
+      let
+        needsMononokiFontFix = lib.hasInfix "mononoki" (lib.toLower config.stylix.fonts.monospace.name);
+      in
+      {
+        enable = true;
+        settings = {
+          confirm_os_window_close = 0;
+          shell = "sh -c \"tmux has-session -t main 2>/dev/null && exec tmux new-session -t main \\\\; new-window || exec tmux new-session -s main \\\"ssh-agent $SHELL\\\"\"";
+        }
+        // lib.optionalAttrs needsMononokiFontFix {
+          "modify_font cell_height" = "+1px";
+        };
+        quickAccessTerminalConfig = {
+          edge = "center-sized";
+        };
       };
-      quickAccessTerminalConfig = {
-        edge = "center-sized";
-      };
-    };
   };
 
   xdg = {
@@ -547,7 +555,8 @@
   stylix = {
     enable = true;
     autoEnable = true;
-    image = ./wallpaper.jpg;
+    image = ./wallpaper.png;
+    imageScalingMode = "fit";
     colorGeneration.scheme = "vibrant";
     colorGeneration.polarity = "dark";
     #polarity = "dark";
@@ -558,21 +567,16 @@
       terminal = 0.8;
     };
 
-    fonts.monospace.name = "JetBrainsMono Nerd Font";
+    fonts.monospace.name = "Mononoki Nerd Font";
 
     targets.cava.rainbow.enable = true;
   };
 
-  # xdg.desktopEntries.kitty-open-dir = {
-  #   name = "Open Directory in Kitty";
-  #   exec = "kitty -d %F";
-  #   terminal = false;
-  #   mimeType = [ "inode/directory" ];
-  # };
-
   xdg.mime.enable = true;
   xdg.mimeApps = {
     enable = true;
+
+    # In case I ever need to specify some by hand
     # defaultApplications = {
     #   "inode/directory" = "kitty-open-dir.desktop";
     #   "text/html" = "brave.desktop";
@@ -581,7 +585,15 @@
     #     "x-scheme-handler/about" = "brave.desktop";
     #     "x-scheme-handler/unknown" = "brave.desktop";
     # };
+
   };
+
+  # xdg.desktopEntries.kitty-open-dir = {
+  #   name = "Open Directory in Kitty";
+  #   exec = "kitty -d %F";
+  #   terminal = false;
+  #   mimeType = [ "inode/directory" ];
+  # };
 
   xdg.userDirs.setSessionVariables = false;
 
@@ -645,4 +657,9 @@
   };
 
   gtk.gtk4.theme = config.gtk.theme;
+
+  manual = {
+    json.enable = true;
+    html.enable = true;
+  };
 }
