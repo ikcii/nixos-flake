@@ -145,4 +145,14 @@
       };
     };
   };
+
+  services.openssh = {
+    enable = true;
+    settings = {
+      PasswordAuthentication = false;
+      KbdInteractiveAuthentication = false;
+      PermitRootLogin = "no";
+    };
+  };
+  networking.firewall.interfaces."zt+".allowedTCPPorts = [ 22 ];
 }
