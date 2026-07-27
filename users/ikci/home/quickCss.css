@@ -1,11 +1,3 @@
-/*
- * THE DEFINITIVE STYLIX TRANSPARENCY FIX (FINAL BALANCED)
- * Note: Keep the Stylix theme ENABLED in Vencord!
- */
-
-/* ==========================================================================
-   1. COMPREHENSIVE NUKE LIST (PREVENTS OPACITY STACKING)
-   ========================================================================== */
 body, html,
 #app-mount,
 #app-mount .app__160d8,
@@ -51,28 +43,26 @@ body, html,
 #app-mount .channelChatWrapper_cb9592,
 #app-mount .wrapper_cb9592,
 #app-mount [class*="scrollableContainer_"],
+#app-mount [class*="searchHeader_"],
+#app-mount [class*="searchResult_"],
 .visual-refresh #app-mount .bg__960e4,
 .visual-refresh #app-mount .wrapper_ef3116,
 .visual-refresh #app-mount .sidebar_c48ade,
 .visual-refresh #app-mount .chatContent_f75fb0,
 .visual-refresh #app-mount .members_c8ffbb,
-.visual-refresh #app-mount .member_c8ffbb {
+.visual-refresh #app-mount .member_c8ffbb,
+.visual-refresh #app-mount [class*="searchHeader_"],
+.visual-refresh #app-mount [class*="searchResult_"] {
     background: transparent !important;
     background-color: transparent !important;
 }
-
-/* ==========================================================================
-   2. RE-APPLY TRANSLUCENT STYLIX BACKDROPS (PANEL-BY-PANEL BALANCING)
-   ========================================================================== */
 
 /* The Absolute Bottom Layer of the entire Window */
 body {
     background-color: color-mix(in srgb, var(--base00, #000000) 50%, transparent) !important;
 }
 
-/* 
- * Main Chat Background (Middle Panel)
- */
+/* Main Chat Background (Middle Panel) */
 .visual-refresh #app-mount .chatContent_f75fb0,
 .visual-refresh #app-mount .chat_f75fb0,
 #app-mount .chatContent_f75fb0,
@@ -116,13 +106,15 @@ body {
     background-color: color-mix(in srgb, var(--base02, #222222) 50%, transparent) !important;
 }
 
-/* Server Member List (Far Right Panel) */
+/* Server Member List & Search Results (Far Right Panel) */
 #app-mount aside[class*="membersWrap_"],
 #app-mount div[class*="container_c8ffbb"],
 #app-mount [class*="members_"],
+#app-mount [class*="searchResultsWrap_"],
 .visual-refresh #app-mount aside[class*="membersWrap_"],
 .visual-refresh #app-mount div[class*="container_c8ffbb"],
-.visual-refresh #app-mount [class*="members_"] {
+.visual-refresh #app-mount [class*="members_"],
+.visual-refresh #app-mount [class*="searchResultsWrap_"] {
     background: color-mix(in srgb, var(--base00, #000000) 30%, transparent) !important;
     background-color: color-mix(in srgb, var(--base00, #000000) 30%, transparent) !important;
 }
@@ -130,9 +122,7 @@ body {
     background: transparent !important;
 }
 
-/* ==========================================================================
-   3. WINDOW TITLE BAR (TOP HEADER)
-   ========================================================================== */
+/* 3. Window title bar (top header) */
 #app-mount [class*="titleBar_"],
 #app-mount [class*="typeWindows_"],
 .visual-refresh #app-mount [class*="titleBar_"],
@@ -140,9 +130,7 @@ body {
     background-color: color-mix(in srgb, var(--base00, #000000) 50%, transparent) !important;
 }
 
-/* ==========================================================================
-   4. TAME GLOBAL CSS VARIABLES (FOR POPUPS & CONTEXT MENUS)
-   ========================================================================== */
+/* 4. Tame global css variables (for popups & context menus) */
 :root, .theme-light, .theme-dark, .theme-darker, .theme-midnight, .visual-refresh {
     --background-primary: color-mix(in srgb, var(--base00, #000000) 50%, transparent) !important;
     --background-secondary-alt: color-mix(in srgb, var(--base01, #111111) 50%, transparent) !important;
@@ -152,22 +140,20 @@ body {
     --background-floating: color-mix(in srgb, var(--base02, #222222) 50%, transparent) !important;
 }
 
-/* ==========================================================================
-   5. SMOOTH SCROLL FADE-OUT (LOW-PROFILE NATIVE FADE)
-   ========================================================================== */
+/* 5. Smooth scroll fade-out (low-profile native fade) */
 
 /* Chat Messages Scroller (Fades only the last 20px of the message box itself) */
 #app-mount [class*="chatContent_"] [class*="scroller_"],
 #app-mount .scroller_e2e187,
 .visual-refresh #app-mount [class*="chatContent_"] [class*="scroller_"] {
     -webkit-mask-image: linear-gradient(
-        to bottom, 
-        black calc(100% - 20px), 
+        to bottom,
+        black calc(100% - 20px),
         transparent 100%
     ) !important;
     mask-image: linear-gradient(
-        to bottom, 
-        black calc(100% - 20px), 
+        to bottom,
+        black calc(100% - 20px),
         transparent 100%
     ) !important;
 }
@@ -178,13 +164,13 @@ body {
 .visual-refresh #app-mount [class*="sidebar_"] [class*="scroller_"],
 .visual-refresh #app-mount [class*="privateChannels_"] [class*="scroller_"] {
     -webkit-mask-image: linear-gradient(
-        to bottom, 
-        black calc(100% - 15px), 
+        to bottom,
+        black calc(100% - 15px),
         transparent 100%
     ) !important;
     mask-image: linear-gradient(
-        to bottom, 
-        black calc(100% - 15px), 
+        to bottom,
+        black calc(100% - 15px),
         transparent 100%
     ) !important;
 }
