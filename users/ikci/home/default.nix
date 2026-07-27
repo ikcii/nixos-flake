@@ -41,6 +41,8 @@
 
       WINEDLLOVERRIDES = "winhttp=n,b;version=n,b";
 
+      NH_OS_FLAKE = "${config.home.homeDirectory}/nixos-flake";
+
     };
 
     packages =
@@ -89,7 +91,6 @@
         # general
 
         # logseq
-        #libreoffice-still
         android-tools
         ani-cli
         audiosource
@@ -121,6 +122,7 @@
         killall
         lazygit
         libqalculate
+        libreoffice
         localsend
         lolcat
         nh
@@ -129,6 +131,7 @@
         nixfmt
         nodejs
         nvimpager
+        obsidian
         p7zip-rar
         pcmanfm
         pipes
