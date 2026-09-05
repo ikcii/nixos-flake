@@ -83,6 +83,34 @@
         # LLM file context utility
         (pkgs.writeShellScriptBin "ct" "for file in \"$@\"; do echo \"$file\"; echo '```'; cat \"$file\"; echo; echo '```'; done")
 
+        # llama-server wrapper with 2GB memory headroom
+        (pkgs.writeShellScriptBin "llm" ''
+          set -euo pipefail
+          if [ "$#" -lt 1 ]; then
+              echo "Usage: $0 <context_size_k> [rea_val] [preserve_flag (0 to unset)]" >&2
+              echo "Example: $0 100 on 0" >&2
+              exit 1
+          fi
+          CONTEXT_SIZE=$(( $1 * 1024 ))
+          REA_VAL="${2:-on}"
+          REASONING_PRESERVE=()
+          if [ "${3:-1}" != "0" ]; then
+              REASONING_PRESERVE=("--reasoning-preserve")
+          fi
+          llama-server \
+              --port 8080 \
+              -ngl 99 \
+              -fa on \
+              -ctk q8_0 \
+              -ctv q8_0 \
+              -c "$CONTEXT_SIZE" \
+              -np 1 \
+              --jinja \
+              -rea "$REA_VAL" \
+              --fit-target 2048 \
+              ${REASONING_PRESERVE[@]+"${REASONING_PRESERVE[@]}"}
+        '')
+
         # --user only flatpak
         (pkgs.writeShellScriptBin "flatpak" ''
           exec ${lib.getExe pkgs.flatpak} --user "$@"
