@@ -92,9 +92,9 @@
               exit 1
           fi
           CONTEXT_SIZE=$(( $1 * 1024 ))
-          REA_VAL="${2:-on}"
+          REA_VAL="${"$"}{2:-on}"
           REASONING_PRESERVE=()
-          if [ "${3:-1}" != "0" ]; then
+          if [ "${"$"}{3:-1}" != "0" ]; then
               REASONING_PRESERVE=("--reasoning-preserve")
           fi
           llama-server \
@@ -108,7 +108,7 @@
               --jinja \
               -rea "$REA_VAL" \
               --fit-target 2048 \
-              ${REASONING_PRESERVE[@]+"${REASONING_PRESERVE[@]}"}
+              ${"$"}{REASONING_PRESERVE[@]+"${"$"}{REASONING_PRESERVE[@]}"}
         '')
 
         # --user only flatpak
