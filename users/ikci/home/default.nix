@@ -228,18 +228,22 @@
         #   })
         # )
 
-        (llama-cpp-rocm.overrideAttrs (old: rec {
-          version = "9591";
-          src = old.src.override {
-            owner = "PrismML-Eng";
-            repo = "llama.cpp";
-            tag = null;
-            rev = "62061f91088281e65071cc38c5f69ee95c39f14e";
-            hash = "sha256-zLxB5UKnCTCw/okB+L8u1VtM1o2yVjVYTlTBgL/BsaM=";
-          };
-          npmDepsHash = "sha256-pjdbI6NcZRlJVd62xhgbLhWrwFYwgsIwjORqvo1+VD8=";
-          npmRoot = "tools/ui";
-        }))
+        # PrismML fork of llama.cpp - for Bonsai 1-bit (Q1_0) and ternary (Q2_0) quantization support
+        # Uncomment if running Bonsai GGUF models that need these formats
+        # (llama-cpp-rocm.overrideAttrs (old: {
+        #   version = "9591";
+        #   src = old.src.override {
+        #     owner = "PrismML-Eng";
+        #     repo = "llama.cpp";
+        #     tag = null;
+        #     rev = "62061f91088281e65071cc38c5f69ee95c39f14e";
+        #     hash = "sha256-CH4k2ga+NDvjb2lzxdi9OtJrwaowbt9mIcOgsCfserI=";
+        #   };
+        #   npmDepsHash = "sha256-pjdbI6NcZRlJVd62xhgbLhWrwFYwgsIwjORqvo1+VD8=";
+        #   npmRoot = "tools/ui";
+        # }))
+
+        llama-cpp-rocm
 
       ];
 
