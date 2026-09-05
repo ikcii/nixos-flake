@@ -151,7 +151,6 @@
         killall
         lazygit
         libqalculate
-        libreoffice
         localsend
         lolcat
         nh
