@@ -116,6 +116,10 @@
           exec ${lib.getExe pkgs.flatpak} --user "$@"
         '')
 
+        (pkgs.writeShellScriptBin "pi" ''
+          exec steam-run ${config.home.homeDirectory}/software/pi/pi $@
+        '')
+
         # general
 
         # logseq
