@@ -51,4 +51,13 @@
     fileSystems = [ "/" ];
   };
 
+  # systemd.services.coolwsd.environment = {
+  #   SAL_LOG = "+WARN+INFO";
+  # };
+  #
+  # services.collabora-online.settings.logging.lokit_sal_log = "+INFO+WARN";
+
+  # programs.nix-ld.enable = true;
+  # programs.nix-ld.libraries = with pkgs; [
+  # ];
 }
