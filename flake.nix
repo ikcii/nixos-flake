@@ -134,6 +134,15 @@
             disko.nixosModules.disko
 
             (
+              { inputs, ... }:
+              {
+                # Preserve the flake source that generated this generation
+                # in the system closure for rollback/inspection.
+                environment.etc."current-flake".source = inputs.self;
+              }
+            )
+
+            (
               { pkgs, ... }:
               {
                 nixpkgs.overlays = [ nix-cachyos-kernel.overlays.pinned ];
