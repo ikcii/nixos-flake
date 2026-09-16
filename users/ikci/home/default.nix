@@ -86,16 +86,18 @@
         # llama-server wrapper with VRAM budget control (multiples of 256MB, default 6 = 1.5GB)
         (pkgs.writeShellScriptBin "llm" ''
           set -euo pipefail
-          VRAM_MULT="${"$"}{1:-6}"
-          REA_VAL="${"$"}{2:-on}"
+          CTX_MULT="${"$"}{1:-100}"
+          VRAM_MULT="${"$"}{2:-6}"
+          REA_VAL="${"$"}{3:-on}"
           REASONING_PRESERVE=()
-          if [ "${"$"}{3:-1}" != "0" ]; then
+          if [ "${"$"}{4:-1}" != "0" ]; then
               REASONING_PRESERVE=("--reasoning-preserve")
           fi
+          CTX_SIZE=$(( CTX_MULT * 1024 ))
           FIT_TARGET=$(( VRAM_MULT * 256 ))
           llama-server \
               --port 8080 \
-              -ngl 99 \
+              -c "$CTX_SIZE" \
               -fa on \
               -ctk q8_0 \
               -ctv q8_0 \
@@ -112,7 +114,7 @@
         '')
 
         (pkgs.writeShellScriptBin "pi" ''
-          exec steam-run ${config.home.homeDirectory}/software/pi/pi $@
+          exec steam-run ${config.home.homeDirectory}/software/pi/pi "${"$"}@"
         '')
 
         # general
@@ -482,6 +484,10 @@
       focusEvents = true;
       escapeTime = 100;
       terminal = "screen-256color";
+      extraConfig = ''
+set -g extended-keys on
+set -g extended-keys-format csi-u
+'';
     };
 
     kitty =
