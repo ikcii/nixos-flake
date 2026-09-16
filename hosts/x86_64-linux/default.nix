@@ -17,7 +17,6 @@
   boot.tmp.cleanOnBoot = true;
 
   # Kernel
-  # Default to latest kernel
   boot.kernelPackages = lib.mkDefault pkgs.cachyosKernels.linuxPackages-cachyos-latest-lto;
 
   # Hardware & Drivers
@@ -63,30 +62,32 @@
 
       forward-zone =
         let
-          mkMullvadRegularEntry = domainName: {
+          mkMinimal = domainName: {
             name = domainName;
             forward-addr = [
-              "194.242.2.2@853#dns.mullvad.net"
-              "2a07:e340::2@853#dns.mullvad.net"
+              "9.9.9.11@853#dns.quad9.net"
+              "2620:fe::fe:11@853#dns.quad9.net"
+            ];
+            forward-tls-upstream = "yes";
+          };
+
+          mkEnhanced = domainName: {
+            name = domainName;
+            forward-addr = [
+              "9.9.9.12@853#dns.quad9.net"
+              "2620:fe::fe:12@853#dns.quad9.net"
             ];
             forward-tls-upstream = "yes";
           };
         in
         [
-          # Arma
-          (mkMullvadRegularEntry "bohemia.net")
-          (mkMullvadRegularEntry "armaplatform.com")
-          (mkMullvadRegularEntry "bistudio.com")
+          (mkMinimal "bohemia.net")
+          (mkMinimal "armaplatform.com")
+          (mkMinimal "bistudio.com")
+          (mkMinimal "fincrafters.pl")
 
-          # Global
-          {
-            name = ".";
-            forward-addr = [
-              "194.242.2.4@853#base.dns.mullvad.net"
-              "2a07:e340::4@853#base.dns.mullvad.net"
-            ];
-            forward-tls-upstream = "yes";
-          }
+          # Global - enhanced (blocks ads, tracking, malware)
+          (mkEnhanced ".")
         ];
     };
   };
