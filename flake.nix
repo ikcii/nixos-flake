@@ -49,12 +49,6 @@
     nix-cachyos-kernel = {
       url = "github:xddxdd/nix-cachyos-kernel/release";
     };
-
-    # Hermes Agent desktop app (AI agent with tool-calling)
-    hermes-agent = {
-      url = "github:NousResearch/hermes-agent";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   # ================================================================ #
