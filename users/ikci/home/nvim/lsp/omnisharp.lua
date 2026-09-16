@@ -1,12 +1,22 @@
 return {
   cmd = {
-    "omnisharp",
+    "omnisharp-mono",
     "--languageserver",
     "--hostPID",
-    vim.fn.getpid(),
+    tostring(vim.fn.getpid()),
   },
   filetypes = { "cs" },
-  root_markers = { "*.sln", "*.csproj", ".git" },
+  root_dir = function(bufnr, on_dir)
+    local fname = vim.api.nvim_buf_get_name(bufnr)
+    local root = vim.fs.root(fname, function(name)
+      return name:match("%.sln$") ~= nil
+          or name:match("%.csproj$") ~= nil
+          or name == ".git"
+    end)
+    if root then
+      on_dir(root)
+    end
+  end,
   init_options = {
     useModernNet = false,
   },
@@ -20,6 +30,7 @@ return {
       AnalyzeOpenDocumentsOnly = false,
     },
     msbuild = {
+      enabled = true,
       loadProjectsOnDemand = true,
     },
   },
