@@ -279,6 +279,18 @@
     swaylock.enable = true;
     yt-dlp.enable = true;
 
+    keepassxc = {
+      enable = true;
+      autostart = true;
+      settings = {
+        SSHAgent = {
+          Enabled = true;
+          AddKeysToAgent = 1;
+          UseSSHAgent = true;
+        };
+      };
+    };
+
     emacs = {
       enable = true;
       extraPackages = epkgs: [
@@ -498,7 +510,7 @@ set -g extended-keys-format csi-u
         enable = true;
         settings = {
           confirm_os_window_close = 0;
-          shell = "sh -c \"tmux has-session -t main 2>/dev/null && exec tmux new-session -t main \\\\; new-window || exec tmux new-session -s main \\\"ssh-agent $SHELL\\\"\"";
+          # shell = "sh -c \"tmux has-session -t main 2>/dev/null && exec tmux new-session -t main \\\\; new-window || exec tmux new-session -s main \\\"ssh-agent $SHELL\\\"\"";
         }
         // lib.optionalAttrs needsMononokiFontFix {
           "modify_font cell_height" = "+1px";
