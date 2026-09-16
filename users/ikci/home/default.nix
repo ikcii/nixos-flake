@@ -522,6 +522,7 @@ set -g extended-keys-format csi-u
   };
 
   xdg = {
+    autostart.enable = true;
     portal = {
       enable = true;
       xdgOpenUsePortal = true;
