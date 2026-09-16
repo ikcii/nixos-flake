@@ -43,6 +43,11 @@ vim.opt.scrolloff = 12
 
 vim.opt.confirm = true
 
+vim.o.winborder = "rounded"
+
+-- Hover popup background (use slightly lighter than main bg)
+vim.api.nvim_set_hl(0, "NormalFloat", { bg = "#" .. require("base16-colorscheme").colors.base01 })
+
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
