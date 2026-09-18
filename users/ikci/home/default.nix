@@ -497,9 +497,9 @@
       escapeTime = 100;
       terminal = "screen-256color";
       extraConfig = ''
-set -g extended-keys on
-set -g extended-keys-format csi-u
-'';
+        set -g extended-keys on
+        set -g extended-keys-format csi-u
+      '';
     };
 
     kitty =
@@ -510,7 +510,7 @@ set -g extended-keys-format csi-u
         enable = true;
         settings = {
           confirm_os_window_close = 0;
-          # shell = "sh -c \"tmux has-session -t main 2>/dev/null && exec tmux new-session -t main \\\\; new-window || exec tmux new-session -s main \\\"ssh-agent $SHELL\\\"\"";
+          shell = "sh -c \"tmux has-session -t main 2>/dev/null && exec tmux new-session -t main \\; new-window || exec tmux new-session -s main \"";
         }
         // lib.optionalAttrs needsMononokiFontFix {
           "modify_font cell_height" = "+1px";
