@@ -155,4 +155,7 @@
     };
   };
   networking.firewall.interfaces."zt+".allowedTCPPorts = [ 22 ];
+
+  services.logind.lidSwitch = "ignore";
+  services.logind.lidSwitchExternalPower = "ignore";
 }
