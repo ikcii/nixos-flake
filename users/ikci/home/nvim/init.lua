@@ -45,8 +45,13 @@ vim.opt.confirm = true
 
 vim.o.winborder = "rounded"
 
--- Hover popup background (use slightly lighter than main bg)
-vim.api.nvim_set_hl(0, "NormalFloat", { bg = "#" .. require("base16-colorscheme").colors.base01 })
+-- Hover popup background matches CursorLine
+vim.api.nvim_create_autocmd("ColorScheme", {
+  callback = function()
+    vim.cmd("highlight NormalFloat gui=none guibg=NONE guifg=NONE")
+    vim.cmd("highlight link NormalFloat CursorLine")
+  end
+})
 
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
