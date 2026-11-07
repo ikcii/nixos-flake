@@ -1,56 +1,56 @@
 body, html,
 #app-mount,
-#app-mount .app__160d8,
-#app-mount .bg__960e4,
-#app-mount .appMount__51fd7,
-#app-mount .wrapper_ef3116,
-#app-mount .container__133bf,
-#app-mount .tabBody__133bf,
-#app-mount .chat_f75fb0,
-#app-mount .chatContent_f75fb0,
-#app-mount .privateChannels_e6b769,
-#app-mount .scroller__99e7c,
-#app-mount .container__7d20c,
-#app-mount .nowPlayingColumn__133bf,
-#app-mount .themed__9293f,
-#app-mount .container__2637a,
-#app-mount .sidebar__5e434,
-#app-mount .sidebar__5e434:after,
+#app-mount .app_QbT-Jy,
+#app-mount .bg_Fd0FEH,
+#app-mount .appMount_gEkNtR,
+#app-mount .wrapper_5dqHTG,
+#app-mount .container_zrUwGA,
+#app-mount .tabBody_zrUwGA,
+#app-mount .chat_z_gUBg,
+#app-mount .chatContent_z_gUBg,
+#app-mount .privateChannels_u88IQl,
+#app-mount .scroller_Bce46W,
+#app-mount .container_GNEh_C,
+#app-mount .nowPlayingColumn_zrUwGA,
+#app-mount .themed_ybUK7Z,
+#app-mount .container_H5ozaj,
+#app-mount .sidebar_pog62O,
+#app-mount .sidebar_pog62O:after,
 #app-mount .visual-refresh .clickable_f37cb1,
-#app-mount .visual-refresh .hasBanner_f37cb1 .header_f37cb1,
-#app-mount :where(.visual-refresh) .themedBackground__74017,
-#app-mount .visual-refresh .container_f369db,
-#app-mount .panels__5e434,
-#app-mount .container__37e49,
-#app-mount .scroller__23746,
-#app-mount .container__551b0,
-#app-mount .theme-light .gradient_e9ef78,
-#app-mount .backdrop__8a7fc,
-#app-mount .visual-refresh .contentRegionScroller__23e6b,
-#app-mount .visual-refresh .sidebarRegionScroller__23e6b,
-#app-mount .visual-refresh .standardSidebarView__23e6b,
-#app-mount .contentRegion__23e6b,
-#app-mount .layer__960e4,
-#app-mount .fieldList_a27e58,
-#app-mount .children__9293f:after,
-#app-mount .wrapper_d852db,
-#app-mount .wrapper_fc8177,
-#app-mount .visual-refresh .content__908e2,
-#app-mount .chatGradient__36d07,
-#app-mount .chatTypingGradientNotAtBottom__36d07,
-#app-mount .chatTypingGradientAtBottom__36d07,
-#app-mount .container__7641b,
-#app-mount .channelChatWrapper_cb9592,
-#app-mount .wrapper_cb9592,
+#app-mount .visual-refresh .hasBanner_XH4OpX .header_XH4OpX,
+#app-mount :where(.visual-refresh) .themedBackground_2x8-Qn,
+#app-mount .visual-refresh .container_BkGrJJ,
+#app-mount .panels_pog62O,
+#app-mount .container_g6VwXp,
+#app-mount .scroller_jkJlMe,
+#app-mount .container_GQJi50,
+#app-mount .theme-light .gradient_-6JdM0,
+#app-mount .backdrop_Y0eJLL,
+#app-mount .visual-refresh .contentRegionScroller_jnk11m,
+#app-mount .visual-refresh .sidebarRegionScroller_jnk11m,
+#app-mount .visual-refresh .standardSidebarView_jnk11m,
+#app-mount .contentRegion_jnk11m,
+#app-mount .layer_Fd0FEH,
+#app-mount .fieldList_a9178b,
+#app-mount .children_ybUK7Z:after,
+#app-mount .wrapper_gFyPwI,
+#app-mount .wrapper_oITdBA,
+#app-mount .visual-refresh .content_4TfzT5,
+#app-mount .chatGradient_8AE1Qq,
+#app-mount .chatTypingGradientNotAtBottom_8AE1Qq,
+#app-mount .chatTypingGradientAtBottom_8AE1Qq,
+#app-mount .container_UPjGEs,
+#app-mount .channelChatWrapper_hbKzX7,
+#app-mount .wrapper_hbKzX7,
 #app-mount [class*="scrollableContainer_"],
 #app-mount [class*="searchHeader_"],
 #app-mount [class*="searchResult_"],
-.visual-refresh #app-mount .bg__960e4,
-.visual-refresh #app-mount .wrapper_ef3116,
-.visual-refresh #app-mount .sidebar_c48ade,
-.visual-refresh #app-mount .chatContent_f75fb0,
-.visual-refresh #app-mount .members_c8ffbb,
-.visual-refresh #app-mount .member_c8ffbb,
+.visual-refresh #app-mount .bg_Fd0FEH,
+.visual-refresh #app-mount .wrapper_5dqHTG,
+.visual-refresh #app-mount .sidebar_pog62O,
+.visual-refresh #app-mount .chatContent_z_gUBg,
+.visual-refresh #app-mount .members_86es0b,
+.visual-refresh #app-mount .member_86es0b,
 .visual-refresh #app-mount [class*="searchHeader_"],
 .visual-refresh #app-mount [class*="searchResult_"] {
     background: transparent !important;
@@ -63,56 +63,56 @@ body {
 }
 
 /* Main Chat Background (Middle Panel) */
-.visual-refresh #app-mount .chatContent_f75fb0,
-.visual-refresh #app-mount .chat_f75fb0,
-#app-mount .chatContent_f75fb0,
-#app-mount .chat_f75fb0 {
+.visual-refresh #app-mount .chatContent_z_gUBg,
+.visual-refresh #app-mount .chat_z_gUBg,
+#app-mount .chatContent_z_gUBg,
+#app-mount .chat_z_gUBg {
     background-color: color-mix(in srgb, var(--base01, #111111) 50%, transparent) !important;
 }
 
 /* Server List Sidebar (Far Left) */
-#app-mount .wrapper_ef3116,
-.visual-refresh #app-mount .wrapper_ef3116 {
+#app-mount .wrapper_5dqHTG,
+.visual-refresh #app-mount .wrapper_5dqHTG {
     background-color: color-mix(in srgb, var(--base00, #000000) 50%, transparent) !important;
 }
 
 /* Channel & DM Sidebar (Left Panel) */
-#app-mount .sidebar_c48ade,
-#app-mount .sidebar__5e434,
-#app-mount .privateChannels_e6b769,
-.visual-refresh #app-mount .sidebar_c48ade,
-.visual-refresh #app-mount .sidebar__5e434 {
+#app-mount .sidebar_pog62O,
+#app-mount .sidebar_pog62O,
+#app-mount .privateChannels_u88IQl,
+.visual-refresh #app-mount .sidebar_pog62O,
+.visual-refresh #app-mount .sidebar_pog62O {
     background-color: color-mix(in srgb, var(--base00, #000000) 50%, transparent) !important;
 }
 
 /* Friends Tab & Settings Screen Backgrounds */
-#app-mount .container__133bf,
-#app-mount .tabBody__133bf,
-#app-mount .standardSidebarView__23e6b {
+#app-mount .container_zrUwGA,
+#app-mount .tabBody_zrUwGA,
+#app-mount .standardSidebarView_jnk11m {
     background-color: color-mix(in srgb, var(--base00, #000000) 50%, transparent) !important;
 }
 
 /* Chat Input Box (Text Field Container) */
-#app-mount .channelTextArea_f75fb0,
-.visual-refresh #app-mount .channelTextArea_f75fb0 {
+#app-mount .channelTextArea_z_gUBg,
+.visual-refresh #app-mount .channelTextArea_z_gUBg {
     background-color: color-mix(in srgb, var(--base02, #222222) 50%, transparent) !important;
 }
 
 /* User Profile Panel (Bottom Left User Bar) */
-#app-mount .panels__5e434,
-#app-mount .container__37e49,
-.visual-refresh #app-mount .panels__5e434,
-.visual-refresh #app-mount .container__37e49 {
+#app-mount .panels_pog62O,
+#app-mount .container_g6VwXp,
+.visual-refresh #app-mount .panels_pog62O,
+.visual-refresh #app-mount .container_g6VwXp {
     background-color: color-mix(in srgb, var(--base02, #222222) 50%, transparent) !important;
 }
 
 /* Server Member List & Search Results (Far Right Panel) */
 #app-mount aside[class*="membersWrap_"],
-#app-mount div[class*="container_c8ffbb"],
+#app-mount div[class*="container_86es0b"],
 #app-mount [class*="members_"],
 #app-mount [class*="searchResultsWrap_"],
 .visual-refresh #app-mount aside[class*="membersWrap_"],
-.visual-refresh #app-mount div[class*="container_c8ffbb"],
+.visual-refresh #app-mount div[class*="container_86es0b"],
 .visual-refresh #app-mount [class*="members_"],
 .visual-refresh #app-mount [class*="searchResultsWrap_"] {
     background: color-mix(in srgb, var(--base00, #000000) 30%, transparent) !important;
@@ -144,7 +144,7 @@ body {
 
 /* Chat Messages Scroller (Fades only the last 20px of the message box itself) */
 #app-mount [class*="chatContent_"] [class*="scroller_"],
-#app-mount .scroller_e2e187,
+#app-mount .scroller_8AE1Qq,
 .visual-refresh #app-mount [class*="chatContent_"] [class*="scroller_"] {
     -webkit-mask-image: linear-gradient(
         to bottom,
