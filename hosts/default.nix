@@ -53,16 +53,18 @@
   # Leave unchanged, mandatory setting for NixOS, versioning is controlled by flake
   system.stateVersion = "25.05";
 
-  # --- Nix Optimization And GC---
-  nix.settings = {
-    auto-optimise-store = true;
-    keep-outputs = true;
-    keep-derivations = true;
-  };
-
-  nix.gc = {
-    automatic = true;
-    dates = "weekly";
-    options = "--delete-older-than 21d";
+  nix = {
+    settings = {
+      auto-optimise-store = true;
+      keep-outputs = true;
+      keep-derivations = true;
+      substituters = [ "https://cache.xinux.uz" ];
+      trusted-public-keys = [ "cache.xinux.uz:BXCrtqejFjWzWEB9YuGB7X2MV4ttBur1N8BkwQRdH+0=" ];
+    };
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 21d";
+    };
   };
 }

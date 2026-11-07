@@ -172,6 +172,7 @@
         recoll
         ripgrep
         scrcpy
+        signal-desktop
         slurp
         tealdeer
         tokei
