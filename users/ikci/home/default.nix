@@ -130,7 +130,6 @@
         compsize
         cowsay
         dig
-        dotnetCorePackages.sdk_10_0
         dust
         easyeffects
         espeak
