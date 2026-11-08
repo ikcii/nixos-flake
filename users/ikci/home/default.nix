@@ -5,6 +5,18 @@
   inputs,
   ...
 }:
+let
+  specifyNixpkgs =
+    url: sha256:
+    (import
+      (builtins.fetchTarball {
+        inherit url sha256;
+      })
+      {
+        system = pkgs.stdenv.hostPlatform.system;
+      }
+    );
+in
 {
   fonts.fontconfig.enable = true;
 
@@ -45,207 +57,190 @@
 
     };
 
-    packages =
-      with pkgs;
-      let
-        specifyNixpkgs =
-          url: sha256:
-          (import
-            (builtins.fetchTarball {
-              inherit url sha256;
-            })
-            {
-              system = pkgs.stdenv.hostPlatform.system;
-            }
-          );
-      in
-      [
+    packages = with pkgs; [
 
-        # fonts
+      # fonts
 
-        dejavu_fonts
-        nerd-fonts.mononoki
-        noto-fonts
-        noto-fonts-cjk-sans
-        noto-fonts-color-emoji
+      dejavu_fonts
+      nerd-fonts.mononoki
+      noto-fonts
+      noto-fonts-cjk-sans
+      noto-fonts-color-emoji
 
-        # current system daemons utils
+      # current system daemons utils
 
-        grim
-        lxmenu-data
-        shared-mime-info
-        wl-clipboard
-        xdg-utils
-        xdg-user-dirs
-        xrandr
-        xwayland
+      grim
+      lxmenu-data
+      shared-mime-info
+      wl-clipboard
+      xdg-utils
+      xdg-user-dirs
+      xrandr
+      xwayland
 
-        # LLM file context utility
-        (pkgs.writeShellScriptBin "ct" "for file in \"$@\"; do echo \"$file\"; echo '```'; cat \"$file\"; echo; echo '```'; done")
+      # LLM file context utility
+      (pkgs.writeShellScriptBin "ct" "for file in \"$@\"; do echo \"$file\"; echo '```'; cat \"$file\"; echo; echo '```'; done")
 
-        # llama-server wrapper with VRAM budget control (multiples of 256MB, default 6 = 1.5GB)
-        (pkgs.writeShellScriptBin "llm" ''
-          set -euo pipefail
-          CTX_MULT="${"$"}{1:-100}"
-          VRAM_MULT="${"$"}{2:-6}"
-          REA_VAL="${"$"}{3:-on}"
-          REASONING_PRESERVE=()
-          if [ "${"$"}{4:-1}" != "0" ]; then
-              REASONING_PRESERVE=("--reasoning-preserve")
-          fi
-          CTX_SIZE=$(( CTX_MULT * 1024 ))
-          FIT_TARGET=$(( VRAM_MULT * 256 ))
-          llama-server \
-              --port 8080 \
-              -c "$CTX_SIZE" \
-              -fa on \
-              -ctk q8_0 \
-              -ctv q8_0 \
-              -np 1 \
-              --jinja \
-              -rea "$REA_VAL" \
-              --fit-target "$FIT_TARGET" \
-              ${"$"}{REASONING_PRESERVE[@]+"${"$"}{REASONING_PRESERVE[@]}"}
-        '')
+      # llama-server wrapper with VRAM budget control (multiples of 256MB, default 6 = 1.5GB)
+      (pkgs.writeShellScriptBin "llm" ''
+        set -euo pipefail
+        CTX_MULT="${"$"}{1:-100}"
+        VRAM_MULT="${"$"}{2:-6}"
+        REA_VAL="${"$"}{3:-on}"
+        REASONING_PRESERVE=()
+        if [ "${"$"}{4:-1}" != "0" ]; then
+            REASONING_PRESERVE=("--reasoning-preserve")
+        fi
+        CTX_SIZE=$(( CTX_MULT * 1024 ))
+        FIT_TARGET=$(( VRAM_MULT * 256 ))
+        llama-server \
+            --port 8080 \
+            -c "$CTX_SIZE" \
+            -fa on \
+            -ctk q8_0 \
+            -ctv q8_0 \
+            -np 1 \
+            --jinja \
+            -rea "$REA_VAL" \
+            --fit-target "$FIT_TARGET" \
+            ${"$"}{REASONING_PRESERVE[@]+"${"$"}{REASONING_PRESERVE[@]}"}
+      '')
 
-        # --user only flatpak
-        (pkgs.writeShellScriptBin "flatpak" ''
-          exec ${lib.getExe pkgs.flatpak} --user "$@"
-        '')
+      # --user only flatpak
+      (pkgs.writeShellScriptBin "flatpak" ''
+        exec ${lib.getExe pkgs.flatpak} --user "$@"
+      '')
 
-        (pkgs.writeShellScriptBin "pi" ''
-          exec steam-run ${config.home.homeDirectory}/software/pi/pi "${"$"}@"
-        '')
+      # general
 
-        # general
+      # logseq
+      android-tools
+      ani-cli
+      audiosource
+      bat
+      brightnessctl
+      cbonsai
+      cmatrix
+      compsize
+      cowsay
+      dig
+      dust
+      easyeffects
+      espeak
+      fastfetch
+      faugus-launcher
+      fd
+      ffmpeg
+      figlet
+      file
+      fjordlauncher
+      fortune
+      fuse-overlayfs
+      fzf
+      gale
+      gamemode
+      gimp-with-plugins
+      git-filter-repo
+      htop
+      killall
+      lazygit
+      libqalculate
+      localsend
+      lolcat
+      nh
+      nix-index
+      nix-search-cli
+      nixfmt
+      nodejs
+      nvimpager
+      obsidian
+      p7zip-rar
+      pcmanfm
+      pi-coding-agent
+      pipes
+      protege-distribution
+      protontricks
+      python3
+      qalculate-qt
+      qdirstat
+      recoll
+      ripgrep
+      scrcpy
+      signal-desktop
+      slurp
+      tealdeer
+      tokei
+      tree
+      tree-sitter
+      unityhub
+      unzip
+      uv
+      wdisplays
+      wget
+      wtf
+      zerotierone
+      zip
 
-        # logseq
-        android-tools
-        ani-cli
-        audiosource
-        bat
-        brightnessctl
-        cbonsai
-        cmatrix
-        compsize
-        cowsay
-        dig
-        dust
-        easyeffects
-        espeak
-        fastfetch
-        faugus-launcher
-        fd
-        ffmpeg
-        figlet
-        file
-        fjordlauncher
-        fortune
-        fuse-overlayfs
-        fzf
-        gale
-        gamemode
-        gimp-with-plugins
-        git-filter-repo
-        htop
-        killall
-        lazygit
-        libqalculate
-        localsend
-        lolcat
-        nh
-        nix-index
-        nix-search-cli
-        nixfmt
-        nodejs
-        nvimpager
-        obsidian
-        p7zip-rar
-        pcmanfm
-        pipes
-        protege-distribution
-        protontricks
-        python3
-        qalculate-qt
-        qdirstat
-        recoll
-        ripgrep
-        scrcpy
-        signal-desktop
-        slurp
-        tealdeer
-        tokei
-        tree
-        tree-sitter
-        unityhub
-        unzip
-        uv
-        wdisplays
-        wget
-        wtf
-        zerotierone
-        zip
+      (haskellPackages.ghcWithPackages (
+        p: with p; [
+          shh
+          shh-extras
+        ]
+      ))
 
-        (haskellPackages.ghcWithPackages (
-          p: with p; [
-            shh
-            shh-extras
-          ]
-        ))
+      # LSPs
 
-        # LSPs
+      bash-language-server
+      csharp-ls
+      haskell-language-server
+      lua-language-server
+      nil
+      pyright
 
-        bash-language-server
-        csharp-ls
-        haskell-language-server
-        lua-language-server
-        nil
-        pyright
+      # overrides, etc
 
-        # overrides, etc
+      (specifyNixpkgs "https://github.com/NixOS/nixpkgs/archive/0ba4d0e96e2358ea1db4737ff8591cba314a574e.tar.gz" "02i5dgg8ar4dwn3grk3w6nggfdp5h4k4dkr81jgq8y7vw2naml83")
+      .tome4
 
-        (specifyNixpkgs "https://github.com/NixOS/nixpkgs/archive/0ba4d0e96e2358ea1db4737ff8591cba314a574e.tar.gz" "02i5dgg8ar4dwn3grk3w6nggfdp5h4k4dkr81jgq8y7vw2naml83")
-        .tome4
+      # (import (builtins.fetchTarball {
+      #   url = "https://github.com/NixOS/nixpkgs/archive/52047c30129eb1bd860a5549f2b2b2d61e0dbfbc.tar.gz";
+      #   sha256 = "0hkhwd703z6xcqqxxj9krkn6c0p5lhfi7q471yccv78xkglv0gxy";
+      # }) {
+      #   system = pkgs.system;
+      #   config.rocmSupport = true;
+      # }).vllm
 
-        # (import (builtins.fetchTarball {
-        #   url = "https://github.com/NixOS/nixpkgs/archive/52047c30129eb1bd860a5549f2b2b2d61e0dbfbc.tar.gz";
-        #   sha256 = "0hkhwd703z6xcqqxxj9krkn6c0p5lhfi7q471yccv78xkglv0gxy";
-        # }) {
-        #   system = pkgs.system;
-        #   config.rocmSupport = true;
-        # }).vllm
+      # (
+      #   (cataclysm-dda-git.override {
+      #     rev = "c62165965c6b74c291c5201cabc3a6e0f385afec";
+      #     sha256 = "sha256-+scyPpsGpW7eMPxvmgIxCtpp0njqZZn/CrbhyrP7c7s=";
+      #     version = "2026-03-15";
+      #   }).overrideAttrs
+      #   (old: {
+      #     env = (old.env or { }) // {
+      #       NIX_CFLAGS_COMPILE = (old.env.NIX_CFLAGS_COMPILE or "") + " -Wno-error=free-nonheap-object";
+      #     };
+      #   })
+      # )
 
-        # (
-        #   (cataclysm-dda-git.override {
-        #     rev = "c62165965c6b74c291c5201cabc3a6e0f385afec";
-        #     sha256 = "sha256-+scyPpsGpW7eMPxvmgIxCtpp0njqZZn/CrbhyrP7c7s=";
-        #     version = "2026-03-15";
-        #   }).overrideAttrs
-        #   (old: {
-        #     env = (old.env or { }) // {
-        #       NIX_CFLAGS_COMPILE = (old.env.NIX_CFLAGS_COMPILE or "") + " -Wno-error=free-nonheap-object";
-        #     };
-        #   })
-        # )
+      # PrismML fork of llama.cpp - for Bonsai 1-bit (Q1_0) and ternary (Q2_0) quantization support
+      # Uncomment if running Bonsai GGUF models that need these formats
+      # (llama-cpp-rocm.overrideAttrs (old: {
+      #   version = "9591";
+      #   src = old.src.override {
+      #     owner = "PrismML-Eng";
+      #     repo = "llama.cpp";
+      #     tag = null;
+      #     rev = "62061f91088281e65071cc38c5f69ee95c39f14e";
+      #     hash = "sha256-CH4k2ga+NDvjb2lzxdi9OtJrwaowbt9mIcOgsCfserI=";
+      #   };
+      #   npmDepsHash = "sha256-pjdbI6NcZRlJVd62xhgbLhWrwFYwgsIwjORqvo1+VD8=";
+      #   npmRoot = "tools/ui";
+      # }))
 
-        # PrismML fork of llama.cpp - for Bonsai 1-bit (Q1_0) and ternary (Q2_0) quantization support
-        # Uncomment if running Bonsai GGUF models that need these formats
-        # (llama-cpp-rocm.overrideAttrs (old: {
-        #   version = "9591";
-        #   src = old.src.override {
-        #     owner = "PrismML-Eng";
-        #     repo = "llama.cpp";
-        #     tag = null;
-        #     rev = "62061f91088281e65071cc38c5f69ee95c39f14e";
-        #     hash = "sha256-CH4k2ga+NDvjb2lzxdi9OtJrwaowbt9mIcOgsCfserI=";
-        #   };
-        #   npmDepsHash = "sha256-pjdbI6NcZRlJVd62xhgbLhWrwFYwgsIwjORqvo1+VD8=";
-        #   npmRoot = "tools/ui";
-        # }))
+      llama-cpp-rocm
 
-        llama-cpp-rocm
-
-      ];
+    ];
 
     # cursor theming
 
@@ -273,6 +268,9 @@
   programs = {
 
     brave.enable = true;
+    brave.package =
+      (specifyNixpkgs "https://github.com/NixOS/nixpkgs/archive/32eda05cc9f648c43705d4bbc9e24ece2d1c1f8a.tar.gz" "sha256:1r6hvskjclncjcq3jmvbxwypfaizdsxz1zvcdppy5iy9108mzmmy")
+      .brave;
     cava.enable = true;
     feh.enable = true;
     git.enable = true;
